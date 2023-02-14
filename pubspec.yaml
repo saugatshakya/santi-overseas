@@ -37,6 +37,8 @@ dependencies:
   intl:
   animated_background: ^2.0.0
   timeago: ^3.3.0
+  particles_flutter: ^0.1.1
+  universal_html: ^2.0.8
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

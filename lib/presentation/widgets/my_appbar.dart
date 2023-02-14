@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:testapp/controller/app_state_controller.dart';
+import 'package:testapp/data/functions/utils.dart';
 import 'package:testapp/static/colors.dart';
 
 class MyAppBar extends AppBar {
@@ -25,7 +26,7 @@ class MyAppBar extends AppBar {
                       width: 100,
                       height: 100,
                       child: Image.asset(
-                        "assets/logo.jpeg",
+                        "assets/logo.png",
                         fit: BoxFit.fill,
                       )),
                   Container(
@@ -47,83 +48,150 @@ class MyAppBar extends AppBar {
                 ],
               ),
             ),
-            const Spacer(flex: 1),
-            HoverButton(
-                label: "Jobs",
-                onTap: () {
-                  appStateController.changePage(1);
-                }),
-            HoverButton(
-                label: "Companies",
-                onTap: () {
-                  appStateController.changePage(2);
-                }),
-            HoverButton(
-                label: "Career Advice",
-                onTap: () {
-                  appStateController.changePage(3);
-                }),
-            HoverButton(
-                label: "About Us",
-                onTap: () {
-                  appStateController.changePage(4);
-                }),
-            const Spacer(flex: 6),
-            HoverButton(
-                label: "Login/SignUp",
-                onTap: () {
-                  appStateController.changePage(5);
-                }),
-            Container(
-              height: 48,
-              margin: const EdgeInsets.fromLTRB(8, 8.0, 8, 8),
-              padding: const EdgeInsets.all(8),
-              child: Center(
-                  child: Text("For Employees",
-                      style: TextStyle(
-                          color: myColors.darkgreen,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600))),
-            ),
-            GetBuilder<AppStateController>(
-                init: appStateController,
-                builder: (state) {
-                  return Center(
-                    child: PopupMenuButton(
-                        onSelected: (val) {
-                          appStateController.changeLanguageI(val);
-                        },
-                        offset: const Offset(0, 48),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(children: [
-                            Text(
-                              state.language.languageCode,
-                              style:
-                                  const TextStyle(fontWeight: FontWeight.w600),
-                            ),
-                            const SizedBox(
-                              width: 4,
-                            ),
-                            Icon(
-                              Icons.arrow_drop_down,
-                              color: myColors.darkgreen,
-                            )
-                          ]),
-                        ),
-                        itemBuilder: (_) => [
-                              const PopupMenuItem(
-                                  value: Locale("Nepali", "NE"),
-                                  child: Text("Nepali")),
-                              const PopupMenuItem(
-                                  value: Locale("English", "EN"),
-                                  child: Text("English"))
-                            ]),
-                  );
-                }),
-            const SizedBox(
-              width: 32,
-            )
+            const Spacer(),
+            getSmartPhoneOrTablet() == phoneType || width < 1275
+                ? const SizedBox()
+                : Row(
+                    children: [
+                      HoverButton(
+                          label: "Jobs",
+                          onTap: () {
+                            appStateController.changePage(1);
+                          }),
+                      HoverButton(
+                          label: "Companies",
+                          onTap: () {
+                            appStateController.changePage(2);
+                          }),
+                      HoverButton(
+                          label: "Career Advice",
+                          onTap: () {
+                            // appStateController.changePage(3);
+                          }),
+                      HoverButton(
+                          label: "About Us",
+                          onTap: () {
+                            // appStateController.changePage(4);
+                          }),
+                      HoverButton(
+                          label: "Login/SignUp",
+                          onTap: () {
+                            // appStateController.changePage(5);
+                          }),
+                    ],
+                  ),
+            getSmartPhoneOrTablet() == phoneType || width < 1275
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Container(
+                        height: 48,
+                        width: 132,
+                        padding: const EdgeInsets.all(8),
+                        child: Center(
+                            child: Text("For Employees",
+                                style: TextStyle(
+                                    color: myColors.darkgreen,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600))),
+                      ),
+                      SizedBox(
+                        width: 92,
+                        height: 48,
+                        child: GetBuilder<AppStateController>(
+                            init: appStateController,
+                            builder: (state) {
+                              return PopupMenuButton(
+                                onSelected: (val) {
+                                  appStateController.changeLanguageI(val);
+                                },
+                                offset: const Offset(0, 48),
+                                itemBuilder: (_) => [
+                                  const PopupMenuItem(
+                                      value: Locale("Nepali", "NE"),
+                                      child: Text("Nepali")),
+                                  const PopupMenuItem(
+                                      value: Locale("English", "EN"),
+                                      child: Text("English"))
+                                ],
+                                child: Container(
+                                  width: 92,
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(children: [
+                                    Text(
+                                      state.language.languageCode,
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                    const SizedBox(
+                                      width: 4,
+                                    ),
+                                    Icon(
+                                      Icons.arrow_drop_down,
+                                      color: myColors.darkgreen,
+                                    )
+                                  ]),
+                                ),
+                              );
+                            }),
+                      ),
+                    ],
+                  )
+                : Row(
+                    children: [
+                      Container(
+                        height: 48,
+                        width: 132,
+                        padding: const EdgeInsets.all(8),
+                        child: Center(
+                            child: Text("For Employees",
+                                style: TextStyle(
+                                    color: myColors.darkgreen,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600))),
+                      ),
+                      SizedBox(
+                        width: 92,
+                        height: 48,
+                        child: GetBuilder<AppStateController>(
+                            init: appStateController,
+                            builder: (state) {
+                              return PopupMenuButton(
+                                onSelected: (val) {
+                                  appStateController.changeLanguageI(val);
+                                },
+                                offset: const Offset(0, 48),
+                                itemBuilder: (_) => [
+                                  const PopupMenuItem(
+                                      value: Locale("Nepali", "NE"),
+                                      child: Text("Nepali")),
+                                  const PopupMenuItem(
+                                      value: Locale("English", "EN"),
+                                      child: Text("English"))
+                                ],
+                                child: Container(
+                                  width: 92,
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(children: [
+                                    Text(
+                                      state.language.languageCode,
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                    const SizedBox(
+                                      width: 4,
+                                    ),
+                                    Icon(
+                                      Icons.arrow_drop_down,
+                                      color: myColors.darkgreen,
+                                    )
+                                  ]),
+                                ),
+                              );
+                            }),
+                      ),
+                    ],
+                  )
           ],
         );
 }
@@ -152,6 +220,9 @@ class _HoverButtonState extends State<HoverButton> {
         radius: 100,
         splashColor: myColors.darkgreen,
         hoverColor: Colors.black12,
+        onHover: (val) {
+          log("hovering");
+        },
         enableFeedback: true,
         onTap: () {
           widget.onTap();

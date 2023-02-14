@@ -6,10 +6,12 @@ class CompanyLogo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     return SizedBox(
-      width: 164,
-      height: 100,
+      width: width > 500 ? 164 : 84,
+      height: width > 500 ? 164 : 84,
       child: Chip(
+        backgroundColor: Colors.white,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(4),
             side: const BorderSide(width: 0.2)),

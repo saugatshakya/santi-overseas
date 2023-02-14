@@ -3,14 +3,21 @@ import 'package:get/get.dart';
 
 class AppStateController extends GetxController {
   Locale language = const Locale('Nepali', 'NE');
-  PageController currentPage = PageController(initialPage: 1);
+  PageController currentPage = PageController(initialPage: 0);
   String searchCountry = "";
   String searchJob = "";
   final FocusNode seachCountryFocus = FocusNode();
   final FocusNode seachJobFocus = FocusNode();
+  //job
   int pagination = 1;
   int itemCount = 83;
-  int perPageItem = 10;
+  int perPageItem = 9;
+  //company
+  int paginationC = 1;
+  int itemCountC = 57;
+  int perPageItemC = 9;
+
+  //demoData
 
   changePage(int page) {
     currentPage.jumpToPage(
@@ -36,6 +43,11 @@ class AppStateController extends GetxController {
 
   changePagination(val) {
     pagination = val;
+    update();
+  }
+
+  changeCompanyPagination(val) {
+    paginationC = val;
     update();
   }
 

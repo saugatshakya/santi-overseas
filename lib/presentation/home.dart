@@ -45,65 +45,56 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   child: Stack(
                     children: [
                       Positioned(
-                          top: 232,
+                          top: 284,
                           child: Container(
                             width: width,
                             height: 216,
                             color: Colors.white70,
                           )),
                       Positioned(
-                          top: 232,
+                          top: 284,
                           child: Container(
                             width: width,
                             height: 216,
                             color: Colors.white30,
                           )),
                       Positioned(
-                        right: width > 800 ? width * 0.05 : width * 0.1,
-                        top: 130,
+                        right: width * 0.05,
+                        bottom: 0,
                         child: SizedBox(
-                            width: width > 800 ? width * 0.3 : width * 0.8,
-                            child: Image.asset("assets/image 138@3x.png")),
+                            width: width > 800 ? width * 0.4 : width * 0.6,
+                            child: Image.asset("assets/worker.png")),
                       ),
                       Positioned(
-                          top: 352,
-                          left: 64,
-                          child: Card(
-                            elevation: 4,
-                            color: Colors.white,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(4)),
-                            child: const SizedBox(
-                              width: 924,
-                              height: 82,
-                            ),
-                          )),
-                      Positioned(
-                          top: 232,
-                          left: 64,
+                          top: 300,
+                          left: 32,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                "Discover the Perfect international job for you",
-                                style: GoogleFonts.actor(
-                                    color: myColors.darkgreen,
-                                    fontSize: 48,
-                                    fontWeight: FontWeight.w500),
+                              SizedBox(
+                                width: width * 0.86,
+                                child: Text(
+                                  "Discover the Perfect international job for you",
+                                  style: GoogleFonts.actor(
+                                      color: myColors.darkgreen,
+                                      fontSize: 32,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 16,
                               ),
                               Text(
                                 "To get your dream job register & fill out your profile first",
                                 style: GoogleFonts.actor(
-                                    color: myColors.darkgreen, fontSize: 28),
+                                    color: myColors.darkgreen, fontSize: 12),
                               ),
                               const SizedBox(
                                 height: 32,
                               ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(16, 16, 16, 8),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                              SizedBox(
+                                width: width * 0.6,
+                                child: Wrap(
                                   children: [
                                     SearchableTextField(
                                       suggestions: const [
@@ -129,7 +120,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                       width: 400,
                                       focusNode: state.seachJobFocus,
                                     ),
-                                    SearchButton()
+                                    const SearchButton()
                                   ],
                                 ),
                               ),

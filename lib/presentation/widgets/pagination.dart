@@ -128,60 +128,55 @@ class _NumberPaginationState extends State<NumberPagination> {
     return GetBuilder<AppStateController>(
         init: appStateController,
         builder: (state) {
-          return Padding(
-            padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                InkWell(
-                  onTap: () => _changePage(--currentPage),
-                  child: Stack(
-                    children: [
-                      if (widget.controlButton != null) ...[
-                        widget.controlButton!,
-                        iconPrevious
-                      ] else
-                        _defaultControlButton(iconPrevious),
-                    ],
-                  ),
+          return Row(
+            children: [
+              InkWell(
+                onTap: () => _changePage(--currentPage),
+                child: Stack(
+                  children: [
+                    if (widget.controlButton != null) ...[
+                      widget.controlButton!,
+                      iconPrevious
+                    ] else
+                      _defaultControlButton(iconPrevious),
+                  ],
                 ),
-                const SizedBox(
-                  width: 10,
-                ),
-                ...List.generate(
-                  rangeEnd <= widget.pageTotal
-                      ? widget.threshold
-                      : widget.pageTotal % widget.threshold,
-                  (index) => Flexible(
-                    child: InkWell(
-                      hoverColor: Colors.black12,
-                      enableFeedback: true,
-                      onTap: () {
-                        _changePage(index + 1 + rangeStart);
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Material(
-                          elevation: state.pagination == (index + 1) ? 4 : 0,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(4)),
-                          color: (currentPage - 1) % widget.threshold == index
-                              ? myColors.darkgreen
-                              : Colors.grey[200],
-                          child: SizedBox(
-                            width: 32,
-                            height: 32,
-                            child: Center(
-                              child: Text(
-                                '${index + 1 + rangeStart}',
-                                style: TextStyle(
-                                    color:
-                                        (currentPage - 1) % widget.threshold ==
-                                                index
-                                            ? Colors.white
-                                            : myColors.darkgreen,
-                                    fontWeight: FontWeight.w600),
-                              ),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              ...List.generate(
+                rangeEnd <= widget.pageTotal
+                    ? widget.threshold
+                    : widget.pageTotal % widget.threshold,
+                (index) => Flexible(
+                  child: InkWell(
+                    hoverColor: Colors.black12,
+                    enableFeedback: true,
+                    onTap: () {
+                      _changePage(index + 1 + rangeStart);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Material(
+                        elevation: state.pagination == (index + 1) ? 4 : 0,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(4)),
+                        color: (currentPage - 1) % widget.threshold == index
+                            ? myColors.darkgreen
+                            : Colors.grey[200],
+                        child: SizedBox(
+                          width: 32,
+                          height: 32,
+                          child: Center(
+                            child: Text(
+                              '${index + 1 + rangeStart}',
+                              style: TextStyle(
+                                  color: (currentPage - 1) % widget.threshold ==
+                                          index
+                                      ? Colors.white
+                                      : myColors.darkgreen,
+                                  fontWeight: FontWeight.w600),
                             ),
                           ),
                         ),
@@ -189,23 +184,23 @@ class _NumberPaginationState extends State<NumberPagination> {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  width: 10,
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              InkWell(
+                onTap: () => _changePage(++currentPage),
+                child: Stack(
+                  children: [
+                    if (widget.controlButton != null) ...[
+                      widget.controlButton!,
+                      iconNext
+                    ] else
+                      _defaultControlButton(iconNext),
+                  ],
                 ),
-                InkWell(
-                  onTap: () => _changePage(++currentPage),
-                  child: Stack(
-                    children: [
-                      if (widget.controlButton != null) ...[
-                        widget.controlButton!,
-                        iconNext
-                      ] else
-                        _defaultControlButton(iconNext),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           );
         });
   }

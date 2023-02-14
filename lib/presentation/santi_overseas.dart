@@ -2,6 +2,8 @@ import 'package:animated_background/animated_background.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:testapp/controller/app_state_controller.dart';
+import 'package:testapp/data/functions/utils.dart';
+import 'package:testapp/presentation/companies.dart';
 import 'package:testapp/presentation/home.dart';
 import 'package:testapp/presentation/jobs.dart';
 import 'package:testapp/presentation/widgets/my_appbar.dart';
@@ -37,9 +39,7 @@ class _SantiOverseasState extends State<SantiOverseas>
                       children: [
                         const Home(),
                         const Jobs(),
-                        Container(
-                          color: Colors.blue,
-                        ),
+                        const Companies(),
                         Container(
                           color: Colors.yellow,
                         ),
@@ -50,6 +50,45 @@ class _SantiOverseasState extends State<SantiOverseas>
                     ),
                   ),
                   SizedBox(height: 100, child: MyAppBar(width)),
+                  getSmartPhoneOrTablet() == phoneType || width < 1275
+                      ? Positioned(
+                          top: 100,
+                          child: Material(
+                            child: SizedBox(
+                              width: width,
+                              child: Wrap(
+                                children: [
+                                  HoverButton(
+                                      label: "Jobs",
+                                      onTap: () {
+                                        appStateController.changePage(1);
+                                      }),
+                                  HoverButton(
+                                      label: "Companies",
+                                      onTap: () {
+                                        appStateController.changePage(2);
+                                      }),
+                                  HoverButton(
+                                      label: "Career Advice",
+                                      onTap: () {
+                                        // appStateController.changePage(3);
+                                      }),
+                                  HoverButton(
+                                      label: "About Us",
+                                      onTap: () {
+                                        // appStateController.changePage(4);
+                                      }),
+                                  HoverButton(
+                                      label: "Login/SignUp",
+                                      onTap: () {
+                                        // appStateController.changePage(5);
+                                      }),
+                                ],
+                              ),
+                            ),
+                          ),
+                        )
+                      : const SizedBox()
                 ],
               ));
         });

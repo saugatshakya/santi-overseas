@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:testapp/data/functions/utils.dart';
 import 'package:testapp/presentation/widgets/my_appbar.dart';
 import 'package:testapp/presentation/widgets/raised_button.dart';
 import 'package:testapp/static/colors.dart';
@@ -35,7 +36,8 @@ class _JobListingState extends State<JobListing> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         child: Container(
           padding: const EdgeInsets.all(12),
-          width: width * 0.32,
+          constraints: const BoxConstraints(minWidth: 300),
+          width: width * 0.3,
           child: ListTile(
             contentPadding: const EdgeInsets.all(0),
             leading: Container(
@@ -44,26 +46,29 @@ class _JobListingState extends State<JobListing> {
               decoration: BoxDecoration(
                   color: Colors.red, borderRadius: BorderRadius.circular(4)),
             ),
-            trailing: Column(
-              children: [
-                Text(
-                  "Posted ${timeago.format(DateTime.now().subtract(const Duration(days: 10)))}",
-                  style: TextStyle(
-                      fontSize: 12,
-                      color: hovering ? Colors.white : myColors.darkgreen),
-                ),
-                const SizedBox(
-                  height: 4,
-                ),
-                RaisedButton(
-                    label: "APPLY",
-                    height: 24,
-                    width: 54,
-                    fontSize: 12,
-                    color: hovering ? Colors.green : myColors.darkgreen,
-                    onTap: () {})
-              ],
-            ),
+            trailing: getSmartPhoneOrTablet() == phoneType || width < 1275
+                ? const SizedBox()
+                : Column(
+                    children: [
+                      Text(
+                        "Posted ${timeago.format(DateTime.now().subtract(const Duration(days: 10)))}",
+                        style: TextStyle(
+                            fontSize: 12,
+                            color:
+                                hovering ? Colors.white : myColors.darkgreen),
+                      ),
+                      const SizedBox(
+                        height: 4,
+                      ),
+                      RaisedButton(
+                          label: "APPLY",
+                          height: 24,
+                          width: 54,
+                          fontSize: 12,
+                          color: hovering ? Colors.green : myColors.darkgreen,
+                          onTap: () {})
+                    ],
+                  ),
             title: Row(children: [
               Text(
                 "Security Guard",
@@ -72,10 +77,10 @@ class _JobListingState extends State<JobListing> {
                     color: hovering ? Colors.white : myColors.darkgreen),
               ),
               const SizedBox(
-                width: 32,
+                width: 16,
               ),
               Container(
-                  padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
+                  padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
                   decoration: BoxDecoration(
                       border: Border.all(
                           color: hovering ? Colors.white : myColors.lightgreen),
@@ -100,43 +105,80 @@ class _JobListingState extends State<JobListing> {
                       fontSize: 14,
                       color: hovering ? Colors.white : myColors.darkgreen),
                 ),
-                Row(
+                Wrap(
                   children: [
-                    Text(
-                      "Basic Salary:",
-                      style: TextStyle(
-                          fontSize: 14,
-                          color: hovering ? Colors.white : myColors.darkgreen),
+                    Row(
+                      children: [
+                        Text(
+                          "Basic Salary:",
+                          style: TextStyle(
+                              fontSize: 14,
+                              color:
+                                  hovering ? Colors.white : myColors.darkgreen),
+                        ),
+                        const SizedBox(
+                          width: 4,
+                        ),
+                        Text(
+                          "रु 5000",
+                          style: TextStyle(
+                              fontSize: 14,
+                              color:
+                                  hovering ? Colors.white : myColors.darkgreen),
+                        ),
+                      ],
                     ),
-                    const SizedBox(
-                      width: 4,
-                    ),
-                    Text(
-                      "रु 5000",
-                      style: TextStyle(
-                          fontSize: 14,
-                          color: hovering ? Colors.white : myColors.darkgreen),
-                    ),
-                    const SizedBox(
-                      width: 12,
-                    ),
-                    Text(
-                      "Apply Before:",
-                      style: TextStyle(
-                          fontSize: 14,
-                          color: hovering ? Colors.white : myColors.darkgreen),
-                    ),
-                    const SizedBox(
-                      width: 4,
-                    ),
-                    Text(
-                      DateFormat("yyyy-MM-dd").format(DateTime.now()),
-                      style: TextStyle(
-                          fontSize: 14,
-                          color: hovering ? Colors.white : myColors.darkgreen),
-                    ),
+                    Row(
+                      children: [
+                        Text(
+                          "Apply Before:",
+                          style: TextStyle(
+                              fontSize: 14,
+                              color:
+                                  hovering ? Colors.white : myColors.darkgreen),
+                        ),
+                        const SizedBox(
+                          width: 4,
+                        ),
+                        Text(
+                          DateFormat("yyyy-MM-dd").format(DateTime.now()),
+                          style: TextStyle(
+                              fontSize: 14,
+                              color:
+                                  hovering ? Colors.white : myColors.darkgreen),
+                        ),
+                      ],
+                    )
                   ],
-                )
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                getSmartPhoneOrTablet() == phoneType || width < 1275
+                    ? Row(
+                        children: [
+                          Text(
+                            "Posted ${timeago.format(DateTime.now().subtract(const Duration(days: 10)))}",
+                            style: TextStyle(
+                                fontSize: 12,
+                                color: hovering
+                                    ? Colors.white
+                                    : myColors.darkgreen),
+                          ),
+                          const SizedBox(
+                            width: 16,
+                          ),
+                          RaisedButton(
+                              label: "APPLY",
+                              height: 24,
+                              width: 54,
+                              fontSize: 12,
+                              color:
+                                  hovering ? Colors.green : myColors.darkgreen,
+                              onTap: () {})
+                        ],
+                      )
+                    : const SizedBox()
               ],
             ),
           ),
