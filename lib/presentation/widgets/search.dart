@@ -43,14 +43,14 @@ class _SearchButtonState extends State<SearchButton>
       child: Material(
         borderRadius: BorderRadius.circular(4),
         elevation: _animationTween!.value,
-        color: myColors.darkgreen,
-        child: const SizedBox(
+        color: myColors.blue,
+        child: SizedBox(
             width: 100,
             height: 54,
             child: Center(
               child: Text(
                 "SEARCH",
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: myColors.white),
               ),
             )),
       ),

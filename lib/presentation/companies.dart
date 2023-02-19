@@ -15,6 +15,14 @@ class Companies extends StatefulWidget {
 }
 
 class _CompaniesState extends State<Companies> {
+  List companies = [
+    "assets/company.jpg",
+    "assets/company (1).jpg",
+    "assets/company (2).jpg",
+    "assets/company (3).jpg",
+    "assets/company (4).jpg",
+    "assets/company (5).jpg"
+  ];
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -47,7 +55,7 @@ class _CompaniesState extends State<Companies> {
                     height: 8,
                   ),
                   Text(
-                    "Page ${state.paginationC} of ${state.itemCountC} Companies",
+                    "Page ${state.paginationC} of ${companies.length} Companies",
                     style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
@@ -57,31 +65,31 @@ class _CompaniesState extends State<Companies> {
                     height: 16,
                   ),
                   Expanded(
-                    child: SingleChildScrollView(
-                        child: Wrap(
+                    child: Wrap(
                       // alignment: WrapAlignment.spaceEvenly,
                       // runAlignment: WrapAlignment.spaceEvenly,
                       // crossAxisAlignment: WrapCrossAlignment.center,
-                      spacing: 12,
-                      runSpacing: 12,
+                      // spacing: 12,
+                      // runSpacing: 12,
                       children: [
                         for (int i =
                                 ((state.paginationC - 1) * state.perPageItemC);
                             i <
                                 (state.paginationC * state.perPageItemC <
-                                        state.itemCountC
+                                        companies.length
                                     ? state.paginationC * state.perPageItemC
-                                    : state.itemCountC);
+                                    : companies.length);
                             i++)
-                          const Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: CompanyLogo(
-                                imageLink:
-                                    "https://upload.wikimedia.org/wikipedia/commons/e/e8/Tesla_logo.png"),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: SizedBox(
+                                width: 164,
+                                height: 164,
+                                child: CompanyLogo(imageLink: companies[i])),
                           ),
                         // const Spacer(),
                       ],
-                    )),
+                    ),
                   ),
                   const SizedBox(
                     height: 8,
@@ -93,7 +101,7 @@ class _CompaniesState extends State<Companies> {
                         state.changeCompanyPagination(pageNumber);
                       });
                     },
-                    pageTotal: (state.itemCountC / state.perPageItemC).ceil(),
+                    pageTotal: (companies.length / state.perPageItemC).ceil(),
                     pageInit: state.paginationC,
                     threshold: 6,
                     iconNext: Material(

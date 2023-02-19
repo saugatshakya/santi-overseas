@@ -1,9 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:testapp/presentation/santi_overseas.dart';
+import 'package:testapp/presentation/free_ticket_free_visa.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
-void main() {
+void main() async {
+  if (kIsWeb) {
+    // initialiaze the facebook javascript SDK
+    await FacebookAuth.i.webAndDesktopInitialize(
+      appId: "9460389773974765",
+      cookie: true,
+      xfbml: true,
+      version: "v14.0",
+    );
+  }
   runApp(const MyApp());
 }
 
@@ -30,7 +41,7 @@ class _MyAppState extends State<MyApp> {
         primarySwatch: Colors.green,
         fontFamily: GoogleFonts.ptSans().fontFamily,
       ),
-      home: SantiOverseas(),
+      home: const Home(),
     );
   }
 }

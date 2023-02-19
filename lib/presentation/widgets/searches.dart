@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flag/flag.dart';
 import 'package:testapp/static/colors.dart';
 
 class Searches extends StatelessWidget {
@@ -11,26 +10,39 @@ class Searches extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 172,
-      margin: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-      padding: const EdgeInsets.all(4),
-      decoration: BoxDecoration(
-          border: Border.all(
+    return Center(
+      child: Container(
+        width: 172,
+        height: 54,
+        margin: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+        padding: const EdgeInsets.all(4),
+        decoration: BoxDecoration(
             color: myColors.lightgreen,
-          ),
-          borderRadius: BorderRadius.circular(4)),
-      child: Row(
-        children: [
-          Icon(Icons.search, color: myColors.darkgreen),
-          const SizedBox(
-            width: 16,
-          ),
-          Text(
-            search,
-            style: TextStyle(fontSize: 18, color: myColors.darkgreen),
-          )
-        ],
+            border: Border.all(
+              width: 2,
+              color: myColors.darkgreen,
+            ),
+            borderRadius: BorderRadius.circular(4)),
+        child: Row(
+          children: [
+            const SizedBox(
+              width: 16,
+            ),
+            Icon(Icons.search, color: myColors.white),
+            const SizedBox(
+              width: 16,
+            ),
+            SizedBox(
+              width: 100,
+              child: Text(
+                search,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(fontSize: 20, color: myColors.white),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

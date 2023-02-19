@@ -1,5 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:testapp/data/models/image.dart';
+import 'package:testapp/data/models/job.dart';
+import 'package:testapp/data/models/user.dart';
 
 class AppStateController extends GetxController {
   Locale language = const Locale('Nepali', 'NE');
@@ -16,9 +21,14 @@ class AppStateController extends GetxController {
   int paginationC = 1;
   int itemCountC = 57;
   int perPageItemC = 9;
+  //
+  User? user;
 
   //demoData
-
+  List<JobModel> jobs = [];
+  JobModel? selectedJob;
+  ImageModel? adImage;
+  List<ImageModel> gallery = [];
   changePage(int page) {
     currentPage.jumpToPage(
       page,
@@ -63,6 +73,31 @@ class AppStateController extends GetxController {
 
   focusOnJob() {
     seachJobFocus.requestFocus();
+    update();
+  }
+
+  saveUser(User newUser) {
+    user = newUser;
+    update();
+  }
+
+  updateJobs(List<JobModel> newJobs) {
+    jobs = newJobs;
+    update();
+  }
+
+  updatADImage(ImageModel image) {
+    adImage = image;
+    update();
+  }
+
+  updateGallery(List<ImageModel> newImages) {
+    gallery = newImages;
+    update();
+  }
+
+  selectJob(JobModel job) {
+    selectedJob = job;
     update();
   }
 }

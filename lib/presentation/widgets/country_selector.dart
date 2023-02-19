@@ -9,29 +9,28 @@ class CountrySelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-      child: Container(
-        padding: const EdgeInsets.all(8),
-        decoration: BoxDecoration(
-            border: Border.all(color: myColors.lightgreen, width: 2),
-            borderRadius: BorderRadius.circular(4)),
-        child: Row(
-          children: [
-            Flag.fromCode(
-              code,
-              height: 32,
-              width: 32,
-            ),
-            const SizedBox(
-              width: 16,
-            ),
-            Text(
-              country,
-              style: TextStyle(fontSize: 18, color: myColors.darkgreen),
-            )
-          ],
-        ),
+    return Container(
+      margin: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+          color: myColors.lightgreen,
+          border: Border.all(color: myColors.white, width: 2),
+          borderRadius: BorderRadius.circular(4)),
+      child: Row(
+        children: [
+          Flag.fromCode(
+            code,
+            height: 48,
+            width: 48,
+          ),
+          const SizedBox(
+            width: 32,
+          ),
+          Text(
+            country,
+            style: TextStyle(fontSize: 18, color: myColors.white),
+          )
+        ],
       ),
     );
   }

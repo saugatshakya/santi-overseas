@@ -3,17 +3,19 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:testapp/controller/app_state_controller.dart';
+import 'package:testapp/data/functions/auth.dart';
 import 'package:testapp/data/functions/utils.dart';
 import 'package:testapp/static/colors.dart';
+import 'dart:html' as html;
 
 class MyAppBar extends AppBar {
   final double width;
   MyAppBar(this.width, {Key? key})
       : super(
           key: key,
-          elevation: 0,
+          elevation: 4,
           toolbarTextStyle: TextStyle(color: myColors.darkgreen),
-          backgroundColor: Colors.transparent,
+          backgroundColor: Colors.white,
           toolbarHeight: 100,
           actions: [
             GestureDetector(
@@ -49,51 +51,58 @@ class MyAppBar extends AppBar {
               ),
             ),
             const Spacer(),
-            getSmartPhoneOrTablet() == phoneType || width < 1275
-                ? const SizedBox()
-                : Row(
-                    children: [
-                      HoverButton(
-                          label: "Jobs",
-                          onTap: () {
-                            appStateController.changePage(1);
-                          }),
-                      HoverButton(
-                          label: "Companies",
-                          onTap: () {
-                            appStateController.changePage(2);
-                          }),
-                      HoverButton(
-                          label: "Career Advice",
-                          onTap: () {
-                            // appStateController.changePage(3);
-                          }),
-                      HoverButton(
-                          label: "About Us",
-                          onTap: () {
-                            // appStateController.changePage(4);
-                          }),
-                      HoverButton(
-                          label: "Login/SignUp",
-                          onTap: () {
-                            // appStateController.changePage(5);
-                          }),
-                    ],
-                  ),
+            // getSmartPhoneOrTablet() == phoneType || width < 1275
+            //     ? const SizedBox()
+            //     :
+            Row(
+              children: [
+                HoverButton(
+                    label: "Jobs",
+                    onTap: () {
+                      appStateController.changePage(1);
+                    }),
+                HoverButton(
+                    label: "Companies",
+                    onTap: () {
+                      appStateController.changePage(2);
+                    }),
+                // HoverButton(
+                //     label: "Career Advice",
+                //     onTap: () {
+                //       // appStateController.changePage(3);
+                //     }),
+                HoverButton(
+                    label: "About Us",
+                    onTap: () {
+                      appStateController.changePage(3);
+                    }),
+                HoverButton(
+                    label: "Login/SignUp",
+                    onTap: () async {
+                      await auth.facebookLogin();
+                    }),
+              ],
+            ),
             getSmartPhoneOrTablet() == phoneType || width < 1275
                 ? Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Container(
-                        height: 48,
-                        width: 132,
-                        padding: const EdgeInsets.all(8),
-                        child: Center(
-                            child: Text("For Employees",
-                                style: TextStyle(
-                                    color: myColors.darkgreen,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600))),
+                      GestureDetector(
+                        onTap: () {
+                          html.window.open(
+                              'https://freeticketfreevisa.com/admin', "_self");
+                        },
+                        child: Container(
+                          height: 48,
+                          width: 132,
+                          padding: const EdgeInsets.all(8),
+                          child: Center(
+                              child: Text("For Employees",
+                                  style: TextStyle(
+                                      color: myColors.darkgreen,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600))),
+                        ),
                       ),
                       SizedBox(
                         width: 92,
@@ -139,16 +148,22 @@ class MyAppBar extends AppBar {
                   )
                 : Row(
                     children: [
-                      Container(
-                        height: 48,
-                        width: 132,
-                        padding: const EdgeInsets.all(8),
-                        child: Center(
-                            child: Text("For Employees",
-                                style: TextStyle(
-                                    color: myColors.darkgreen,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600))),
+                      GestureDetector(
+                        onTap: () {
+                          html.window.open(
+                              'https://freeticketfreevisa.com/admin', "_self");
+                        },
+                        child: Container(
+                          height: 48,
+                          width: 132,
+                          padding: const EdgeInsets.all(8),
+                          child: Center(
+                              child: Text("For Employees",
+                                  style: TextStyle(
+                                      color: myColors.darkgreen,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600))),
+                        ),
                       ),
                       SizedBox(
                         width: 92,

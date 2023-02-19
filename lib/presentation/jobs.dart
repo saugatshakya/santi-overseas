@@ -46,7 +46,7 @@ class _JobsState extends State<Jobs> {
                     height: 8,
                   ),
                   Text(
-                    "Page ${state.pagination} of ${state.itemCount} Jobs",
+                    "Page ${state.pagination} of ${state.jobs.length} Jobs",
                     style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
@@ -56,62 +56,56 @@ class _JobsState extends State<Jobs> {
                     height: 16,
                   ),
                   Expanded(
-                    child: SingleChildScrollView(
-                        child: Wrap(
-                      spacing: 12,
-                      runSpacing: 12,
+                    child: Wrap(
                       children: [
                         for (int i =
                                 ((state.pagination - 1) * state.perPageItem);
                             i <
                                 (state.pagination * state.perPageItem >
-                                        state.itemCount
-                                    ? state.itemCount
+                                        state.jobs.length
+                                    ? state.jobs.length
                                     : state.pagination * state.perPageItem);
                             i++)
-                          JobListing(i: i),
+                          JobListing(job: state.jobs[i]),
                         // const Spacer(),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        NumberPagination(
-                          onPageChanged: (int pageNumber) {
-                            //do somthing for selected page
-                            setState(() {
-                              state.changePagination(pageNumber);
-                            });
-                          },
-                          pageTotal:
-                              (state.itemCount / state.perPageItem).ceil(),
-                          pageInit: state.pagination,
-                          threshold: 6,
-                          iconNext: Material(
-                            elevation: 0,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(4)),
-                            color: Colors.grey[200],
-                            child: const SizedBox(
-                              width: 32,
-                              height: 32,
-                              child: Center(
-                                  child: Icon(Icons.keyboard_arrow_right)),
-                            ),
-                          ),
-                          iconPrevious: Material(
-                            elevation: 0,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(4)),
-                            color: Colors.grey[200],
-                            child: const SizedBox(
-                              width: 32,
-                              height: 32,
-                              child: Center(
-                                  child: Icon(Icons.keyboard_arrow_left)),
-                            ),
-                          ),
-                        )
                       ],
-                    )),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  NumberPagination(
+                    onPageChanged: (int pageNumber) {
+                      //do somthing for selected page
+                      setState(() {
+                        state.changePagination(pageNumber);
+                      });
+                    },
+                    pageTotal: (state.jobs.length / state.perPageItem).ceil(),
+                    pageInit: state.pagination,
+                    threshold: 6,
+                    iconNext: Material(
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(4)),
+                      color: Colors.grey[200],
+                      child: const SizedBox(
+                        width: 32,
+                        height: 32,
+                        child: Center(child: Icon(Icons.keyboard_arrow_right)),
+                      ),
+                    ),
+                    iconPrevious: Material(
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(4)),
+                      color: Colors.grey[200],
+                      child: const SizedBox(
+                        width: 32,
+                        height: 32,
+                        child: Center(child: Icon(Icons.keyboard_arrow_left)),
+                      ),
+                    ),
                   ),
                   const SizedBox(
                     height: 16,

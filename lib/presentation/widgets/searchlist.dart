@@ -71,6 +71,12 @@ class _SearchableTextFieldState extends State<SearchableTextField> {
                             borderSide: BorderSide(color: myColors.darkgreen)),
                         labelText: widget.label,
                         labelStyle: TextStyle(color: myColors.darkgreen),
+                        floatingLabelStyle: TextStyle(
+                          color: myColors.blue,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                          backgroundColor: myColors.white,
+                        ),
                         prefixIconConstraints:
                             const BoxConstraints(minWidth: 0),
                         prefixIcon: widget.icon == null
@@ -86,39 +92,39 @@ class _SearchableTextFieldState extends State<SearchableTextField> {
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 8,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  for (int i = 0; i < suggestions.length; i++)
-                    if (suggestions[i]
-                            .toLowerCase()
-                            .contains(searchText.text.toLowerCase()) &&
-                        searchText.text.isNotEmpty &&
-                        showSuggesation &&
-                        widget.focusNode.hasFocus)
-                      Options(
-                        option: suggestions[i],
-                        width: widget.width,
-                        ontap: () {
-                          if (widget.label ==
-                              "Jobs, Title, Keywords or Company") {
-                            state.changeSearchJob(suggestions[i]);
-                          } else {
-                            state.changeSearchCountry(suggestions[i]);
-                          }
-                          searchText.text = suggestions[i];
-                          log(widget.label + searchText.text);
-                          setState(() {
-                            showSuggesation = false;
-                          });
-                        },
-                      )
-                ],
-              )
+              // const SizedBox(
+              //   height: 8,
+              // ),
+              // Column(
+              //   crossAxisAlignment: CrossAxisAlignment.start,
+              //   mainAxisAlignment: MainAxisAlignment.start,
+              //   children: [
+              //     for (int i = 0; i < suggestions.length; i++)
+              //       if (suggestions[i]
+              //               .toLowerCase()
+              //               .contains(searchText.text.toLowerCase()) &&
+              //           searchText.text.isNotEmpty &&
+              //           showSuggesation &&
+              //           widget.focusNode.hasFocus)
+              //         Options(
+              //           option: suggestions[i],
+              //           width: widget.width,
+              //           ontap: () {
+              //             if (widget.label ==
+              //                 "Jobs, Title, Keywords or Company") {
+              //               state.changeSearchJob(suggestions[i]);
+              //             } else {
+              //               state.changeSearchCountry(suggestions[i]);
+              //             }
+              //             searchText.text = suggestions[i];
+              //             log(widget.label + searchText.text);
+              //             setState(() {
+              //               showSuggesation = false;
+              //             });
+              //           },
+              //         )
+              //   ],
+              // )
             ]),
           );
         });
