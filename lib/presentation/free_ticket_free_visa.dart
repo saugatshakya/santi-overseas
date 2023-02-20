@@ -42,11 +42,11 @@ class _HomeState extends State<Home> {
   ];
   List companies = [
     "assets/company.jpg",
-    "assets/company (1).jpg",
-    "assets/company (2).jpg",
-    "assets/company (3).jpg",
-    "assets/company (4).jpg",
-    "assets/company (5).jpg"
+    "assets/company_1.jpg",
+    "assets/company_2.jpg",
+    "assets/company_3.jpg",
+    "assets/company_4.jpg",
+    "assets/company_5.jpg"
   ];
   @override
   void initState() {

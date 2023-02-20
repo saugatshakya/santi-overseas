@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 
 class MyApi {
-  String host = "http://freeticketfreevisa.com/api/";
+  String host = "https://freeticketfreevisa.com/api/";
   get(String path, [String? token]) async {
     final response = await http.get(
       Uri.parse(host + path),
