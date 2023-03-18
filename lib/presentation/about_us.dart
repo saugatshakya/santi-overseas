@@ -7,7 +7,7 @@ class AboutUs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: myColors.white.withOpacity(0.95),
+      color: myColors.white.withOpacity(0.9),
       padding: EdgeInsets.fromLTRB(32, 16, 32, 16),
       child: SingleChildScrollView(
         child: Column(

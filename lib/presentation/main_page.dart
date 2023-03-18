@@ -38,7 +38,7 @@ class MainPage extends StatelessWidget {
         builder: (state) {
           return SafeArea(
               child: Container(
-                  color: myColors.white.withOpacity(0.95),
+                  color: myColors.white.withOpacity(0.9),
                   height: height,
                   width: width,
                   child: SingleChildScrollView(
@@ -511,15 +511,7 @@ class MainPage extends StatelessWidget {
                               ),
                               ScrollWidget(
                                   reverse: false,
-                                  widget: (context, i) => Container(
-                                        margin: const EdgeInsets.all(8),
-                                        height: 132,
-                                        width: 132,
-                                        child: Image.network(
-                                          "http://freeticketfreevisa.com/${state.gallery[i % state.gallery.length].imagePath!}",
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
+                                  widget: (context, i) => GalleryImage(path: state.gallery[i % state.gallery.length].imagePath!,),
                                   direction: Axis.horizontal,
                                   height: 132),
                             ],
@@ -824,5 +816,48 @@ class MainPage extends StatelessWidget {
                     ),
                   )));
         });
+  }
+}
+
+class GalleryImage extends StatefulWidget {
+  final String path;
+  const GalleryImage({
+    super.key, required this.path,
+  });
+
+  @override
+  State<GalleryImage> createState() => _GalleryImageState();
+}
+
+class _GalleryImageState extends State<GalleryImage> {
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector
+    (onTap: (){
+      Get.dialog(Center(child: Dialog(child: Container(
+              margin: const EdgeInsets.all(8),
+              height:300,
+              width: 300,
+              child: Image.network(
+                "https://freeticketfreevisa.com/${widget.path}",
+                fit: BoxFit.cover,
+              ),
+            ),),));
+    },
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
+        
+        child: Container(
+              margin: const EdgeInsets.all(8),
+              height:132,
+              width: 132,
+              child: Image.network(
+                "https://freeticketfreevisa.com/${widget.path}",
+                fit: BoxFit.cover,
+              ),
+            ),
+      ),
+    );
   }
 }

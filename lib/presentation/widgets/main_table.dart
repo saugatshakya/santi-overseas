@@ -101,8 +101,14 @@ class MainTable extends StatelessWidget {
                           height: 16,
                         ),
                         if (state.adImage != null)
-                          Image.network(
-                              "http://freeticketfreevisa.com/${state.adImage!.imagePath}")
+                          MouseRegion(cursor: SystemMouseCursors.click,
+                            child: GestureDetector(
+                            onTap:()=> Get.dialog( Center(child: Image.network(
+                                  "https://freeticketfreevisa.com/${state.adImage!.imagePath}"),)),
+                              child: Image.network(
+                                  "https://freeticketfreevisa.com/${state.adImage!.imagePath}"),
+                            ),
+                          )
                       ],
                     ),
                   ),

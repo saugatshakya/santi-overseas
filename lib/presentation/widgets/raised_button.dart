@@ -54,20 +54,23 @@ class _RaisedButtonState extends State<RaisedButton>
       onTap: () {
         widget.onTap();
       },
-      child: Material(
-        borderRadius: BorderRadius.circular(4),
-        elevation: _animationTween!.value,
-        color: widget.color,
-        child: SizedBox(
-            width: widget.width,
-            height: widget.height,
-            child: Center(
-              child: Text(
-                widget.label,
-                style:
-                    TextStyle(color: Colors.white, fontSize: widget.fontSize),
-              ),
-            )),
+      child: MouseRegion(                    cursor: SystemMouseCursors.click,
+
+        child: Material(
+          borderRadius: BorderRadius.circular(4),
+          elevation: _animationTween!.value,
+          color: widget.color,
+          child: SizedBox(
+              width: widget.width,
+              height: widget.height,
+              child: Center(
+                child: Text(
+                  widget.label,
+                  style:
+                      TextStyle(color: Colors.white, fontSize: widget.fontSize),
+                ),
+              )),
+        ),
       ),
     );
   }
