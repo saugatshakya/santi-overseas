@@ -40,19 +40,22 @@ class _SearchButtonState extends State<SearchButton>
     return GestureDetector(
       onTapDown: _onTapDown,
       onTapUp: _onTapUp,
-      child: Material(
-        borderRadius: BorderRadius.circular(4),
-        elevation: _animationTween!.value,
-        color: myColors.blue,
-        child: SizedBox(
-            width: 100,
-            height: 54,
-            child: Center(
-              child: Text(
-                "SEARCH",
-                style: TextStyle(color: myColors.white),
-              ),
-            )),
+      child: MouseRegion(                    cursor: SystemMouseCursors.click,
+
+        child: Material(
+          borderRadius: BorderRadius.circular(4),
+          elevation: _animationTween!.value,
+          color: myColors.blue,
+          child: SizedBox(
+              width: 100,
+              height: 54,
+              child: Center(
+                child: Text(
+                  "SEARCH",
+                  style: TextStyle(color: myColors.white),
+                ),
+              )),
+        ),
       ),
     );
   }
