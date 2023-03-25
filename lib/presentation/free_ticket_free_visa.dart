@@ -1,6 +1,7 @@
 import 'package:flag/flag.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:testapp/controller/app_state_controller.dart';
 import 'package:testapp/data/functions/jobs.dart';
 import 'package:testapp/presentation/about_us.dart';
@@ -21,13 +22,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  List<Map> countryCheckBox = [
-    {"country": "Qatar", "code": FlagsCode.QA},
-    {"country": "Malaysia", "code": FlagsCode.MY},
-    {"country": "Saudi", "code": FlagsCode.SA},
-    {"country": "kuwait", "code": FlagsCode.KW},
-    {"country": "Dubai", "code": FlagsCode.AE},
-  ];
+  List countryCheckBox = [];
   List questions = [
     "What is free visa and free ticket program?",
     "Is this truly the ZERO cost program?",
@@ -40,19 +35,43 @@ class _HomeState extends State<Home> {
     "ZERO cost / Free of cost includes the following entities:\nPassport cost NPR 5000.00\nTraveling, lodging and fooding cost for interview\nMedical cost\nVisa cost\nInsurance and welfare cost\nOne-way travel cost to Kathmandu for flight\nTicket cost",
     "Sorry, no cost shall be deducted since this is free of cost program."
   ];
-  List companies = [
-    "assets/company.jpg",
-    "assets/company_1.jpg",
-    "assets/company_2.jpg",
-    "assets/company_3.jpg",
-    "assets/company_4.jpg",
-    "assets/company_5.jpg"
-  ];
-  @override
-  void initState() {
+  List searches = [];
+  List companies = [];
+  showDialod() async {
     JobsApi().allJobs();
     JobsApi().getAd();
+    countryCheckBox = await JobsApi().getCountries();
+    companies = await JobsApi().getCompanies();
+    searches = await JobsApi().getPopularSearch();
+    setState(() {});
     JobsApi().getGallery();
+    await Future.delayed(const Duration(milliseconds: 500));
+    Get.dialog(Dialog(
+      child: Stack(children: [
+        Image.asset("assets/ddbox.jpg"),
+        Positioned(
+            top: 0,
+            right: 16,
+            child: GestureDetector(
+              onTap: () {
+                Get.back();
+              },
+              child: Container(
+                decoration: const BoxDecoration(
+                    color: Colors.white, shape: BoxShape.circle),
+                width: 32,
+                height: 32,
+                child: const Center(child: Icon(Icons.close)),
+              ),
+            ))
+      ]),
+    ));
+  }
+
+  @override
+  void initState() {
+    showDialod();
+
     super.initState();
   }
 
@@ -68,13 +87,14 @@ class _HomeState extends State<Home> {
               appBar: MyAppBar(width),
               body: SizedBox(
                 width: width,
-                height: height,
+                height: height - 48,
                 child: PageView(
                     controller: state.currentPage,
                     pageSnapping: true,
                     physics: const NeverScrollableScrollPhysics(),
                     children: [
                       MainPage(
+                          searches: searches,
                           height: height,
                           width: width,
                           countryCheckBox: countryCheckBox,

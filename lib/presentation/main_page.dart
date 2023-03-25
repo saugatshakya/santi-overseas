@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:testapp/controller/app_state_controller.dart';
+import 'package:testapp/data/functions/jobs.dart';
 import 'package:testapp/presentation/widgets/company_logo.dart';
 import 'package:testapp/presentation/widgets/country_selector.dart';
 import 'package:testapp/presentation/widgets/main_table.dart';
 import 'package:testapp/presentation/widgets/news.dart';
+import 'package:testapp/presentation/widgets/raised_button.dart';
 import 'package:testapp/presentation/widgets/scroll_widget.dart';
 import 'package:testapp/presentation/widgets/search.dart';
 import 'package:testapp/presentation/widgets/searches.dart';
@@ -14,7 +16,7 @@ import 'package:testapp/static/colors.dart';
 import 'dart:html' as html;
 
 class MainPage extends StatelessWidget {
-  const MainPage({
+  MainPage({
     super.key,
     required this.height,
     required this.width,
@@ -22,15 +24,19 @@ class MainPage extends StatelessWidget {
     required this.companies,
     required this.questions,
     required this.answers,
+    required this.searches,
   });
-
+  final TextEditingController _name = TextEditingController();
+  final TextEditingController _email = TextEditingController();
+  final TextEditingController _address = TextEditingController();
+  final TextEditingController _contact = TextEditingController();
   final double height;
   final double width;
-  final List<Map> countryCheckBox;
+  final List countryCheckBox;
   final List companies;
   final List questions;
   final List answers;
-
+  final List searches;
   @override
   Widget build(BuildContext context) {
     return GetBuilder<AppStateController>(
@@ -38,19 +44,28 @@ class MainPage extends StatelessWidget {
         builder: (state) {
           return SafeArea(
               child: Container(
-                  color: myColors.white.withOpacity(0.9),
-                  height: height,
+                  height: height - 48,
                   width: width,
+                  decoration: BoxDecoration(
+                      color: myColors.white.withOpacity(0.9),
+                      image: const DecorationImage(
+                          image: AssetImage("assets/bg.jpg"),
+                          repeat: ImageRepeat.repeat,
+                          opacity: 0.4)),
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
                         Container(
                           decoration: BoxDecoration(
+                              image: const DecorationImage(
+                                  image: AssetImage("assets/17278525.png"),
+                                  opacity: 0.3,
+                                  fit: BoxFit.cover),
                               gradient: LinearGradient(
                                   colors: [
-                                myColors.darkgreen,
-                                myColors.lightgreen
-                              ],
+                                    myColors.darkgreen,
+                                    myColors.lightgreen
+                                  ],
                                   begin: Alignment.centerLeft,
                                   end: Alignment.centerRight)),
                           child: Column(
@@ -60,14 +75,14 @@ class MainPage extends StatelessWidget {
                               ),
                               Text(
                                 "Discover the Perfect international job for you",
-                                style: GoogleFonts.shadowsIntoLight(
+                                style: GoogleFonts.ptSerif(
                                     color: myColors.white,
                                     fontSize: 48,
                                     fontWeight: FontWeight.w500),
                               ),
                               Text(
                                 "To get your dream job register & fill out your profile first",
-                                style: GoogleFonts.shadowsIntoLight(
+                                style: GoogleFonts.ptSerif(
                                     color: myColors.white, fontSize: 28),
                               ),
                               const SizedBox(
@@ -114,23 +129,26 @@ class MainPage extends StatelessWidget {
                               const SizedBox(
                                 height: 16,
                               ),
-                              ScrollWidget(
-                                  reverse: false,
-                                  height: 100,
-                                  direction: Axis.horizontal,
-                                  widget: (context, i) => GestureDetector(
-                                        onTap: () {},
-                                        child: CountrySelector(
-                                          country: countryCheckBox[
-                                                  i % countryCheckBox.length]
-                                              ["country"],
-                                          code: countryCheckBox[i %
-                                              countryCheckBox.length]["code"],
-                                        ),
-                                      )),
-                              const SizedBox(
-                                height: 16,
-                              ),
+                              if (countryCheckBox.isNotEmpty)
+                                ScrollWidget(
+                                    reverse: false,
+                                    height: 100,
+                                    stop: false,
+                                    direction: Axis.horizontal,
+                                    widget: (context, i) => GestureDetector(
+                                          onTap: () {},
+                                          child: CountrySelector(
+                                            country: countryCheckBox[
+                                                    i % countryCheckBox.length]
+                                                ["country"],
+                                            code: countryCheckBox[i %
+                                                countryCheckBox.length]["code"],
+                                          ),
+                                        )),
+                              if (countryCheckBox.isNotEmpty)
+                                const SizedBox(
+                                  height: 16,
+                                ),
                             ],
                           ),
                         ),
@@ -142,83 +160,265 @@ class MainPage extends StatelessWidget {
                         const SizedBox(
                           height: 16,
                         ),
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          padding: const EdgeInsets.fromLTRB(32, 8, 8, 8),
-                          child: Center(
-                            child: Text("TOP COMPANIES",
-                                style: TextStyle(
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.w600,
-                                    color: myColors.darkgreen)),
+                        if (companies.isNotEmpty)
+                          Container(
+                            width: MediaQuery.of(context).size.width,
+                            padding: const EdgeInsets.fromLTRB(32, 8, 8, 8),
+                            child: Center(
+                              child: Text("TOP COMPANIES",
+                                  style: TextStyle(
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.w600,
+                                      color: myColors.darkgreen)),
+                            ),
                           ),
-                        ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        ScrollWidget(
-                            reverse: true,
-                            height: 100,
-                            direction: Axis.horizontal,
-                            widget: (context, i) => GestureDetector(
-                                  onTap: () {},
-                                  child: CompanyLogo(
-                                      imageLink:
-                                          companies[i % companies.length]),
-                                )),
-                        const SizedBox(
-                          height: 32,
-                        ),
-                        Divider(
-                          height: 0,
-                          thickness: 2,
-                          color: myColors.darkgreen,
-                        ),
-                        const MainTable(),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        Divider(
-                          height: 0,
-                          thickness: 2,
-                          color: myColors.darkgreen,
-                        ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          padding: const EdgeInsets.fromLTRB(32, 8, 8, 8),
-                          child: Center(
-                            child: Text("POPULAR SEARCHES",
-                                style: TextStyle(
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.w600,
-                                    color: myColors.darkgreen)),
+                        if (companies.isNotEmpty)
+                          const SizedBox(
+                            height: 16,
                           ),
-                        ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        ScrollWidget(
-                            reverse: false,
-                            widget: (context, i) =>
-                                Searches(search: "Search $i"),
-                            direction: Axis.horizontal,
-                            height: 64),
-                        const SizedBox(
-                          height: 32,
+                        if (companies.isNotEmpty)
+                          ScrollWidget(
+                              reverse: true,
+                              height: 100,
+                              stop: false,
+                              direction: Axis.horizontal,
+                              widget: (context, i) => GestureDetector(
+                                    onTap: () {},
+                                    child: CompanyLogo(
+                                        imageLink:
+                                            companies[i % companies.length]),
+                                  )),
+                        if (companies.isNotEmpty)
+                          const SizedBox(
+                            height: 32,
+                          ),
+                        if (companies.isNotEmpty)
+                          Divider(
+                            height: 0,
+                            thickness: 2,
+                            color: myColors.darkgreen,
+                          ),
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: width * 0.5 - 16,
+                              height: 248,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 32.0),
+                                    child: Text("ZERO COST",
+                                        style: TextStyle(
+                                            fontSize: 64,
+                                            fontWeight: FontWeight.w600,
+                                            color: myColors.blue)),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 32.0),
+                                    child: Text("RECRUITMENT",
+                                        style: TextStyle(
+                                            fontSize: 52,
+                                            fontWeight: FontWeight.w500,
+                                            color: myColors.blue)),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.all(16),
+                              color: myColors.darkgreen,
+                              width: width * 0.5,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "How Can We Help You?",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                  SizedBox(
+                                    height: 32,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: TextField(
+                                      controller: _name,
+                                      style: TextStyle(color: Colors.white),
+                                      decoration: InputDecoration(
+                                          labelText: "Full Name *",
+                                          labelStyle:
+                                              TextStyle(color: Colors.white),
+                                          enabledBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: Colors.white)),
+                                          border: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: Colors.white))),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: TextField(
+                                      controller: _address,
+                                      style: TextStyle(color: Colors.white),
+                                      decoration: InputDecoration(
+                                          labelText: "Address *",
+                                          labelStyle:
+                                              TextStyle(color: Colors.white),
+                                          enabledBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: Colors.white)),
+                                          border: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: Colors.white))),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: TextField(
+                                      controller: _contact,
+                                      style: TextStyle(color: Colors.white),
+                                      decoration: InputDecoration(
+                                          labelText: "Contact no *",
+                                          labelStyle:
+                                              TextStyle(color: Colors.white),
+                                          enabledBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: Colors.white)),
+                                          border: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: Colors.white))),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: TextField(
+                                      controller: _email,
+                                      style: TextStyle(color: Colors.white),
+                                      decoration: InputDecoration(
+                                          labelText: "Email *",
+                                          labelStyle:
+                                              TextStyle(color: Colors.white),
+                                          enabledBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: Colors.white)),
+                                          border: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: Colors.white))),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 16,
+                                  ),
+                                  RaisedButton(
+                                      label: "SUBMIT",
+                                      height: 42,
+                                      width: 132,
+                                      fontSize: 18,
+                                      onTap: () async {
+                                        if (_name.text.isEmpty ||
+                                            _address.text.isEmpty ||
+                                            _contact.text.isEmpty ||
+                                            _email.text.isEmpty) {
+                                          Get.dialog(Dialog(
+                                            child: SizedBox(
+                                              width: 164,
+                                              height: 42,
+                                              child: Center(
+                                                child: Text(
+                                                    "Please Fill All The Details"),
+                                              ),
+                                            ),
+                                          ));
+                                        } else {
+                                          await JobsApi().formSubmit(
+                                              _name.text,
+                                              _address.text,
+                                              _contact.text,
+                                              _email.text);
+                                          _name.clear();
+                                          _address.clear();
+                                          _email.clear();
+                                          _contact.clear();
+                                          Get.dialog(Dialog(
+                                            child: SizedBox(
+                                              width: 164,
+                                              height: 42,
+                                              child: Center(
+                                                child: Text(
+                                                    "Submitted Successfully"),
+                                              ),
+                                            ),
+                                          ));
+                                        }
+                                      },
+                                      color: myColors.blue)
+                                ],
+                              ),
+                            )
+                          ],
                         ),
                         Divider(
                           height: 0,
                           thickness: 2,
                           color: myColors.darkgreen,
-                        ),
-                        const SizedBox(
-                          height: 32,
                         ),
                         SizedBox(
-                          height: 500,
+                          height: 16,
+                        ),
+                        const MainTable(),
+                        Divider(
+                          height: 0,
+                          thickness: 2,
+                          color: myColors.darkgreen,
+                        ),
+                        if (searches.isNotEmpty)
+                          const SizedBox(
+                            height: 16,
+                          ),
+                        if (searches.isNotEmpty)
+                          Container(
+                            width: MediaQuery.of(context).size.width,
+                            padding: const EdgeInsets.fromLTRB(32, 8, 8, 8),
+                            child: Center(
+                              child: Text("POPULAR SEARCHES",
+                                  style: TextStyle(
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.w600,
+                                      color: myColors.darkgreen)),
+                            ),
+                          ),
+                        if (searches.isNotEmpty)
+                          const SizedBox(
+                            height: 16,
+                          ),
+                        if (searches.isNotEmpty)
+                          ScrollWidget(
+                              reverse: false,
+                              widget: (context, i) => Searches(
+                                  search: searches[i % searches.length]),
+                              direction: Axis.horizontal,
+                              height: 64),
+                        if (searches.isNotEmpty)
+                          const SizedBox(
+                            height: 32,
+                          ),
+                        Divider(
+                          height: 0,
+                          thickness: 2,
+                          color: myColors.darkgreen,
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                              image: const DecorationImage(
+                                  image: AssetImage("assets/bg.jpg"),
+                                  opacity: 0.5,
+                                  repeat: ImageRepeat.repeat),
+                              color: myColors.darkgreen.withOpacity(0.8)),
+                          height: 464,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
@@ -227,11 +427,14 @@ class MainPage extends StatelessWidget {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
+                                    const SizedBox(
+                                      height: 32,
+                                    ),
                                     Text("FAQs",
                                         style: TextStyle(
                                             fontSize: 22,
                                             fontWeight: FontWeight.w600,
-                                            color: myColors.darkgreen)),
+                                            color: myColors.white)),
                                     const SizedBox(
                                       height: 32,
                                     ),
@@ -287,7 +490,7 @@ class MainPage extends StatelessWidget {
                                             16, 8, 16, 8),
                                         decoration: BoxDecoration(
                                             border: Border.all(
-                                              color: myColors.lightgreen,
+                                              color: myColors.white,
                                             ),
                                             borderRadius:
                                                 BorderRadius.circular(4)),
@@ -295,7 +498,7 @@ class MainPage extends StatelessWidget {
                                           "View All",
                                           style: TextStyle(
                                             fontSize: 14,
-                                            color: myColors.darkgreen,
+                                            color: myColors.white,
                                           ),
                                         ),
                                       ),
@@ -308,11 +511,14 @@ class MainPage extends StatelessWidget {
                                 height: 464,
                                 child: Column(
                                   children: [
+                                    const SizedBox(
+                                      height: 32,
+                                    ),
                                     Text("News",
                                         style: TextStyle(
                                             fontSize: 22,
                                             fontWeight: FontWeight.w600,
-                                            color: myColors.darkgreen)),
+                                            color: myColors.white)),
                                     const SizedBox(
                                       height: 32,
                                     ),
@@ -328,15 +534,15 @@ class MainPage extends StatelessWidget {
                                       padding: const EdgeInsets.fromLTRB(
                                           16, 8, 16, 8),
                                       decoration: BoxDecoration(
-                                          border: Border.all(
-                                              color: myColors.lightgreen),
+                                          border:
+                                              Border.all(color: myColors.white),
                                           borderRadius:
                                               BorderRadius.circular(4)),
                                       child: Text(
                                         "View All",
                                         style: TextStyle(
                                           fontSize: 14,
-                                          color: myColors.darkgreen,
+                                          color: myColors.white,
                                         ),
                                       ),
                                     ),
@@ -489,48 +695,50 @@ class MainPage extends StatelessWidget {
                           child: Divider(
                             height: 0,
                             thickness: 2,
-                            color: myColors.darkgreen,
+                            color: myColors.darkgreen.withOpacity(0.4),
                           ),
-                        ),
-                        const SizedBox(
-                          height: 16,
                         ),
                         if (state.gallery.isNotEmpty)
-                          Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(12.0),
-                                child: Text("GALLERY",
-                                    style: TextStyle(
-                                        fontSize: 22,
-                                        fontWeight: FontWeight.w600,
-                                        color: myColors.darkgreen)),
-                              ),
-                              const SizedBox(
-                                height: 8,
-                              ),
-                              ScrollWidget(
-                                  reverse: false,
-                                  widget: (context, i) => GalleryImage(path: state.gallery[i % state.gallery.length].imagePath!,),
-                                  direction: Axis.horizontal,
-                                  height: 132),
-                            ],
+                          Container(
+                            color: myColors.darkgreen.withOpacity(0.3),
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(12.0),
+                                  child: Text("GALLERY",
+                                      style: TextStyle(
+                                          fontSize: 22,
+                                          fontWeight: FontWeight.w600,
+                                          color: myColors.white)),
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                ScrollWidget(
+                                    reverse: false,
+                                    widget: (context, i) => GalleryImage(
+                                          path: state
+                                              .gallery[i % state.gallery.length]
+                                              .imagePath!,
+                                        ),
+                                    direction: Axis.horizontal,
+                                    height: 132),
+                              ],
+                            ),
                           ),
-                        const SizedBox(
-                          height: 64,
-                        ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               SizedBox(
-                                width: width * 0.42,
+                                width: width * 0.5 - 16,
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.all(12.0),
+                                      padding:
+                                          const EdgeInsets.only(left: 32.0),
                                       child: Text("GET THE APP",
                                           style: TextStyle(
                                               fontSize: 42,
@@ -538,7 +746,8 @@ class MainPage extends StatelessWidget {
                                               color: myColors.darkgreen)),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.all(12.0),
+                                      padding:
+                                          const EdgeInsets.only(left: 32.0),
                                       child: Text(
                                           "Experience hassel free recruitment with santi overseas!\nDownload the app today and take the first step towards dream jobs abroad",
                                           style: TextStyle(
@@ -547,7 +756,8 @@ class MainPage extends StatelessWidget {
                                               color: myColors.darkgreen)),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.all(12.0),
+                                      padding:
+                                          const EdgeInsets.only(left: 32.0),
                                       child: Text("COMING SOON",
                                           style: TextStyle(
                                               fontSize: 28,
@@ -557,25 +767,15 @@ class MainPage extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                              Container(
-                                width: 2,
-                                height: 200,
-                                color: myColors.darkgreen,
-                              ),
-                              ClipRRect(
-                                  borderRadius: BorderRadius.circular(8),
-                                  child: SizedBox(
-                                    width: width * 0.42,
-                                    child: Image.asset(
-                                      "assets/ss.png",
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ))
+                              SizedBox(
+                                width: width * 0.5,
+                                child: Image.asset(
+                                  "assets/ss.png",
+                                  fit: BoxFit.cover,
+                                ),
+                              )
                             ],
                           ),
-                        ),
-                        const SizedBox(
-                          height: 32,
                         ),
                         Container(
                           width: width,
@@ -822,7 +1022,8 @@ class MainPage extends StatelessWidget {
 class GalleryImage extends StatefulWidget {
   final String path;
   const GalleryImage({
-    super.key, required this.path,
+    super.key,
+    required this.path,
   });
 
   @override
@@ -830,33 +1031,35 @@ class GalleryImage extends StatefulWidget {
 }
 
 class _GalleryImageState extends State<GalleryImage> {
-
   @override
   Widget build(BuildContext context) {
-    return GestureDetector
-    (onTap: (){
-      Get.dialog(Center(child: Dialog(child: Container(
+    return GestureDetector(
+      onTap: () {
+        Get.dialog(Center(
+          child: Dialog(
+            child: Container(
               margin: const EdgeInsets.all(8),
-              height:300,
+              height: 300,
               width: 300,
               child: Image.network(
                 "https://freeticketfreevisa.com/${widget.path}",
                 fit: BoxFit.cover,
               ),
-            ),),));
-    },
+            ),
+          ),
+        ));
+      },
       child: MouseRegion(
         cursor: SystemMouseCursors.click,
-        
         child: Container(
-              margin: const EdgeInsets.all(8),
-              height:132,
-              width: 132,
-              child: Image.network(
-                "https://freeticketfreevisa.com/${widget.path}",
-                fit: BoxFit.cover,
-              ),
-            ),
+          margin: const EdgeInsets.all(8),
+          height: 132,
+          width: 132,
+          child: Image.network(
+            "https://freeticketfreevisa.com/${widget.path}",
+            fit: BoxFit.cover,
+          ),
+        ),
       ),
     );
   }

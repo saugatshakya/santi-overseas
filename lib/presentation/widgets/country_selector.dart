@@ -4,7 +4,7 @@ import 'package:testapp/static/colors.dart';
 
 class CountrySelector extends StatefulWidget {
   final String country;
-  final FlagsCode code;
+  final String code;
   const CountrySelector({super.key, required this.country, required this.code});
 
   @override
@@ -12,11 +12,13 @@ class CountrySelector extends StatefulWidget {
 }
 
 class _CountrySelectorState extends State<CountrySelector> {
-    bool hovering = false;
+  bool hovering = false;
 
   @override
   Widget build(BuildContext context) {
-    return MouseRegion(cursor: SystemMouseCursors.click,  onEnter: (_) {
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      onEnter: (_) {
         setState(() {
           hovering = true;
         });
@@ -30,12 +32,12 @@ class _CountrySelectorState extends State<CountrySelector> {
         margin: const EdgeInsets.fromLTRB(16, 8, 16, 8),
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-            color:hovering?myColors.darkgreen: myColors.lightgreen,
+            color: hovering ? myColors.darkgreen : myColors.lightgreen,
             border: Border.all(color: myColors.white, width: 2),
             borderRadius: BorderRadius.circular(4)),
         child: Row(
           children: [
-            Flag.fromCode(
+            Flag.fromString(
               widget.code,
               height: 48,
               width: 48,

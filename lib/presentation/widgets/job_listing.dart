@@ -74,7 +74,7 @@ class _JobListingState extends State<JobListing> {
                             fontSize: 12,
                             color: hovering ? Colors.green : myColors.darkgreen,
                             onTap: () {
-                              Get.dialog(Center(
+                              Get.dialog(const Center(
                                 child: Dialog(
                                   child: SizedBox(
                                     width: 132,
@@ -124,48 +124,69 @@ class _JobListingState extends State<JobListing> {
                         fontSize: 14,
                         color: hovering ? Colors.white : myColors.darkgreen),
                   ),
-                  Row(
-                    children: [
-                      Text(
-                        "Basic Salary:",
-                        style: TextStyle(
-                            fontSize: 14,
-                            color:
-                                hovering ? Colors.white : myColors.darkgreen),
-                      ),
-                      const SizedBox(
-                        width: 4,
-                      ),
-                      Text(
-                        "रु ${widget.job.salary ?? "-"}",
-                        style: TextStyle(
-                            fontSize: 14,
-                            color:
-                                hovering ? Colors.white : myColors.darkgreen),
-                      ),
-                      const SizedBox(
-                        width: 16,
-                      ),
-                      Text(
-                        "Apply Before:",
-                        style: TextStyle(
-                            fontSize: 14,
-                            color:
-                                hovering ? Colors.white : myColors.darkgreen),
-                      ),
-                      const SizedBox(
-                        width: 4,
-                      ),
-                      Text(
-                        DateFormat("yyyy-MM-dd").format(DateTime.parse(
-                            widget.job.applyBefore ??
-                                DateTime.now().toString())),
-                        style: TextStyle(
-                            fontSize: 14,
-                            color:
-                                hovering ? Colors.white : myColors.darkgreen),
-                      )
-                    ],
+                  SizedBox(
+                    width: width * 0.28,
+                    child: Wrap(
+                      children: [
+                        SizedBox(
+                          width: width * 0.12,
+                          child: Row(
+                            children: [
+                              Text(
+                                "Basic Salary:",
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    color: hovering
+                                        ? Colors.white
+                                        : myColors.darkgreen),
+                              ),
+                              const SizedBox(
+                                width: 4,
+                              ),
+                              Text(
+                                "रु ${widget.job.salary ?? "-"}",
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    color: hovering
+                                        ? Colors.white
+                                        : myColors.darkgreen),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 16,
+                        ),
+                        SizedBox(
+                          width: width * 0.12,
+                          child: Row(
+                            children: [
+                              Text(
+                                "Apply Before:",
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    color: hovering
+                                        ? Colors.white
+                                        : myColors.darkgreen),
+                              ),
+                              const SizedBox(
+                                width: 4,
+                              ),
+                              Text(
+                                DateFormat("yyyy-MM-dd").format(DateTime.parse(
+                                    widget.job.applyBefore ??
+                                        DateTime.now().toString())),
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    color: hovering
+                                        ? Colors.white
+                                        : myColors.darkgreen),
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                   const SizedBox(
                     height: 8,
@@ -193,7 +214,7 @@ class _JobListingState extends State<JobListing> {
                                     ? Colors.green
                                     : myColors.darkgreen,
                                 onTap: () {
-                                  Get.dialog(Center(
+                                  Get.dialog(const Center(
                                     child: Dialog(
                                       child: SizedBox(
                                         width: 132,

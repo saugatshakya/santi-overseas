@@ -30,6 +30,10 @@ class _JobsState extends State<Jobs> {
                   height: 164,
                   padding: const EdgeInsets.all(32),
                   decoration: BoxDecoration(
+                      image: const DecorationImage(
+                          image: AssetImage("assets/17278525.png"),
+                          opacity: 0.3,
+                          fit: BoxFit.cover),
                       gradient: LinearGradient(
                           colors: [myColors.darkgreen, myColors.lightgreen],
                           begin: Alignment.centerLeft,

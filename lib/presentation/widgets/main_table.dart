@@ -14,110 +14,83 @@ class MainTable extends StatelessWidget {
     return GetBuilder<AppStateController>(
         init: appStateController,
         builder: (state) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    height: 400,
-                    width: Get.width * 0.42,
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        Text(
-                          "New Jobs",
-                          style: TextStyle(
-                              fontSize: 22,
-                              fontWeight: FontWeight.w600,
-                              color: myColors.darkgreen),
-                        ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        if (state.jobs.isNotEmpty)
-                          ScrolllVerticle(
-                              height: 280,
-                              widget: (context, i) => Padding(
-                                    padding: const EdgeInsets.all(6.0),
-                                    child: JobListing(
-                                        job: state.jobs[i % state.jobs.length]),
-                                  ),
-                              direction: Axis.vertical),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            state.changePage(1);
-                          },
-                          child: Container(
-                              padding: const EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                  border:
-                                      Border.all(color: myColors.lightgreen),
-                                  borderRadius: BorderRadius.circular(4)),
-                              child: Text(
-                                "View All Job Listings",
-                                style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                    color: myColors.darkgreen),
-                              )),
-                        )
-                      ],
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                height: 400,
+                width: Get.width * 0.46,
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 8,
                     ),
-                  ),
-                ),
-                Container(
-                  width: 2,
-                  height: 300,
-                  color: myColors.darkgreen,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    width: Get.width * 0.42,
-                    height: 400,
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        Text(
-                          "Advertisement",
-                          style: TextStyle(
-                              fontSize: 22,
-                              fontWeight: FontWeight.w600,
-                              color: myColors.darkgreen),
-                        ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        if (state.adImage != null)
-                          MouseRegion(
-                            cursor: SystemMouseCursors.click,
-                            child: GestureDetector(
-                              onTap: () => Get.dialog(Center(
-                                child: Image.network(
-                                    "https://freeticketfreevisa.com/${state.adImage!.imagePath}"),
-                              )),
-                              child: Image.network(
-                                  "https://freeticketfreevisa.com/${state.adImage!.imagePath}"),
-                            ),
-                          )
-                      ],
+                    Text(
+                      "New Jobs",
+                      style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w600,
+                          color: myColors.darkgreen),
                     ),
-                  ),
-                )
-              ],
-            ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    if (state.jobs.isNotEmpty)
+                      ScrolllVerticle(
+                          height: 280,
+                          widget: (context, i) => Padding(
+                                padding: const EdgeInsets.all(6.0),
+                                child: JobListing(
+                                    job: state.jobs[i % state.jobs.length]),
+                              ),
+                          direction: Axis.vertical),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        state.changePage(1);
+                      },
+                      child: Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                              border: Border.all(color: myColors.lightgreen),
+                              borderRadius: BorderRadius.circular(4)),
+                          child: Text(
+                            "View All Job Listings",
+                            style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                                color: myColors.darkgreen),
+                          )),
+                    )
+                  ],
+                ),
+              ),
+              Container(
+                color: myColors.darkgreen.withOpacity(0.8),
+                width: Get.width * 0.54,
+                height: 400,
+                child: state.adImage != null
+                    ? MouseRegion(
+                        cursor: SystemMouseCursors.click,
+                        child: GestureDetector(
+                          onTap: () => Get.dialog(Center(
+                            child: Image.network(
+                                "https://freeticketfreevisa.com/${state.adImage!.imagePath}"),
+                          )),
+                          child: Image.network(
+                            "https://freeticketfreevisa.com/${state.adImage!.imagePath}",
+                            fit: BoxFit.cover,
+                            colorBlendMode: BlendMode.softLight,
+                            color: myColors.darkgreen.withOpacity(0.8),
+                          ),
+                        ),
+                      )
+                    : const SizedBox(),
+              )
+            ],
           );
         });
   }

@@ -8,12 +8,14 @@ class ScrollWidget extends StatefulWidget {
   final Axis direction;
   final double height;
   final bool reverse;
+  final bool stop;
   const ScrollWidget(
       {super.key,
       required this.widget,
       required this.direction,
       required this.height,
-      required this.reverse});
+      required this.reverse,
+      this.stop = true});
 
   @override
   State<ScrollWidget> createState() => _ScrollWidgetState();
@@ -24,10 +26,11 @@ class _ScrollWidgetState extends State<ScrollWidget> {
 
   final PageController _controller = PageController(viewportFraction: 0.16);
   loop() async {
-    focusChanger = Timer.periodic(const Duration(milliseconds: 4000), (timer) {
+    focusChanger = Timer.periodic(
+        Duration(milliseconds: widget.stop ? 4000 : 3000), (timer) {
       _controller.nextPage(
-          duration: const Duration(milliseconds: 1000),
-          curve: Curves.easeInSine);
+          duration: Duration(milliseconds: widget.stop ? 1000 : 3000),
+          curve: Curves.linear);
     });
   }
 

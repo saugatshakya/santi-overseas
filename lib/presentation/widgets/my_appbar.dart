@@ -79,7 +79,48 @@ class MyAppBar extends AppBar {
                 HoverButton(
                     label: "Login/SignUp",
                     onTap: () async {
-                      await auth.facebookLogin();
+                      Get.dialog(Dialog(
+                        clipBehavior: Clip.hardEdge,
+                        child: SizedBox(
+                          width: 300,
+                          height: 200,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  Auth().facebookLogin();
+                                },
+                                child: Container(
+                                  width: 164,
+                                  height: 42,
+                                  decoration: BoxDecoration(
+                                      color: myColors.blue.withOpacity(0.4),
+                                      borderRadius: BorderRadius.circular(16)),
+                                  child: Center(
+                                      child: Text("SignIn with Facebook")),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  Auth().googleLogin();
+                                },
+                                child: Container(
+                                  width: 164,
+                                  height: 42,
+                                  decoration: BoxDecoration(
+                                      color:
+                                          myColors.darkgreen.withOpacity(0.4),
+                                      borderRadius: BorderRadius.circular(16)),
+                                  child:
+                                      Center(child: Text("SignIn with Google")),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ));
+                      // await auth.googleLogin();
                     }),
               ],
             ),
@@ -104,46 +145,6 @@ class MyAppBar extends AppBar {
                                       fontWeight: FontWeight.w600))),
                         ),
                       ),
-                      SizedBox(
-                        width: 92,
-                        height: 48,
-                        child: GetBuilder<AppStateController>(
-                            init: appStateController,
-                            builder: (state) {
-                              return PopupMenuButton(
-                                onSelected: (val) {
-                                  appStateController.changeLanguageI(val);
-                                },
-                                offset: const Offset(0, 48),
-                                itemBuilder: (_) => [
-                                  const PopupMenuItem(
-                                      value: Locale("Nepali", "NE"),
-                                      child: Text("Nepali")),
-                                  const PopupMenuItem(
-                                      value: Locale("English", "EN"),
-                                      child: Text("English"))
-                                ],
-                                child: Container(
-                                  width: 92,
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(children: [
-                                    Text(
-                                      state.language.languageCode,
-                                      style: const TextStyle(
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                    const SizedBox(
-                                      width: 4,
-                                    ),
-                                    Icon(
-                                      Icons.arrow_drop_down,
-                                      color: myColors.darkgreen,
-                                    )
-                                  ]),
-                                ),
-                              );
-                            }),
-                      ),
                     ],
                   )
                 : Row(
@@ -164,46 +165,6 @@ class MyAppBar extends AppBar {
                                       fontSize: 14,
                                       fontWeight: FontWeight.w600))),
                         ),
-                      ),
-                      SizedBox(
-                        width: 92,
-                        height: 48,
-                        child: GetBuilder<AppStateController>(
-                            init: appStateController,
-                            builder: (state) {
-                              return PopupMenuButton(
-                                onSelected: (val) {
-                                  appStateController.changeLanguageI(val);
-                                },
-                                offset: const Offset(0, 48),
-                                itemBuilder: (_) => [
-                                  const PopupMenuItem(
-                                      value: Locale("Nepali", "NE"),
-                                      child: Text("Nepali")),
-                                  const PopupMenuItem(
-                                      value: Locale("English", "EN"),
-                                      child: Text("English"))
-                                ],
-                                child: Container(
-                                  width: 92,
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(children: [
-                                    Text(
-                                      state.language.languageCode,
-                                      style: const TextStyle(
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                    const SizedBox(
-                                      width: 4,
-                                    ),
-                                    Icon(
-                                      Icons.arrow_drop_down,
-                                      color: myColors.darkgreen,
-                                    )
-                                  ]),
-                                ),
-                              );
-                            }),
                       ),
                     ],
                   )

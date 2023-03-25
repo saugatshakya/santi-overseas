@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 import 'package:testapp/controller/app_state_controller.dart';
 import 'package:testapp/data/functions/api.dart';
@@ -24,10 +25,52 @@ class JobsApi {
       var response = await api.get("getImages/advertisement");
       ImageModel image = ImageModel.fromJson(response["images"][0]);
       appStateController.updatADImage(image);
-      log(response.toString());
     } catch (e) {
       log(e.toString());
     }
+  }
+
+  getPopularSearch() async {
+    List<String> datas = [];
+    try {
+      var response = await api.get("popularsearch");
+      for (String data in response) {
+        datas.add(data);
+      }
+      log("datas ${datas.length}");
+    } catch (e) {
+      log(e.toString());
+    }
+    return datas;
+  }
+
+  getCountries() async {
+    List datas = [];
+    try {
+      var response = await api.get("country");
+      for (Map data in response) {
+        datas.add({
+          "country": data["name"],
+          "code": data["alpha2"].toString().toUpperCase()
+        });
+      }
+    } catch (e) {
+      log(e.toString());
+    }
+    return datas;
+  }
+
+  getCompanies() async {
+    List datas = [];
+    try {
+      var response = await api.get("company");
+      for (Map data in response) {
+        datas.add(data["logo"]);
+      }
+    } catch (e) {
+      log(e.toString());
+    }
+    return datas;
   }
 
   getGallery() async {
@@ -39,6 +82,24 @@ class JobsApi {
         ImageModel image = ImageModel.fromJson(data);
         images.add(image);
       }
+    } catch (e) {
+      log(e.toString());
+    }
+    appStateController.updateGallery(images);
+  }
+
+  formSubmit(String name, address, phone, email) async {
+    List<ImageModel> images = [];
+    try {
+      var response = await api.post(
+          "signup",
+          jsonEncode({
+            "name": name,
+            "phone": phone,
+            "address": address,
+            "email": email
+          }));
+      log(response.body.toString());
     } catch (e) {
       log(e.toString());
     }
