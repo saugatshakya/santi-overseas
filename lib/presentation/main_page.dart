@@ -726,6 +726,7 @@ class MainPage extends StatelessWidget {
                               ],
                             ),
                           ),
+                        Image.asset("assets/team.png"),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Row(
@@ -926,7 +927,7 @@ class MainPage extends StatelessWidget {
                                                   color: myColors.blue,
                                                   borderRadius:
                                                       BorderRadius.circular(4)),
-                                              child: Center(
+                                              child: const Center(
                                                 child: Text(
                                                   "Subscribe",
                                                   style: TextStyle(
@@ -946,7 +947,7 @@ class MainPage extends StatelessWidget {
                                   color: Colors.white,
                                 ),
                                 SizedBox(
-                                  width: width * 0.42,
+                                  width: width * 0.24,
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -988,6 +989,13 @@ class MainPage extends StatelessWidget {
                                     ],
                                   ),
                                 ),
+                                Card(
+                                    elevation: 4,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(4)),
+                                    child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(4),
+                                        child: Image.asset("assets/map.png")))
                               ],
                             ),
                           ),
