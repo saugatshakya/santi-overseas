@@ -477,32 +477,8 @@ class MainPage extends StatelessWidget {
                                               ),
                                             ),
                                         direction: Axis.vertical,
-                                        height: 300),
-                                    const SizedBox(
-                                      height: 16,
-                                    ),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.5,
-                                      alignment: Alignment.center,
-                                      child: Container(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            16, 8, 16, 8),
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                              color: myColors.white,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(4)),
-                                        child: Text(
-                                          "View All",
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            color: myColors.white,
-                                          ),
-                                        ),
-                                      ),
-                                    )
+                                        height: 354),
+                                   
                                   ],
                                 ),
                               ),
@@ -527,25 +503,7 @@ class MainPage extends StatelessWidget {
                                       direction: Axis.horizontal,
                                       height: 300,
                                     ),
-                                    const SizedBox(
-                                      height: 16,
-                                    ),
-                                    Container(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          16, 8, 16, 8),
-                                      decoration: BoxDecoration(
-                                          border:
-                                              Border.all(color: myColors.white),
-                                          borderRadius:
-                                              BorderRadius.circular(4)),
-                                      child: Text(
-                                        "View All",
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          color: myColors.white,
-                                        ),
-                                      ),
-                                    ),
+                                  
                                   ],
                                 ),
                               )
