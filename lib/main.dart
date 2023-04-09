@@ -12,10 +12,10 @@ void main() async {
   if (kIsWeb) {
     // initialiaze the facebook javascript SDK
     await FacebookAuth.i.webAndDesktopInitialize(
-      appId: "9460389773974765",
+      appId: "604017458447537",
       cookie: true,
       xfbml: true,
-      version: "v14.0",
+      version: "v16.0",
     );
   }
   runApp(const MyApp());

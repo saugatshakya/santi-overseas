@@ -21,7 +21,7 @@ class Auth {
           await FacebookAuth.instance.getUserData(fields: "name,email,picture");
       User user = User(email: userData["email"], id: null);
       if (user.email == null) {
-        user.email = "${user.name}dummyMitini@gmail.com";
+        user.email = "${user.name}santi@gmail.com";
         user.email = user.email!.replaceAll(" ", "");
       }
       appStateController.saveUser(user);
