@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:testapp/data/functions/jobs.dart';
 import 'package:testapp/data/models/job.dart';
+import 'package:testapp/data/repo/user_info.dart';
 import 'package:testapp/presentation/widgets/raised_button.dart';
+import 'package:testapp/presentation/widgets/show_auth.dart';
 import 'package:testapp/static/colors.dart';
 
 class Job extends StatelessWidget {
@@ -18,7 +21,7 @@ class Job extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 32,
             ),
             Transform.scale(
@@ -46,16 +49,22 @@ class Job extends StatelessWidget {
                       fontSize: 12,
                       color: myColors.darkgreen,
                       onTap: () {
-                        Get.dialog(Center(
-                          child: Dialog(
-                            child: SizedBox(
-                              width: 132,
-                              height: 54,
-                              child:
-                                  Center(child: Text("Successfully Applied")),
-                            ),
-                          ),
-                        ));
+                        String? userInfo = UserInfo().getUserInfo();
+                        if (userInfo == null) {
+                          showAuthDialog();
+                        } else {
+                          JobsApi().apply(job.id, userInfo);
+                          // Get.dialog(const Center(
+                          //   child: Dialog(
+                          //     child: SizedBox(
+                          //       width: 132,
+                          //       height: 54,
+                          //       child:
+                          //           Center(child: Text("Successfully Applied")),
+                          //     ),
+                          //   ),
+                          // ));
+                        }
                       }),
                 ),
               ),

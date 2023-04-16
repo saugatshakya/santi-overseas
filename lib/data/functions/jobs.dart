@@ -12,6 +12,7 @@ class JobsApi {
       var response = await api.get("jobs");
       for (var data in response) {
         JobModel job = JobModel.fromJson(data);
+        log("required numbers: " + job.requiredNumbers.toString());
         jobs.add(job);
       }
     } catch (e) {
@@ -104,5 +105,11 @@ class JobsApi {
       log(e.toString());
     }
     appStateController.updateGallery(images);
+  }
+
+  apply(jobId, contactInfo) async {
+    var response =
+        await api.post("apply", "job_id=$jobId&contact_info=$contactInfo");
+    log(response.body);
   }
 }

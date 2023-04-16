@@ -1,10 +1,15 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:testapp/controller/app_state_controller.dart';
+import 'package:testapp/data/functions/jobs.dart';
 import 'package:testapp/data/functions/utils.dart';
 import 'package:testapp/data/models/job.dart';
+import 'package:testapp/data/repo/user_info.dart';
 import 'package:testapp/presentation/widgets/raised_button.dart';
+import 'package:testapp/presentation/widgets/show_auth.dart';
 import 'package:testapp/static/colors.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -73,17 +78,27 @@ class _JobListingState extends State<JobListing> {
                             width: 54,
                             fontSize: 12,
                             color: hovering ? Colors.green : myColors.darkgreen,
-                            onTap: () {
-                              Get.dialog(const Center(
-                                child: Dialog(
-                                  child: SizedBox(
-                                    width: 132,
-                                    height: 54,
-                                    child: Center(
-                                        child: Text("Successfully Applied")),
-                                  ),
-                                ),
-                              ));
+                            onTap: () async {
+                              log("Tap");
+                              String? userInfo = await UserInfo().getUserInfo();
+                              log("userinfo: $userInfo");
+                              if (userInfo == null) {
+                                log("here");
+                                showAuthDialog();
+                              } else {
+                                log("over here");
+                                JobsApi().apply(widget.job.id, userInfo);
+                                // Get.dialog(const Center(
+                                //   child: Dialog(
+                                //     child: SizedBox(
+                                //       width: 132,
+                                //       height: 54,
+                                //       child:
+                                //           Center(child: Text("Successfully Applied")),
+                                //     ),
+                                //   ),
+                                // ));
+                              }
                             }),
                       ],
                     ),
@@ -213,18 +228,27 @@ class _JobListingState extends State<JobListing> {
                                 color: hovering
                                     ? Colors.green
                                     : myColors.darkgreen,
-                                onTap: () {
-                                  Get.dialog(const Center(
-                                    child: Dialog(
-                                      child: SizedBox(
-                                        width: 132,
-                                        height: 54,
-                                        child: Center(
-                                            child:
-                                                Text("Successfully Applied")),
-                                      ),
-                                    ),
-                                  ));
+                                onTap: () async {
+                                  String? userInfo =
+                                      await UserInfo().getUserInfo();
+                                  log("userinfo: $userInfo");
+                                  if (userInfo == null) {
+                                    log("here");
+                                    showAuthDialog();
+                                  } else {
+                                    log("over here");
+                                    JobsApi().apply(widget.job.id, userInfo);
+                                    // Get.dialog(const Center(
+                                    //   child: Dialog(
+                                    //     child: SizedBox(
+                                    //       width: 132,
+                                    //       height: 54,
+                                    //       child:
+                                    //           Center(child: Text("Successfully Applied")),
+                                    //     ),
+                                    //   ),
+                                    // ));
+                                  }
                                 }),
                           ],
                         )

@@ -202,24 +202,27 @@ class MainPage extends StatelessWidget {
                           children: [
                             SizedBox(
                               width: width * 0.5 - 16,
-                              height: 248,
+                              height: 280,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.only(left: 32.0),
+                                    padding: const EdgeInsets.only(left: 64.0),
                                     child: Text("ZERO COST",
                                         style: TextStyle(
-                                            fontSize: 64,
+                                            textBaseline:
+                                                TextBaseline.ideographic,
+                                            fontSize: 132,
                                             fontWeight: FontWeight.w600,
                                             color: myColors.blue)),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(left: 32.0),
+                                    padding: const EdgeInsets.only(left: 64.0),
                                     child: Text("RECRUITMENT",
                                         style: TextStyle(
-                                            fontSize: 52,
+                                            fontSize: 84,
                                             fontWeight: FontWeight.w500,
+                                            letterSpacing: 8,
                                             color: myColors.blue)),
                                   ),
                                 ],
@@ -478,7 +481,6 @@ class MainPage extends StatelessWidget {
                                             ),
                                         direction: Axis.vertical,
                                         height: 354),
-                                   
                                   ],
                                 ),
                               ),
@@ -503,7 +505,6 @@ class MainPage extends StatelessWidget {
                                       direction: Axis.horizontal,
                                       height: 300,
                                     ),
-                                  
                                   ],
                                 ),
                               )
@@ -684,7 +685,10 @@ class MainPage extends StatelessWidget {
                               ],
                             ),
                           ),
-                        Image.asset("assets/team.png"),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 64.0),
+                          child: Image.asset("assets/team.png"),
+                        ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Row(

@@ -6,6 +6,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:testapp/controller/app_state_controller.dart';
 import 'package:testapp/data/functions/api.dart';
 import 'package:testapp/data/models/user.dart';
+import 'package:testapp/data/repo/user_info.dart';
 
 class Auth {
   final GoogleSignIn _googleSignIn = GoogleSignIn(
@@ -25,7 +26,6 @@ class Auth {
         user.email = user.email!.replaceAll(" ", "");
       }
       appStateController.saveUser(user);
-
       toMyUser(user.name ?? "", user.email ?? "");
     } else {
       Get.showSnackbar(const GetSnackBar(
@@ -40,22 +40,22 @@ class Auth {
     if (account != null) {
       User user = User(email: account.email, name: account.displayName);
       appStateController.saveUser(user);
-
       await toMyUser(user.name ?? "", user.email ?? "");
     }
   }
 
   toMyUser(String name, email) async {
-    var response = await api.post("login", jsonEncode({"email": email}));
-    if (response.statusCode == 200) {
-      String token = jsonDecode(response.body)["token"];
-      log(token);
-    } else {
-      // Get.showSnackbar(const GetSnackBar(
-      //   message: "Could not log in",
-      //   duration: Duration(milliseconds: 2000),
-      // ));
-    }
+    repo.saveUserInfo(email);
+    // var response = await api.post("login", jsonEncode({"email": email}));
+    // if (response.statusCode == 200) {
+    //   String token = jsonDecode(response.body)["token"];
+    //   log(token);
+    // } else {
+    // Get.showSnackbar(const GetSnackBar(
+    //   message: "Could not log in",
+    //   duration: Duration(milliseconds: 2000),
+    // ));
+    // }
   }
 
   googlelogout() {

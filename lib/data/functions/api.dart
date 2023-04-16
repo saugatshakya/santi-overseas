@@ -55,6 +55,22 @@ class MyApi {
     }
   }
 
+  postWithParams(String path, String params) async {
+    final response = await http.post(
+      Uri.parse("$host$path?$params"),
+      headers: <String, String>{
+        'Accept': 'application/json',
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+    if (response.statusCode == 200) {
+      return response;
+    } else {
+      log(response.reasonPhrase ?? "failed without a reason");
+      return response;
+    }
+  }
+
   put(String path, String body) async {
     final response = await http.put(
       Uri.parse(host + path),

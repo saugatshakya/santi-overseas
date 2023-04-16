@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:testapp/controller/app_state_controller.dart';
 import 'package:testapp/data/functions/auth.dart';
 import 'package:testapp/data/functions/utils.dart';
+import 'package:testapp/presentation/widgets/show_auth.dart';
 import 'package:testapp/static/colors.dart';
 import 'dart:html' as html;
 
@@ -76,52 +77,7 @@ class MyAppBar extends AppBar {
                     onTap: () {
                       appStateController.changePage(3);
                     }),
-                HoverButton(
-                    label: "Login/SignUp",
-                    onTap: () async {
-                      Get.dialog(Dialog(
-                        clipBehavior: Clip.hardEdge,
-                        child: SizedBox(
-                          width: 300,
-                          height: 200,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  Auth().facebookLogin();
-                                },
-                                child: Container(
-                                  width: 164,
-                                  height: 42,
-                                  decoration: BoxDecoration(
-                                      color: myColors.blue.withOpacity(0.4),
-                                      borderRadius: BorderRadius.circular(16)),
-                                  child: Center(
-                                      child: Text("SignIn with Facebook")),
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  Auth().googleLogin();
-                                },
-                                child: Container(
-                                  width: 164,
-                                  height: 42,
-                                  decoration: BoxDecoration(
-                                      color:
-                                          myColors.darkgreen.withOpacity(0.4),
-                                      borderRadius: BorderRadius.circular(16)),
-                                  child:
-                                      Center(child: Text("SignIn with Google")),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ));
-                      // await auth.googleLogin();
-                    }),
+                const HoverButton(label: "Login/SignUp", onTap: showAuthDialog),
               ],
             ),
             getSmartPhoneOrTablet() == phoneType || width < 1275

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:testapp/controller/app_state_controller.dart';
+import 'package:testapp/data/repo/user_info.dart';
 import 'package:testapp/presentation/free_ticket_free_visa.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
