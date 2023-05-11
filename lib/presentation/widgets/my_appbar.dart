@@ -7,7 +7,7 @@ import 'package:testapp/data/functions/auth.dart';
 import 'package:testapp/data/functions/utils.dart';
 import 'package:testapp/presentation/widgets/show_auth.dart';
 import 'package:testapp/static/colors.dart';
-import 'dart:html' as html;
+import 'package:url_launcher/url_launcher.dart';
 
 class MyAppBar extends AppBar {
   final double width;
@@ -86,8 +86,9 @@ class MyAppBar extends AppBar {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          html.window.open(
-                              'https://freeticketfreevisa.com/admin', "_self");
+                          Uri url =
+                              Uri.parse("https://freeticketfreevisa.com/admin");
+                          launchUrl(url);
                         },
                         child: Container(
                           height: 48,
@@ -107,8 +108,9 @@ class MyAppBar extends AppBar {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          html.window.open(
-                              'https://freeticketfreevisa.com/admin', "_self");
+                          Uri url =
+                              Uri.parse("https://freeticketfreevisa.com/admin");
+                          launchUrl(url);
                         },
                         child: Container(
                           height: 48,

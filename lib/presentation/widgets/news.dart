@@ -1,12 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:testapp/data/models/news.dart';
 import 'package:testapp/static/colors.dart';
 
 class News extends StatelessWidget {
-  const News({
-    super.key,
-  });
+  final NewsModel news;
+  const News({super.key, required this.news});
 
   @override
   Widget build(BuildContext context) {
@@ -23,14 +23,14 @@ class News extends StatelessWidget {
           SizedBox(
             width: 132,
             height: 150,
-            child: Image.network(
-                "https://upload.wikimedia.org/wikipedia/commons/e/e8/Tesla_logo.png"),
+            child: Image.network(news.imageLink!),
           ),
           const SizedBox(
             height: 8,
           ),
           Text(
-            "Title",
+            news.title ?? "null",
+            maxLines: 1,
             style: TextStyle(
                 fontWeight: FontWeight.w600, color: myColors.darkgreen),
           ),
@@ -39,7 +39,7 @@ class News extends StatelessWidget {
             height: 90,
             padding: const EdgeInsets.all(8),
             child: Text(
-              "Honestly, two weeks ago I would have said yes.But with GPU prices dropping off a cliff, multiple Radeon RX 6600 cards are sitting at 369 right now for a card that (with a few caveats) outperforms the 3050. With RX 6600 being marginally faster, marginally more efficient, and marginally cheaper than the the 3050, you need to weigh your options.If you play AMD games like AC:Valhalla and Far Cry 6 then the Radeon 6600 is practically a no-brainer. It also (for whatever reason) smokes the 3050 in Apex Legends, which has traditionally been the domain of Nvidia cards.This is what’s up.",
+              news.summary ?? "null",
               overflow: TextOverflow.fade,
               style: TextStyle(fontSize: 10, color: myColors.darkgreen),
             ),

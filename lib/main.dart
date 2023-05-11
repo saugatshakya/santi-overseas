@@ -7,7 +7,10 @@ import 'package:testapp/data/repo/user_info.dart';
 import 'package:testapp/presentation/free_ticket_free_visa.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:testapp/presentation/widgets/show_auth.dart';
 import 'package:testapp/static/colors.dart';
+import 'mobile_presentation/main_page.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() async {
   if (kIsWeb) {
@@ -18,6 +21,27 @@ void main() async {
       xfbml: true,
       version: "v16.0",
     );
+    await Future.delayed(const Duration(milliseconds: 500));
+    Get.dialog(Dialog(
+      child: Stack(children: [
+        Image.asset("assets/ddbox.jpg"),
+        Positioned(
+            top: 0,
+            right: 16,
+            child: GestureDetector(
+              onTap: () {
+                Get.back();
+              },
+              child: Container(
+                decoration: const BoxDecoration(
+                    color: Colors.white, shape: BoxShape.circle),
+                width: 32,
+                height: 32,
+                child: const Center(child: Icon(Icons.close)),
+              ),
+            ))
+      ]),
+    ));
   }
   runApp(const MyApp());
 }
@@ -45,7 +69,177 @@ class _MyAppState extends State<MyApp> {
         primarySwatch: Colors.green,
         fontFamily: GoogleFonts.ptSans().fontFamily,
       ),
-      home: const MainWidget(),
+      home: Get.width < 1000 ? const MiniWidget() : const MainWidget(),
+    );
+  }
+}
+
+class MiniWidget extends StatelessWidget {
+  const MiniWidget({
+    super.key,
+  });
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      drawer: Drawer(
+          backgroundColor: myColors.lightgreen,
+          elevation: 8,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Spacer(),
+                ListTile(
+                  onTap: () {
+                    appStateController.changePage(0);
+                    Navigator.pop(context);
+                  },
+                  dense: true,
+                  title: Text(
+                    "Home",
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white),
+                  ),
+                  subtitle: Divider(
+                    color: Colors.white,
+                    thickness: 1,
+                    endIndent: 80,
+                  ),
+                ),
+                ListTile(
+                  onTap: () {
+                    appStateController.changePage(1);
+                    Navigator.pop(context);
+                  },
+                  dense: true,
+                  title: Text(
+                    "Jobs",
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white),
+                  ),
+                  subtitle: Divider(
+                    color: Colors.white,
+                    thickness: 1,
+                    endIndent: 80,
+                  ),
+                ),
+                ListTile(
+                  onTap: () {
+                    appStateController.changePage(2);
+                    Navigator.pop(context);
+                  },
+                  dense: true,
+                  title: Text(
+                    "Companies",
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white),
+                  ),
+                  subtitle: Divider(
+                    color: Colors.white,
+                    thickness: 1,
+                    endIndent: 64,
+                  ),
+                ),
+                ListTile(
+                  dense: true,
+                  onTap: () {
+                    appStateController.changePage(3);
+                    Navigator.pop(context);
+                  },
+                  title: Text(
+                    "About us",
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white),
+                  ),
+                  subtitle: Divider(
+                    color: Colors.white,
+                    endIndent: 48,
+                    thickness: 1,
+                  ),
+                ),
+                ListTile(
+                  onTap: showAuthDialog,
+                  dense: true,
+                  title: Text(
+                    "Login/SignUp",
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white),
+                  ),
+                  subtitle: Divider(
+                    color: Colors.white,
+                    endIndent: 32,
+                    thickness: 1,
+                  ),
+                ),
+                ListTile(
+                  dense: true,
+                  onTap: () {
+                    Uri url = Uri.parse("https://freeticketfreevisa.com/admin");
+                    launchUrl(url);
+                  },
+                  title: Text(
+                    "For Employees",
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white),
+                  ),
+                  subtitle: Divider(
+                    color: Colors.white,
+                    endIndent: 16,
+                    thickness: 1,
+                  ),
+                ),
+                Spacer(),
+                Text(
+                  "Phone Number: 9810479710",
+                  style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white),
+                ),
+                Text(
+                  "Location: basundhara chawki, kathmandu",
+                  style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white),
+                ),
+                Text(
+                  "Pan Number: 113513513513",
+                  style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white),
+                ),
+              ],
+            ),
+          )),
+      appBar: AppBar(
+        title: const Text(
+          "SANTI OVERSEAS",
+          style: TextStyle(
+              letterSpacing: 4,
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
+              color: Colors.white),
+        ),
+        centerTitle: true,
+        backgroundColor: myColors.darkgreen,
+      ),
+      body: MobileView(),
     );
   }
 }

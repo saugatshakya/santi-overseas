@@ -37,35 +37,16 @@ class _HomeState extends State<Home> {
   ];
   List searches = [];
   List companies = [];
+  List news = [];
   showDialod() async {
     JobsApi().allJobs();
     JobsApi().getAd();
     countryCheckBox = await JobsApi().getCountries();
     companies = await JobsApi().getCompanies();
     searches = await JobsApi().getPopularSearch();
+    news = await JobsApi().getNews();
     setState(() {});
     JobsApi().getGallery();
-    await Future.delayed(const Duration(milliseconds: 500));
-    Get.dialog(Dialog(
-      child: Stack(children: [
-        Image.asset("assets/ddbox.jpg"),
-        Positioned(
-            top: 0,
-            right: 16,
-            child: GestureDetector(
-              onTap: () {
-                Get.back();
-              },
-              child: Container(
-                decoration: const BoxDecoration(
-                    color: Colors.white, shape: BoxShape.circle),
-                width: 32,
-                height: 32,
-                child: const Center(child: Icon(Icons.close)),
-              ),
-            ))
-      ]),
-    ));
   }
 
   @override
@@ -100,7 +81,8 @@ class _HomeState extends State<Home> {
                           countryCheckBox: countryCheckBox,
                           companies: companies,
                           questions: questions,
-                          answers: answers),
+                          answers: answers,
+                          news: news),
                       const Jobs(),
                       const Companies(),
                       const AboutUs(),

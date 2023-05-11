@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:testapp/data/models/company.dart';
 import 'package:testapp/data/models/image.dart';
 import 'package:testapp/data/models/job.dart';
 import 'package:testapp/data/models/user.dart';
@@ -27,6 +28,7 @@ class AppStateController extends GetxController {
   //demoData
   List<JobModel> jobs = [];
   JobModel? selectedJob;
+  List<String> companies = [];
   ImageModel? adImage;
   List<ImageModel> gallery = [];
   changePage(int page) {
@@ -83,6 +85,11 @@ class AppStateController extends GetxController {
 
   updateJobs(List<JobModel> newJobs) {
     jobs = newJobs;
+    update();
+  }
+
+  updateCompanies(List<String> newCompanies) {
+    companies = newCompanies;
     update();
   }
 

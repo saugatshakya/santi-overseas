@@ -73,8 +73,8 @@ class JobModel {
     ageRequirement = json['age_requirement'];
     skills = json['skills'];
     otherRequirement = json['other_requirement'];
-    salary = json['salary'];
-    earning = json['earning'];
+    salary = json['salary'].truncate();
+    earning = json['earning'].truncate();
     accommodation = json['accommodation'];
     food = json['food'];
     annualVacation = json['annual_vacation'];

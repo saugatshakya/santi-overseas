@@ -13,19 +13,19 @@ import 'package:testapp/presentation/widgets/search.dart';
 import 'package:testapp/presentation/widgets/searches.dart';
 import 'package:testapp/presentation/widgets/searchlist.dart';
 import 'package:testapp/static/colors.dart';
-import 'dart:html' as html;
+import 'package:url_launcher/url_launcher.dart';
 
 class MainPage extends StatelessWidget {
-  MainPage({
-    super.key,
-    required this.height,
-    required this.width,
-    required this.countryCheckBox,
-    required this.companies,
-    required this.questions,
-    required this.answers,
-    required this.searches,
-  });
+  MainPage(
+      {super.key,
+      required this.height,
+      required this.width,
+      required this.countryCheckBox,
+      required this.companies,
+      required this.questions,
+      required this.answers,
+      required this.searches,
+      required this.news});
   final TextEditingController _name = TextEditingController();
   final TextEditingController _email = TextEditingController();
   final TextEditingController _address = TextEditingController();
@@ -37,6 +37,7 @@ class MainPage extends StatelessWidget {
   final List questions;
   final List answers;
   final List searches;
+  final List news;
   @override
   Widget build(BuildContext context) {
     return GetBuilder<AppStateController>(
@@ -501,7 +502,8 @@ class MainPage extends StatelessWidget {
                                       height: 32,
                                     ),
                                     NewsScroll(
-                                      widget: (context, i) => const News(),
+                                      widget: (context, i) =>
+                                          News(news: news[i % news.length]),
                                       direction: Axis.horizontal,
                                       height: 300,
                                     ),
@@ -964,9 +966,9 @@ class MainPage extends StatelessWidget {
                         ),
                         GestureDetector(
                           onTap: () {
-                            html.window.open(
-                                'https://freeticketfreevisa.com/privacypolicy',
-                                "_self");
+                            Uri url = Uri.parse(
+                                "https://freeticketfreevisa.com/privacypolicy");
+                            launchUrl(url);
                           },
                           child: Container(
                             width: width,

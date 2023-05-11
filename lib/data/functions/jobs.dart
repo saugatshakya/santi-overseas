@@ -2,8 +2,10 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:testapp/controller/app_state_controller.dart';
 import 'package:testapp/data/functions/api.dart';
+import 'package:testapp/data/models/company.dart';
 import 'package:testapp/data/models/image.dart';
 import 'package:testapp/data/models/job.dart';
+import 'package:testapp/data/models/news.dart';
 
 class JobsApi {
   allJobs() async {
@@ -62,15 +64,17 @@ class JobsApi {
   }
 
   getCompanies() async {
-    List datas = [];
+    List<String> datas = [];
     try {
       var response = await api.get("company");
+      log(response.toString());
       for (Map data in response) {
         datas.add(data["logo"]);
       }
     } catch (e) {
       log(e.toString());
     }
+    appStateController.updateCompanies(datas);
     return datas;
   }
 
@@ -110,6 +114,18 @@ class JobsApi {
   apply(jobId, contactInfo) async {
     var response =
         await api.post("apply", "job_id=$jobId&contact_info=$contactInfo");
-    log(response.body);
+    log(response.body.toString());
+  }
+
+  getNews() async {
+    var response = await api.get("get_news");
+    List<NewsModel> news = [];
+    if (response != null) {
+      for (int i = 0; i < response.length; i++) {
+        NewsModel neww = NewsModel.fromJson(response[i]);
+        news.add(neww);
+      }
+    }
+    return news;
   }
 }
