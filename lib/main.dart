@@ -13,6 +13,8 @@ import 'mobile_presentation/main_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   if (kIsWeb) {
     // initialiaze the facebook javascript SDK
     await FacebookAuth.i.webAndDesktopInitialize(
@@ -21,6 +23,25 @@ void main() async {
       xfbml: true,
       version: "v16.0",
     );
+  }
+  runApp(const MyApp());
+}
+
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    showWidget();
+    super.initState();
+  }
+
+  showWidget() async {
     await Future.delayed(const Duration(milliseconds: 500));
     Get.dialog(Dialog(
       child: Stack(children: [
@@ -43,21 +64,6 @@ void main() async {
       ]),
     ));
   }
-  runApp(const MyApp());
-}
-
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  @override
-  void initState() {
-    super.initState();
-  }
 
   // This widget is the root of your application.
   @override
@@ -69,7 +75,7 @@ class _MyAppState extends State<MyApp> {
         primarySwatch: Colors.green,
         fontFamily: GoogleFonts.ptSans().fontFamily,
       ),
-      home: Get.width < 1000 ? const MiniWidget() : const MainWidget(),
+      home: const MainWidget(),
     );
   }
 }
@@ -252,6 +258,7 @@ class MainWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
+      color: Colors.red,
       child: SizedBox(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
