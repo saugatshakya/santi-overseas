@@ -5,92 +5,230 @@ import 'package:testapp/data/repo/user_info.dart';
 import 'package:testapp/static/colors.dart';
 
 showAuthDialog() {
-  String info = "";
-  return Get.dialog(Dialog(
-    clipBehavior: Clip.hardEdge,
-    child: SizedBox(
-      width: 300,
-      height: 300,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              onChanged: (value) {
-                info = value;
-              },
-              decoration: const InputDecoration(
-                  labelText: "Enter Email or Phone",
-                  border: OutlineInputBorder()),
-            ),
-          ),
-          GestureDetector(
-            onTap: () {
-              if (info != "") {
-                repo.saveUserInfo(info);
-                Get.back();
-              } else {
-                Get.dialog(
-                  const Center(
-                    child: SizedBox(
-                      width: 132,
-                      height: 48,
-                      child: Center(child: Text("Please Enter Email or Phone")),
-                    ),
+  String email = "";
+  String name = "";
+  String phone = "";
+  String address = "";
+  String password = "";
+  bool signUpLoading = false;
+  bool loginLoading = false;
+  return Get.dialog(StatefulBuilder(
+    builder: (context, setState) => Dialog(
+        clipBehavior: Clip.hardEdge,
+        child: SizedBox(
+          width: Get.width * 0.65,
+          child:
+              Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+            Card(
+              child: SizedBox(
+                width: Get.width * 0.32,
+                height: Get.width * 0.32,
+                child: Padding(
+                  padding: EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Login",
+                        style: TextStyle(
+                            fontSize: 32,
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xff101010)),
+                      ),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      Text("Email"),
+                      TextField(
+                        onChanged: (val) {
+                          email = val;
+                        },
+                        decoration:
+                            InputDecoration(border: OutlineInputBorder()),
+                      ),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      Text("Password"),
+                      TextField(
+                        onChanged: (val) {
+                          password = val;
+                        },
+                        obscureText: true,
+                        decoration:
+                            InputDecoration(border: OutlineInputBorder()),
+                      ),
+                      SizedBox(
+                        height: 12,
+                      ),
+                      GestureDetector(
+                        onTap: () async {
+                          if (!signUpLoading &&
+                              !loginLoading &&
+                              email != "" &&
+                              password != "") {
+                            setState(() {
+                              loginLoading = true;
+                            });
+                            await auth.userLogin(email, password);
+                            setState(() {
+                              loginLoading = false;
+                            });
+                          }
+                        },
+                        child: Container(
+                          width: Get.width * .16,
+                          height: 40,
+                          decoration: BoxDecoration(
+                              color: myColors.darkgreen,
+                              borderRadius: BorderRadius.circular(20)),
+                          child: Center(
+                            child: loginLoading
+                                ? SizedBox(
+                                    width: 20,
+                                    height: 20,
+                                    child: CircularProgressIndicator(
+                                      color: Colors.white,
+                                    ),
+                                  )
+                                : Text(
+                                    "Proceed",
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 132,
+                      ),
+                    ],
                   ),
-                );
-              }
-            },
-            child: Container(
-              width: 84,
-              height: 42,
-              decoration: BoxDecoration(
-                  color: myColors.darkgreen,
-                  borderRadius: BorderRadius.circular(32)),
-              child: const Center(
-                  child: Text(
-                "SUBMIT",
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
-              )),
+                ),
+              ),
             ),
-          ),
-          Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: const [
-                SizedBox(width: 100, child: Divider()),
-                Text("or"),
-                SizedBox(width: 100, child: Divider())
-              ]),
-          GestureDetector(
-            onTap: () {
-              Auth().facebookLogin();
-            },
-            child: Container(
-              width: 164,
-              height: 42,
-              decoration: BoxDecoration(
-                  color: myColors.blue.withOpacity(0.4),
-                  borderRadius: BorderRadius.circular(32)),
-              child: const Center(child: Text("SignIn with Facebook")),
+            Card(
+              child: SizedBox(
+                width: Get.width * 0.32,
+                height: Get.width * 0.32,
+                child: Padding(
+                  padding: EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "SignUp",
+                        style: TextStyle(
+                            fontSize: 32,
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xff101010)),
+                      ),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      Text("Name"),
+                      TextField(
+                        onChanged: (val) {
+                          name = val;
+                        },
+                        decoration:
+                            InputDecoration(border: OutlineInputBorder()),
+                      ),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      Text("Email"),
+                      TextField(
+                        onChanged: (val) {
+                          email = val;
+                        },
+                        decoration:
+                            InputDecoration(border: OutlineInputBorder()),
+                      ),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      Text("Phone"),
+                      TextField(
+                        onChanged: (val) {
+                          phone = val;
+                        },
+                        decoration:
+                            InputDecoration(border: OutlineInputBorder()),
+                      ),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      Text("Address"),
+                      TextField(
+                        onChanged: (value) {
+                          address = value;
+                        },
+                        decoration:
+                            InputDecoration(border: OutlineInputBorder()),
+                      ),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      Text("Password"),
+                      TextField(
+                        onChanged: (val) {
+                          password = val;
+                        },
+                        decoration:
+                            InputDecoration(border: OutlineInputBorder()),
+                      ),
+                      SizedBox(
+                        height: 12,
+                      ),
+                      GestureDetector(
+                        onTap: () async {
+                          if (!signUpLoading &&
+                              !loginLoading &&
+                              email != "" &&
+                              password != "" &&
+                              name != "" &&
+                              address != "" &&
+                              phone != "") {
+                            setState(() {
+                              signUpLoading = true;
+                            });
+                            await auth.userSignUp(
+                                email, password, phone, name, address);
+                            setState(() {
+                              signUpLoading = false;
+                            });
+                          }
+                        },
+                        child: Container(
+                          width: Get.width * .16,
+                          height: 40,
+                          decoration: BoxDecoration(
+                              color: myColors.darkgreen,
+                              borderRadius: BorderRadius.circular(20)),
+                          child: Center(
+                            child: signUpLoading
+                                ? SizedBox(
+                                    width: 20,
+                                    height: 20,
+                                    child: CircularProgressIndicator(
+                                      color: Colors.white,
+                                    ),
+                                  )
+                                : Text(
+                                    "Proceed",
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ),
-          ),
-          GestureDetector(
-            onTap: () {
-              Auth().googleLogin();
-            },
-            child: Container(
-              width: 164,
-              height: 42,
-              decoration: BoxDecoration(
-                  color: myColors.darkgreen.withOpacity(0.4),
-                  borderRadius: BorderRadius.circular(32)),
-              child: const Center(child: Text("SignIn with Google")),
-            ),
-          ),
-        ],
-      ),
-    ),
+          ]),
+        )),
   ));
 }

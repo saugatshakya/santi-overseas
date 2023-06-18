@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'package:get/get.dart';
 import 'package:testapp/controller/app_state_controller.dart';
 import 'package:testapp/data/functions/api.dart';
 import 'package:testapp/data/models/company.dart';
+import 'package:testapp/data/models/country.dart';
 import 'package:testapp/data/models/image.dart';
 import 'package:testapp/data/models/job.dart';
 import 'package:testapp/data/models/news.dart';
@@ -12,9 +14,10 @@ class JobsApi {
     List<JobModel> jobs = [];
     try {
       var response = await api.get("jobs");
+      log("jobs: $response");
       for (var data in response) {
         JobModel job = JobModel.fromJson(data);
-        log("required numbers: " + job.requiredNumbers.toString());
+        log("required numbers: " + job.applyBefore.toString());
         jobs.add(job);
       }
     } catch (e) {
@@ -51,8 +54,10 @@ class JobsApi {
     List datas = [];
     try {
       var response = await api.get("country");
+      log("countries: $response");
       for (Map data in response) {
         datas.add({
+          "id": data["id"],
           "country": data["name"],
           "code": data["alpha2"].toString().toUpperCase()
         });
@@ -112,6 +117,7 @@ class JobsApi {
   }
 
   apply(jobId, contactInfo) async {
+    log("$jobId , $contactInfo");
     var response =
         await api.post("apply", "job_id=$jobId&contact_info=$contactInfo");
     log(response.body.toString());
@@ -126,6 +132,96 @@ class JobsApi {
         news.add(neww);
       }
     }
+
     return news;
+  }
+
+  addCountry(CountryModel country) async {
+    try {
+      var response = await api.post("country",
+          jsonEncode({"name": country.name, "alpha2": country.alpha2}));
+      log(response.body.toString());
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
+  addCompany(String name, address, logo, email, phone) async {
+    try {
+      var response = await api.post(
+          "company",
+          jsonEncode({
+            "name": name,
+            "address": address,
+            "logo": logo,
+            "email": email,
+            "contact_number": phone
+          }));
+      return jsonDecode(response.body)["id"];
+    } catch (e) {
+      return null;
+    }
+  }
+
+  assignCompany(String empId, String compId) async {
+    try {
+      var response = await api.put(
+          "employer?employer_id=$empId", jsonEncode({"company_id": compId}));
+      return true;
+    } catch (e) {
+      log(e.toString());
+      return false;
+    }
+  }
+
+  addJob(
+      {String? title,
+      String? category,
+      String? description,
+      String? requirement,
+      String? minQualification,
+      String? requiredNum,
+      String? hoursPDay,
+      String? hoursPWeek,
+      String? minExp,
+      String? salary,
+      bool? accomodation,
+      bool? food,
+      bool? overTime,
+      String? annualVacation,
+      String? otherBenefit,
+      String? companyId,
+      String? applyBefore,
+      String? contractPeriod,
+      String? country}) async {
+    try {
+      var response = await api.post(
+          "jobs",
+          jsonEncode({
+            "title": title,
+            "required_numbers": requiredNum,
+            "category": category,
+            "working_hours_per_day": hoursPDay,
+            "working_days_per_week": hoursPWeek,
+            "description": description,
+            "min_qualification": minQualification,
+            "min_experience": minExp,
+            "other_benefits": otherBenefit,
+            "salary": salary,
+            "accommodation": accomodation,
+            "food": food,
+            "annual_vacation": annualVacation,
+            "over_time": overTime,
+            "company": companyId,
+            "apply_before": applyBefore,
+            "contract_period": contractPeriod,
+            "country": country
+          }));
+      log(response.body);
+      return true;
+    } catch (e) {
+      log("Error with $e");
+      return null;
+    }
   }
 }

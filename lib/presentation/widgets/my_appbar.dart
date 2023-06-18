@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:testapp/controller/app_state_controller.dart';
 import 'package:testapp/data/functions/auth.dart';
 import 'package:testapp/data/functions/utils.dart';
+import 'package:testapp/presentation/Employee.dart';
 import 'package:testapp/presentation/widgets/show_auth.dart';
 import 'package:testapp/static/colors.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -86,9 +87,9 @@ class MyAppBar extends AppBar {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          Uri url =
-                              Uri.parse("https://freeticketfreevisa.com/admin");
-                          launchUrl(url);
+                          Get.to(() => const Employee());
+                          // Uri url = Uri.parse("https://freeticketfreevisa.com/admin");
+                          // launchUrl(url);
                         },
                         child: Container(
                           height: 48,
@@ -108,9 +109,9 @@ class MyAppBar extends AppBar {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          Uri url =
-                              Uri.parse("https://freeticketfreevisa.com/admin");
-                          launchUrl(url);
+                          Get.to(() => const Employee());
+                          // Uri url = Uri.parse("https://freeticketfreevisa.com/admin");
+                          // launchUrl(url);
                         },
                         child: Container(
                           height: 48,

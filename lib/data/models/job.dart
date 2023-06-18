@@ -73,15 +73,16 @@ class JobModel {
     ageRequirement = json['age_requirement'];
     skills = json['skills'];
     otherRequirement = json['other_requirement'];
-    salary = json['salary'].truncate();
-    earning = json['earning'].truncate();
+    salary = json["salary"] == null ? 0 : json['salary'].truncate();
+    earning = json['earning'] == null ? 0 : json['earning'].truncate();
     accommodation = json['accommodation'];
     food = json['food'];
     annualVacation = json['annual_vacation'];
     overTime = json['over_time'];
     otherBenefits = json['other_benefits'];
-    company =
-        json['company'] != null ? CompanyModel.fromJson(json['company']) : null;
+    company = json['company'] != null
+        ? CompanyModel.fromJson(json['company'], null)
+        : null;
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     country =
