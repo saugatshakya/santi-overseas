@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:testapp/controller/app_state_controller.dart';
-import 'package:testapp/presentation/widgets/company_logo.dart';
 import 'package:testapp/presentation/widgets/job_listing.dart';
 import 'package:testapp/presentation/widgets/scroll_widget.dart';
 import 'package:testapp/static/colors.dart';
@@ -27,7 +26,7 @@ class MainTable extends StatelessWidget {
                       height: 8,
                     ),
                     Text(
-                      "New Jobs",
+                      "New Job".tr,
                       style: TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.w600,

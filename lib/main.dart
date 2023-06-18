@@ -3,15 +3,14 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:testapp/controller/app_state_controller.dart';
-import 'package:testapp/data/repo/user_info.dart';
 import 'package:testapp/presentation/Employee.dart';
 import 'package:testapp/presentation/free_ticket_free_visa.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:testapp/presentation/widgets/show_auth.dart';
 import 'package:testapp/static/colors.dart';
+import 'package:testapp/static/strings.dart';
 import 'mobile_presentation/main_page.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -72,6 +71,8 @@ class _MyAppState extends State<MyApp> {
     return GetMaterialApp(
       title: 'Santi OverSeas',
       debugShowCheckedModeBanner: false,
+      translations: Languages(),
+      locale: appStateController.language,
       theme: ThemeData(
         primarySwatch: Colors.green,
         fontFamily: GoogleFonts.ptSans().fontFamily,
@@ -97,21 +98,21 @@ class MiniWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Spacer(),
+                const Spacer(),
                 ListTile(
                   onTap: () {
                     appStateController.changePage(0);
                     Navigator.pop(context);
                   },
                   dense: true,
-                  title: Text(
+                  title: const Text(
                     "Home",
                     style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
                         color: Colors.white),
                   ),
-                  subtitle: Divider(
+                  subtitle: const Divider(
                     color: Colors.white,
                     thickness: 1,
                     endIndent: 80,
@@ -124,13 +125,13 @@ class MiniWidget extends StatelessWidget {
                   },
                   dense: true,
                   title: Text(
-                    "Jobs",
+                    "jobs".tr,
                     style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
                         color: Colors.white),
                   ),
-                  subtitle: Divider(
+                  subtitle: const Divider(
                     color: Colors.white,
                     thickness: 1,
                     endIndent: 80,
@@ -142,14 +143,14 @@ class MiniWidget extends StatelessWidget {
                     Navigator.pop(context);
                   },
                   dense: true,
-                  title: Text(
+                  title: const Text(
                     "Companies",
                     style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
                         color: Colors.white),
                   ),
-                  subtitle: Divider(
+                  subtitle: const Divider(
                     color: Colors.white,
                     thickness: 1,
                     endIndent: 64,
@@ -161,20 +162,20 @@ class MiniWidget extends StatelessWidget {
                     appStateController.changePage(3);
                     Navigator.pop(context);
                   },
-                  title: Text(
+                  title: const Text(
                     "About us",
                     style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
                         color: Colors.white),
                   ),
-                  subtitle: Divider(
+                  subtitle: const Divider(
                     color: Colors.white,
                     endIndent: 48,
                     thickness: 1,
                   ),
                 ),
-                ListTile(
+                const ListTile(
                   onTap: showAuthDialog,
                   dense: true,
                   title: Text(
@@ -197,35 +198,35 @@ class MiniWidget extends StatelessWidget {
                     // Uri url = Uri.parse("https://freeticketfreevisa.com/admin");
                     // launchUrl(url);
                   },
-                  title: Text(
+                  title: const Text(
                     "For Employees",
                     style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
                         color: Colors.white),
                   ),
-                  subtitle: Divider(
+                  subtitle: const Divider(
                     color: Colors.white,
                     endIndent: 16,
                     thickness: 1,
                   ),
                 ),
-                Spacer(),
-                Text(
+                const Spacer(),
+                const Text(
                   "Phone Number: 9810479710",
                   style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
                       color: Colors.white),
                 ),
-                Text(
+                const Text(
                   "Location: basundhara chawki, kathmandu",
                   style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
                       color: Colors.white),
                 ),
-                Text(
+                const Text(
                   "Pan Number: 113513513513",
                   style: TextStyle(
                       fontSize: 12,
@@ -236,8 +237,8 @@ class MiniWidget extends StatelessWidget {
             ),
           )),
       appBar: AppBar(
-        title: const Text(
-          "SANTI OVERSEAS",
+        title: Text(
+          "santiOverseas".tr,
           style: TextStyle(
               letterSpacing: 4,
               fontSize: 18,
@@ -247,7 +248,7 @@ class MiniWidget extends StatelessWidget {
         centerTitle: true,
         backgroundColor: myColors.darkgreen,
       ),
-      body: MobileView(),
+      body: const MobileView(),
     );
   }
 }
@@ -325,10 +326,10 @@ class MainWidget extends StatelessWidget {
                           offset: const Offset(0, 48),
                           itemBuilder: (_) => [
                             const PopupMenuItem(
-                                value: Locale("Nepali", "NE"),
+                                value: Locale("ne", "NE"),
                                 child: Text("Nepali")),
                             const PopupMenuItem(
-                                value: Locale("English", "EN"),
+                                value: Locale("en", "EN"),
                                 child: Text("English"))
                           ],
                           child: Container(

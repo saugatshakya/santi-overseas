@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:testapp/controller/app_state_controller.dart';
-import 'package:testapp/data/functions/utils.dart';
 import 'package:testapp/presentation/widgets/company_logo.dart';
-import 'package:testapp/presentation/widgets/job_listing.dart';
 import 'package:testapp/presentation/widgets/pagination.dart';
 import 'package:testapp/static/colors.dart';
 
@@ -48,7 +46,7 @@ class _CompaniesState extends State<Companies> {
                           begin: Alignment.centerLeft,
                           end: Alignment.centerRight)),
                   child: Text(
-                    "Companies",
+                    "companies".tr,
                     style: TextStyle(fontSize: 32, color: myColors.white),
                   ),
                 ),

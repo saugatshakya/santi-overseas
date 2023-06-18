@@ -8,20 +8,17 @@ import 'package:testapp/data/functions/jobs.dart';
 import 'package:testapp/data/models/news.dart';
 import 'package:testapp/mobile_presentation/about.dart';
 import 'package:testapp/mobile_presentation/job.dart';
-import 'package:testapp/presentation/job.dart';
 import 'package:testapp/presentation/main_page.dart';
 import 'package:testapp/presentation/widgets/company_logo.dart';
 import 'package:testapp/presentation/widgets/country_selector.dart';
-import 'package:testapp/presentation/widgets/job_listing.dart';
 import 'package:testapp/presentation/widgets/news.dart';
 import 'package:testapp/presentation/widgets/pagination.dart';
 import 'package:testapp/presentation/widgets/raised_button.dart';
-import 'package:testapp/presentation/widgets/scroll_widget.dart';
-import 'package:testapp/presentation/widgets/search.dart';
 import 'package:testapp/presentation/widgets/searchlist.dart';
 import 'package:testapp/static/colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:testapp/mobile_presentation/job_detail.dart';
+import 'package:testapp/static/data.dart';
 
 class MobileView extends StatelessWidget {
   const MobileView({super.key});
@@ -39,10 +36,10 @@ class MobileView extends StatelessWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 controller: state.currentPage,
                 children: [
-                  Default(),
-                  Jobs(),
-                  Companies(),
-                  AboutUsMobile(),
+                  const Default(),
+                  const Jobs(),
+                  const Companies(),
+                  const AboutUsMobile(),
                   Container(
                     color: Colors.red,
                   ),
@@ -71,16 +68,23 @@ class _DefaultState extends State<Default> {
   final TextEditingController _contact = TextEditingController();
   List countryCheckBox = [];
   List questions = [
-    "What is free visa and free ticket program?",
-    "Is this truly the ZERO cost program?",
-    "What does this ZERO cost include?",
-    "Will the company deduct all these above mentioned costs from the salary?"
+    "question1".tr,
+    "question2".tr,
+    "question3".tr,
+    "question4".tr
   ];
-  List answers = [
-    "It is the visa system sanctioned by the employer bearing all the processing cost of the employees.",
-    "Of course, this is indeed the ZERO cost program.",
-    "ZERO cost / Free of cost includes the following entities:\nPassport cost NPR 5000.00\nTraveling, lodging and fooding cost for interview\nMedical cost\nVisa cost\nInsurance and welfare cost\nOne-way travel cost to Kathmandu for flight\nTicket cost",
-    "Sorry, no cost shall be deducted since this is free of cost program."
+  List answers = ["answer1".tr, "answer2".tr, "answer3".tr, "answer4".tr];
+  List nepaliQ = [
+    'फ्रि भिसा, फ्रि टिकट कार्यक्रम भन्नाले के बुझिन्छ ?',
+    'के यो वास्तवमा शुन्य लागत अर्थात पूर्ण निशुल्क को कार्यक्रम नै हो त?',
+    'शुन्य लागत अर्थात पूर्ण निशुल्क भित्र कुन कुन सेवाहरु पर्दछन्?',
+    'के यी माथि उल्लेखित खर्चहरु कम्पनिले कामदारहरुको तलबबाट कटाउनेछ?'
+  ];
+  List nepaliA = [
+    'रोजगारदाताले आफ्नो कम्पनिमा काम गर्न आउन चाहने कामदारहरुलाई उक्त प्रक्रियाको लागि आवश्यक पर्ने सम्पूर्ण खर्च बेहोर्ने गरी लागु गरिएको भिसा प्रणाली हो भन्ने बुझिन्छ ।',
+    'अवश्य, यो कार्यक्रम वास्तवमै शुन्य लागत अर्थात पूर्ण निशुल्क को कार्यक्रम हो ।',
+    'शुन्य लागत अर्थात पूर्ण निशुल्क भित्र निम्नानुसारका सेवाहरु पर्दछन्:\nराहदानी खर्च ने.रु. ५०००।– \nअन्तरवार्ताको लागि आउँदा लाग्ने यातायात, बस्ने र खाने खर्च\nमेडिकल गर्ने खर्च\nभिषाको लागि लाग्ने खर्च\nबिमा तथा अन्य कल्याणकारी खर्च\nहवाई को समयमा घरदेखि काठमाडौं सम्मको यातायात खर्च\nविदेशजाने हवाई टिकट',
+    'के यी माथि उल्लेखित खर्चहरु कम्पनिले कामदारहरुको तलबबाट कटाउनेछ?माफ गर्नुहोला, जब यो कार्यक्रम नै निशुल्क भन्ने छ, खर्च कटाउने त प्रश्नै उठ्दैन नी, धन्यवाद ।, '
   ];
   List searches = [];
   List companies = [];
@@ -134,14 +138,15 @@ class _DefaultState extends State<Default> {
                             height: 64,
                           ),
                           Text(
-                            "Discover the Perfect international job for you",
+                            "Find the best work at foreign employment through SANTI OVERSEAS."
+                                .tr,
                             style: GoogleFonts.ptSerif(
                                 color: myColors.white,
                                 fontSize: 18,
                                 fontWeight: FontWeight.w500),
                           ),
                           Text(
-                            "To get your dream job register & fill out your profile first",
+                            "Fill up your profile to get your dream job.".tr,
                             style: GoogleFonts.ptSerif(
                                 color: myColors.white, fontSize: 14),
                           ),
@@ -165,7 +170,7 @@ class _DefaultState extends State<Default> {
                                   width: MediaQuery.of(context).size.width,
                                   focusNode: state.seachCountryFocus,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 16,
                                 ),
                                 SearchableTextField(
@@ -270,22 +275,22 @@ class _DefaultState extends State<Default> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          const Text(
                             "How Can We Help You?",
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 18,
                                 fontWeight: FontWeight.w600),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 32,
                           ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: TextField(
                               controller: _name,
-                              style: TextStyle(color: Colors.white),
-                              decoration: InputDecoration(
+                              style: const TextStyle(color: Colors.white),
+                              decoration: const InputDecoration(
                                   labelText: "Full Name *",
                                   labelStyle: TextStyle(color: Colors.white),
                                   enabledBorder: OutlineInputBorder(
@@ -300,8 +305,8 @@ class _DefaultState extends State<Default> {
                             padding: const EdgeInsets.all(8.0),
                             child: TextField(
                               controller: _address,
-                              style: TextStyle(color: Colors.white),
-                              decoration: InputDecoration(
+                              style: const TextStyle(color: Colors.white),
+                              decoration: const InputDecoration(
                                   labelText: "Address *",
                                   labelStyle: TextStyle(color: Colors.white),
                                   enabledBorder: OutlineInputBorder(
@@ -316,8 +321,8 @@ class _DefaultState extends State<Default> {
                             padding: const EdgeInsets.all(8.0),
                             child: TextField(
                               controller: _contact,
-                              style: TextStyle(color: Colors.white),
-                              decoration: InputDecoration(
+                              style: const TextStyle(color: Colors.white),
+                              decoration: const InputDecoration(
                                   labelText: "Contact no *",
                                   labelStyle: TextStyle(color: Colors.white),
                                   enabledBorder: OutlineInputBorder(
@@ -332,8 +337,8 @@ class _DefaultState extends State<Default> {
                             padding: const EdgeInsets.all(8.0),
                             child: TextField(
                               controller: _email,
-                              style: TextStyle(color: Colors.white),
-                              decoration: InputDecoration(
+                              style: const TextStyle(color: Colors.white),
+                              decoration: const InputDecoration(
                                   labelText: "Email *",
                                   labelStyle: TextStyle(color: Colors.white),
                                   enabledBorder: OutlineInputBorder(
@@ -344,7 +349,7 @@ class _DefaultState extends State<Default> {
                                           BorderSide(color: Colors.white))),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 16,
                           ),
                           RaisedButton(
@@ -357,7 +362,7 @@ class _DefaultState extends State<Default> {
                                     _address.text.isEmpty ||
                                     _contact.text.isEmpty ||
                                     _email.text.isEmpty) {
-                                  Get.dialog(Dialog(
+                                  Get.dialog(const Dialog(
                                     child: SizedBox(
                                       width: 164,
                                       height: 42,
@@ -377,7 +382,7 @@ class _DefaultState extends State<Default> {
                                   _address.clear();
                                   _email.clear();
                                   _contact.clear();
-                                  Get.dialog(Dialog(
+                                  Get.dialog(const Dialog(
                                     child: SizedBox(
                                       width: 164,
                                       height: 42,
@@ -395,7 +400,7 @@ class _DefaultState extends State<Default> {
                     Container(
                       color: myColors.darkgreen.withOpacity(0.32),
                       width: Get.width,
-                      padding: EdgeInsets.all(8),
+                      padding: const EdgeInsets.all(8),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
@@ -528,12 +533,15 @@ class _DefaultState extends State<Default> {
                                                   color: Colors.yellow),
                                             ),
                                             minLeadingWidth: 0,
-                                            title: const Text("Name "),
+                                            title: Text(
+                                                testimony[i % testimony.length]
+                                                    .name),
                                             subtitle: SizedBox(
                                               width: Get.width * 0.5 - 0.5 - 16,
                                               height: 92,
-                                              child: const Text(
-                                                  "It is the visa system sanctioned by the employer bearing all the processing cost of the employees."),
+                                              child: Text(testimony[
+                                                      i % testimony.length]
+                                                  .data),
                                             ),
                                           )),
                                       Container(
@@ -590,13 +598,16 @@ class _DefaultState extends State<Default> {
                                                   shape: BoxShape.circle,
                                                   color: Colors.yellow),
                                             ),
-                                            title: const Text("Name "),
+                                            title: Text(
+                                                testimony[i % testimony.length]
+                                                    .name),
                                             minLeadingWidth: 0,
                                             subtitle: SizedBox(
                                               width: Get.width * 0.5 - 0.5 - 16,
                                               height: 92,
-                                              child: const Text(
-                                                  "It is the visa system sanctioned by the employer bearing all the processing cost of the employees."),
+                                              child: Text(testimony[
+                                                      i % testimony.length]
+                                                  .data),
                                             ),
                                           ))
                                     ]),
@@ -672,47 +683,47 @@ class _DefaultState extends State<Default> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Chip(
-                                      backgroundColor: Color(0xff4267B2),
+                                      backgroundColor: const Color(0xff4267B2),
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(4)),
-                                      label: Text(
+                                      label: const Text(
                                         "Facebook",
                                         style: TextStyle(color: Colors.white),
                                       )),
                                   Chip(
-                                      backgroundColor: Color(0xff00acee),
+                                      backgroundColor: const Color(0xff00acee),
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(4)),
-                                      label: Text(
+                                      label: const Text(
                                         "Twitter",
                                         style: TextStyle(color: Colors.white),
                                       )),
                                   Chip(
-                                      backgroundColor: Color(0xffd62976),
+                                      backgroundColor: const Color(0xffd62976),
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(4)),
-                                      label: Text(
+                                      label: const Text(
                                         "Instagram",
                                         style: TextStyle(color: Colors.white),
                                       )),
                                   Chip(
-                                      backgroundColor: Color(0xffFF0000),
+                                      backgroundColor: const Color(0xffFF0000),
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(4)),
-                                      label: Text(
+                                      label: const Text(
                                         "YouTube",
                                         style: TextStyle(color: Colors.white),
                                       )),
                                   Chip(
-                                      backgroundColor: Color(0xffff0050),
+                                      backgroundColor: const Color(0xffff0050),
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(4)),
-                                      label: Text(
+                                      label: const Text(
                                         "TikTok",
                                         style: TextStyle(color: Colors.white),
                                       ))
@@ -759,7 +770,7 @@ class _DefaultState extends State<Default> {
                                     ),
                                   ),
                                 ),
-                                Spacer(),
+                                const Spacer(),
                                 Container(
                                   width: 72,
                                   height: 54,
@@ -855,7 +866,7 @@ class _DefaultState extends State<Default> {
                           children: [
                             Text(
                                 "Copyright © ${DateTime.now().year} Santi OverSeas Pvt.Ltd"),
-                            Text("Privacy Policy")
+                            const Text("Privacy Policy")
                           ],
                         ),
                       ),

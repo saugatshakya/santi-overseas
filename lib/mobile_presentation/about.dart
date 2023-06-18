@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
 import 'package:testapp/static/colors.dart';
 
@@ -9,7 +7,7 @@ class AboutUsMobile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: Get.height,
       width: Get.width,
       child: SingleChildScrollView(

@@ -3,12 +3,10 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:testapp/controller/app_state_controller.dart';
-import 'package:testapp/data/functions/auth.dart';
 import 'package:testapp/data/functions/utils.dart';
 import 'package:testapp/presentation/Employee.dart';
 import 'package:testapp/presentation/widgets/show_auth.dart';
 import 'package:testapp/static/colors.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class MyAppBar extends AppBar {
   final double width;
@@ -42,7 +40,7 @@ class MyAppBar extends AppBar {
                     width: 8,
                   ),
                   Text(
-                    "SANTI\nOVERSEAS",
+                    "santiOverseas".tr,
                     style: TextStyle(
                         color: myColors.darkgreen,
                         letterSpacing: 2,
@@ -59,12 +57,12 @@ class MyAppBar extends AppBar {
             Row(
               children: [
                 HoverButton(
-                    label: "Jobs",
+                    label: "job".tr,
                     onTap: () {
                       appStateController.changePage(1);
                     }),
                 HoverButton(
-                    label: "Companies",
+                    label: "companies".tr,
                     onTap: () {
                       appStateController.changePage(2);
                     }),
@@ -74,11 +72,20 @@ class MyAppBar extends AppBar {
                 //       // appStateController.changePage(3);
                 //     }),
                 HoverButton(
-                    label: "About Us",
+                    label: "aboutUs".tr,
                     onTap: () {
                       appStateController.changePage(3);
                     }),
-                const HoverButton(label: "Login/SignUp", onTap: showAuthDialog),
+                GetBuilder<AppStateController>(
+                    init: appStateController,
+                    builder: (state) => state.user == null
+                        ? HoverButton(
+                            label: "login/signup".tr, onTap: showAuthDialog)
+                        : HoverButton(
+                            label: "logout".tr,
+                            onTap: () {
+                              state.logout();
+                            })),
               ],
             ),
             getSmartPhoneOrTablet() == phoneType || width < 1275
@@ -96,7 +103,7 @@ class MyAppBar extends AppBar {
                           width: 132,
                           padding: const EdgeInsets.all(8),
                           child: Center(
-                              child: Text("For Employees",
+                              child: Text("forEmployees".tr,
                                   style: TextStyle(
                                       color: myColors.darkgreen,
                                       fontSize: 14,
@@ -118,7 +125,7 @@ class MyAppBar extends AppBar {
                           width: 132,
                           padding: const EdgeInsets.all(8),
                           child: Center(
-                              child: Text("For Employees",
+                              child: Text("forEmployees".tr,
                                   style: TextStyle(
                                       color: myColors.darkgreen,
                                       fontSize: 14,

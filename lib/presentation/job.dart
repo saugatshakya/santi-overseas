@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:testapp/data/functions/jobs.dart';
 import 'package:testapp/data/models/job.dart';
 import 'package:testapp/data/repo/user_info.dart';

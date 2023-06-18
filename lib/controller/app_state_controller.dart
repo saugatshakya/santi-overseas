@@ -1,14 +1,11 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:testapp/data/models/company.dart';
 import 'package:testapp/data/models/image.dart';
 import 'package:testapp/data/models/job.dart';
 import 'package:testapp/data/models/user.dart';
 
 class AppStateController extends GetxController {
-  Locale language = const Locale('Nepali', 'NE');
+  Locale language = const Locale('ne', 'NE');
   PageController currentPage = PageController(initialPage: 0);
   String searchCountry = "";
   String searchJob = "";
@@ -40,6 +37,7 @@ class AppStateController extends GetxController {
 
   changeLanguageI(Locale lan) {
     language = lan;
+    Get.updateLocale(lan);
     update();
   }
 
@@ -105,6 +103,11 @@ class AppStateController extends GetxController {
 
   selectJob(JobModel job) {
     selectedJob = job;
+    update();
+  }
+
+  logout() {
+    user = null;
     update();
   }
 }

@@ -74,7 +74,7 @@ class _MyCompanyState extends State<MyCompany> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 32,
               ),
               Item(
@@ -84,69 +84,69 @@ class _MyCompanyState extends State<MyCompany> {
                     ? Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          const Text(
                             "Add Company",
                             style: TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.w600,
                                 color: Color(0xff101010)),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 16,
                           ),
-                          Text("Name"),
+                          const Text("Name"),
                           TextField(
                             onChanged: (val) {
                               companyName = val;
                             },
                             decoration:
-                                InputDecoration(border: OutlineInputBorder()),
+                                const InputDecoration(border: OutlineInputBorder()),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 8,
                           ),
-                          Text("Address"),
+                          const Text("Address"),
                           TextField(
                             onChanged: (val) {
                               address = val;
                             },
                             decoration:
-                                InputDecoration(border: OutlineInputBorder()),
+                                const InputDecoration(border: OutlineInputBorder()),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 8,
                           ),
-                          Text("Logo Link"),
+                          const Text("Logo Link"),
                           TextField(
                             onChanged: (val) {
                               logoLink = val;
                             },
                             decoration:
-                                InputDecoration(border: OutlineInputBorder()),
+                                const InputDecoration(border: OutlineInputBorder()),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 8,
                           ),
-                          Text("Email"),
+                          const Text("Email"),
                           TextField(
                             onChanged: (val) {
                               email = val;
                             },
                             decoration:
-                                InputDecoration(border: OutlineInputBorder()),
+                                const InputDecoration(border: OutlineInputBorder()),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 8,
                           ),
-                          Text("Phone"),
+                          const Text("Phone"),
                           TextField(
                             onChanged: (val) {
                               phone = val;
                             },
                             decoration:
-                                InputDecoration(border: OutlineInputBorder()),
+                                const InputDecoration(border: OutlineInputBorder()),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 8,
                           ),
                           GestureDetector(
@@ -194,14 +194,14 @@ class _MyCompanyState extends State<MyCompany> {
                                   borderRadius: BorderRadius.circular(20)),
                               child: Center(
                                 child: addingCompany
-                                    ? SizedBox(
+                                    ? const SizedBox(
                                         width: 20,
                                         height: 20,
                                         child: CircularProgressIndicator(
                                           color: Colors.white,
                                         ),
                                       )
-                                    : Text(
+                                    : const Text(
                                         "ADD",
                                         style: TextStyle(color: Colors.white),
                                       ),
@@ -223,13 +223,13 @@ class _MyCompanyState extends State<MyCompany> {
                         ),
                       ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 16,
               ),
               Item(
                 width: width,
                 title: "Country",
-                widget: Container(
+                widget: SizedBox(
                   width: width,
                   child: Wrap(children: [
                     for (Map country in countries)
@@ -237,42 +237,42 @@ class _MyCompanyState extends State<MyCompany> {
                         country: country["country"],
                         code: country["code"],
                       ),
-                    SizedBox(
+                    const SizedBox(
                       height: 18,
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           "Add Country",
                           style: TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.w600,
                               color: Color(0xff101010)),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 12,
                         ),
-                        Text("Name"),
+                        const Text("Name"),
                         TextField(
                           onChanged: (val) {
                             countryName = val;
                           },
                           decoration:
-                              InputDecoration(border: OutlineInputBorder()),
+                              const InputDecoration(border: OutlineInputBorder()),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 8,
                         ),
-                        Text("Alpha Two Code"),
+                        const Text("Alpha Two Code"),
                         TextField(
                           onChanged: (val) {
                             alpha2Code = val;
                           },
                           decoration:
-                              InputDecoration(border: OutlineInputBorder()),
+                              const InputDecoration(border: OutlineInputBorder()),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 12,
                         ),
                         GestureDetector(
@@ -301,13 +301,13 @@ class _MyCompanyState extends State<MyCompany> {
                                 borderRadius: BorderRadius.circular(20)),
                             child: Center(
                               child: addingCountry
-                                  ? SizedBox(
+                                  ? const SizedBox(
                                       width: 20,
                                       height: 20,
                                       child: CircularProgressIndicator(
                                         color: Colors.white,
                                       ))
-                                  : Text(
+                                  : const Text(
                                       "ADD",
                                       style: TextStyle(color: Colors.white),
                                     ),
@@ -319,7 +319,7 @@ class _MyCompanyState extends State<MyCompany> {
                   ]),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 16,
               ),
               Item(
@@ -328,14 +328,14 @@ class _MyCompanyState extends State<MyCompany> {
                 widget: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       "Add Job",
                       style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.w600,
                           color: Color(0xff101010)),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 16,
                     ),
                     Row(
@@ -345,18 +345,18 @@ class _MyCompanyState extends State<MyCompany> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("Title"),
+                              const Text("Title"),
                               TextField(
                                 onChanged: (val) {
                                   title = val;
                                 },
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                     border: OutlineInputBorder()),
                               )
                             ],
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 16,
                         ),
                         Expanded(
@@ -364,12 +364,12 @@ class _MyCompanyState extends State<MyCompany> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("Category"),
+                              const Text("Category"),
                               TextField(
                                 onChanged: (val) {
                                   category = val;
                                 },
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                     border: OutlineInputBorder()),
                               )
                             ],
@@ -377,37 +377,37 @@ class _MyCompanyState extends State<MyCompany> {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 8,
                     ),
-                    Text("Description"),
+                    const Text("Description"),
                     TextField(
                       onChanged: (val) {
                         description = val;
                       },
-                      decoration: InputDecoration(border: OutlineInputBorder()),
+                      decoration: const InputDecoration(border: OutlineInputBorder()),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 8,
                     ),
-                    Text("Requirement"),
+                    const Text("Requirement"),
                     TextField(
                       onChanged: (val) {
                         requirement = val;
                       },
-                      decoration: InputDecoration(border: OutlineInputBorder()),
+                      decoration: const InputDecoration(border: OutlineInputBorder()),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 8,
                     ),
-                    Text("Minimum Qualification"),
+                    const Text("Minimum Qualification"),
                     TextField(
                       onChanged: (val) {
                         minQualification = val;
                       },
-                      decoration: InputDecoration(border: OutlineInputBorder()),
+                      decoration: const InputDecoration(border: OutlineInputBorder()),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 8,
                     ),
                     SizedBox(
@@ -417,7 +417,7 @@ class _MyCompanyState extends State<MyCompany> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("Required Number"),
+                              const Text("Required Number"),
                               SizedBox(
                                 height: 40,
                                 width: 64,
@@ -425,19 +425,19 @@ class _MyCompanyState extends State<MyCompany> {
                                   onChanged: (val) {
                                     requiredNum = val;
                                   },
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                       border: OutlineInputBorder()),
                                 ),
                               ),
                             ],
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 32,
                           ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("Hours Per Day"),
+                              const Text("Hours Per Day"),
                               SizedBox(
                                 height: 40,
                                 width: 64,
@@ -445,19 +445,19 @@ class _MyCompanyState extends State<MyCompany> {
                                   onChanged: (val) {
                                     hoursPDay = val;
                                   },
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                       border: OutlineInputBorder()),
                                 ),
                               ),
                             ],
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 32,
                           ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("Hours Per Week"),
+                              const Text("Hours Per Week"),
                               SizedBox(
                                 height: 40,
                                 width: 64,
@@ -465,19 +465,19 @@ class _MyCompanyState extends State<MyCompany> {
                                   onChanged: (val) {
                                     hoursPWeek = val;
                                   },
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                       border: OutlineInputBorder()),
                                 ),
                               ),
                             ],
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 32,
                           ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("Min Experience"),
+                              const Text("Min Experience"),
                               SizedBox(
                                 height: 40,
                                 width: 64,
@@ -485,19 +485,19 @@ class _MyCompanyState extends State<MyCompany> {
                                   onChanged: (val) {
                                     minExp = val;
                                   },
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                       border: OutlineInputBorder()),
                                 ),
                               ),
                             ],
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 32,
                           ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("Salary"),
+                              const Text("Salary"),
                               SizedBox(
                                 height: 40,
                                 width: 84,
@@ -505,19 +505,19 @@ class _MyCompanyState extends State<MyCompany> {
                                   onChanged: (val) {
                                     salary = val;
                                   },
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                       border: OutlineInputBorder()),
                                 ),
                               ),
                             ],
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 32,
                           ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("Contact Period"),
+                              const Text("Contact Period"),
                               SizedBox(
                                 height: 40,
                                 width: 132,
@@ -525,19 +525,19 @@ class _MyCompanyState extends State<MyCompany> {
                                   onChanged: (val) {
                                     contactPeriod = val;
                                   },
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                       border: OutlineInputBorder()),
                                 ),
                               ),
                             ],
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 32,
                           ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("Apply Before (YYYY-MM-DD)"),
+                              const Text("Apply Before (YYYY-MM-DD)"),
                               SizedBox(
                                 height: 40,
                                 width: 234,
@@ -545,19 +545,19 @@ class _MyCompanyState extends State<MyCompany> {
                                   onChanged: (val) {
                                     applyBefore = val;
                                   },
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                       border: OutlineInputBorder()),
                                 ),
                               ),
                             ],
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 32,
                           ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("Country"),
+                              const Text("Country"),
                               PopupMenuButton(
                                 onSelected: (nc) {
                                   setState(() {
@@ -589,7 +589,7 @@ class _MyCompanyState extends State<MyCompany> {
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 8,
                     ),
                     SizedBox(
@@ -597,8 +597,8 @@ class _MyCompanyState extends State<MyCompany> {
                       width: width,
                       child: Row(
                         children: [
-                          Text("Accomodation"),
-                          SizedBox(
+                          const Text("Accomodation"),
+                          const SizedBox(
                             width: 8,
                           ),
                           SizedBox(
@@ -612,11 +612,11 @@ class _MyCompanyState extends State<MyCompany> {
                                   });
                                 },
                               )),
-                          SizedBox(
+                          const SizedBox(
                             width: 32,
                           ),
-                          Text("Food"),
-                          SizedBox(
+                          const Text("Food"),
+                          const SizedBox(
                             width: 8,
                           ),
                           SizedBox(
@@ -630,11 +630,11 @@ class _MyCompanyState extends State<MyCompany> {
                                   });
                                 },
                               )),
-                          SizedBox(
+                          const SizedBox(
                             width: 32,
                           ),
-                          Text("Overtime"),
-                          SizedBox(
+                          const Text("Overtime"),
+                          const SizedBox(
                             width: 8,
                           ),
                           SizedBox(
@@ -648,11 +648,11 @@ class _MyCompanyState extends State<MyCompany> {
                                   });
                                 },
                               )),
-                          SizedBox(
+                          const SizedBox(
                             width: 32,
                           ),
-                          Text("Annual Vacation"),
-                          SizedBox(
+                          const Text("Annual Vacation"),
+                          const SizedBox(
                             width: 8,
                           ),
                           SizedBox(
@@ -661,7 +661,7 @@ class _MyCompanyState extends State<MyCompany> {
                               onChanged: (val) {
                                 annualVacation = val;
                               },
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                   border: OutlineInputBorder(),
                                   contentPadding: EdgeInsets.only(left: 4)),
                             ),
@@ -669,17 +669,17 @@ class _MyCompanyState extends State<MyCompany> {
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 8,
                     ),
-                    Text("Other Benifits"),
+                    const Text("Other Benifits"),
                     TextField(
                       onChanged: (val) {
                         otherBenefit = val;
                       },
-                      decoration: InputDecoration(border: OutlineInputBorder()),
+                      decoration: const InputDecoration(border: OutlineInputBorder()),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 12,
                     ),
                     GestureDetector(
@@ -760,13 +760,13 @@ class _MyCompanyState extends State<MyCompany> {
                             borderRadius: BorderRadius.circular(20)),
                         child: Center(
                           child: addingJob
-                              ? SizedBox(
+                              ? const SizedBox(
                                   width: 20,
                                   height: 20,
                                   child: CircularProgressIndicator(
                                       color: Colors.white),
                                 )
-                              : Text(
+                              : const Text(
                                   "ADD",
                                   style: TextStyle(color: Colors.white),
                                 ),
@@ -808,8 +808,8 @@ class _ItemState extends State<Item> {
       width: widget.width * 0.8,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(width: 0.5, color: Color(0xff141414))),
-      padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
+          border: Border.all(width: 0.5, color: const Color(0xff141414))),
+      padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
       child: Column(
         children: [
           GestureDetector(
@@ -823,15 +823,15 @@ class _ItemState extends State<Item> {
               child: Row(children: [
                 Text(
                   widget.title,
-                  style: TextStyle(fontSize: 32, fontWeight: FontWeight.w600),
+                  style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w600),
                 ),
-                Spacer(),
+                const Spacer(),
                 SizedBox(
                     height: 20,
                     width: 20,
                     child: active
-                        ? Icon(Icons.arrow_upward)
-                        : Icon(
+                        ? const Icon(Icons.arrow_upward)
+                        : const Icon(
                             Icons.arrow_downward,
                             color: Colors.black,
                           ))

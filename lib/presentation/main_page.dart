@@ -14,6 +14,7 @@ import 'package:testapp/presentation/widgets/searches.dart';
 import 'package:testapp/presentation/widgets/searchlist.dart';
 import 'package:testapp/static/colors.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:testapp/static/data.dart';
 
 class MainPage extends StatelessWidget {
   MainPage(
@@ -75,14 +76,16 @@ class MainPage extends StatelessWidget {
                                 height: 64,
                               ),
                               Text(
-                                "Discover the Perfect international job for you",
+                                "Find the best work at foreign employment through SANTI OVERSEAS."
+                                    .tr,
                                 style: GoogleFonts.ptSerif(
                                     color: myColors.white,
                                     fontSize: 48,
                                     fontWeight: FontWeight.w500),
                               ),
                               Text(
-                                "To get your dream job register & fill out your profile first",
+                                "Fill up your profile to get your dream job."
+                                    .tr,
                                 style: GoogleFonts.ptSerif(
                                     color: myColors.white, fontSize: 28),
                               ),
@@ -236,22 +239,23 @@ class MainPage extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
+                                  const Text(
                                     "How Can We Help You?",
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 18,
                                         fontWeight: FontWeight.w600),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 32,
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: TextField(
                                       controller: _name,
-                                      style: TextStyle(color: Colors.white),
-                                      decoration: InputDecoration(
+                                      style:
+                                          const TextStyle(color: Colors.white),
+                                      decoration: const InputDecoration(
                                           labelText: "Full Name *",
                                           labelStyle:
                                               TextStyle(color: Colors.white),
@@ -267,8 +271,9 @@ class MainPage extends StatelessWidget {
                                     padding: const EdgeInsets.all(8.0),
                                     child: TextField(
                                       controller: _address,
-                                      style: TextStyle(color: Colors.white),
-                                      decoration: InputDecoration(
+                                      style:
+                                          const TextStyle(color: Colors.white),
+                                      decoration: const InputDecoration(
                                           labelText: "Address *",
                                           labelStyle:
                                               TextStyle(color: Colors.white),
@@ -284,8 +289,9 @@ class MainPage extends StatelessWidget {
                                     padding: const EdgeInsets.all(8.0),
                                     child: TextField(
                                       controller: _contact,
-                                      style: TextStyle(color: Colors.white),
-                                      decoration: InputDecoration(
+                                      style:
+                                          const TextStyle(color: Colors.white),
+                                      decoration: const InputDecoration(
                                           labelText: "Contact no *",
                                           labelStyle:
                                               TextStyle(color: Colors.white),
@@ -301,8 +307,9 @@ class MainPage extends StatelessWidget {
                                     padding: const EdgeInsets.all(8.0),
                                     child: TextField(
                                       controller: _email,
-                                      style: TextStyle(color: Colors.white),
-                                      decoration: InputDecoration(
+                                      style:
+                                          const TextStyle(color: Colors.white),
+                                      decoration: const InputDecoration(
                                           labelText: "Email *",
                                           labelStyle:
                                               TextStyle(color: Colors.white),
@@ -314,7 +321,7 @@ class MainPage extends StatelessWidget {
                                                   color: Colors.white))),
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 16,
                                   ),
                                   RaisedButton(
@@ -327,7 +334,7 @@ class MainPage extends StatelessWidget {
                                             _address.text.isEmpty ||
                                             _contact.text.isEmpty ||
                                             _email.text.isEmpty) {
-                                          Get.dialog(Dialog(
+                                          Get.dialog(const Dialog(
                                             child: SizedBox(
                                               width: 164,
                                               height: 42,
@@ -347,7 +354,7 @@ class MainPage extends StatelessWidget {
                                           _address.clear();
                                           _email.clear();
                                           _contact.clear();
-                                          Get.dialog(Dialog(
+                                          Get.dialog(const Dialog(
                                             child: SizedBox(
                                               width: 164,
                                               height: 42,
@@ -370,7 +377,7 @@ class MainPage extends StatelessWidget {
                           thickness: 2,
                           color: myColors.darkgreen,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 16,
                         ),
                         const MainTable(),
@@ -434,7 +441,7 @@ class MainPage extends StatelessWidget {
                                     const SizedBox(
                                       height: 32,
                                     ),
-                                    Text("FAQs",
+                                    Text("FAQs".tr,
                                         style: TextStyle(
                                             fontSize: 22,
                                             fontWeight: FontWeight.w600,
@@ -493,7 +500,7 @@ class MainPage extends StatelessWidget {
                                     const SizedBox(
                                       height: 32,
                                     ),
-                                    Text("News",
+                                    Text("News".tr,
                                         style: TextStyle(
                                             fontSize: 22,
                                             fontWeight: FontWeight.w600,
@@ -515,7 +522,7 @@ class MainPage extends StatelessWidget {
                         ),
                         Padding(
                           padding: const EdgeInsets.all(12.0),
-                          child: Text("TESTIMONIALS",
+                          child: Text("Testimonials".tr,
                               style: TextStyle(
                                   fontSize: 22,
                                   fontWeight: FontWeight.w600,
@@ -544,36 +551,63 @@ class MainPage extends StatelessWidget {
                                         width: width * 0.3,
                                         height: 132,
                                         child: Row(children: [
-                                          Container(
-                                              width: width * 0.3 - 64,
-                                              height: 132,
-                                              padding: const EdgeInsets.all(8),
-                                              decoration: BoxDecoration(
-                                                color: myColors.white,
-                                                border: Border.all(
-                                                    width: 0.5,
-                                                    color: myColors.darkgreen),
-                                                borderRadius:
-                                                    BorderRadius.circular(4),
-                                              ),
-                                              child: ListTile(
-                                                leading: Container(
-                                                  width: 64,
-                                                  height: 64,
-                                                  decoration:
-                                                      const BoxDecoration(
-                                                          shape:
-                                                              BoxShape.circle,
-                                                          color: Colors.yellow),
+                                          GestureDetector(
+                                            onTap: () {
+                                              Get.dialog(Dialog(
+                                                child: SizedBox(
+                                                  width: 400,
+                                                  height: 400,
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: Text(testimony[i %
+                                                            testimony.length]
+                                                        .data),
+                                                  ),
                                                 ),
-                                                title: const Text("Name "),
-                                                subtitle: SizedBox(
-                                                  width: width * 0.3 - 180,
-                                                  height: 132,
-                                                  child: const Text(
-                                                      "It is the visa system sanctioned by the employer bearing all the processing cost of the employees."),
+                                              ));
+                                            },
+                                            child: Container(
+                                                width: width * 0.3 - 64,
+                                                height: 132,
+                                                padding:
+                                                    const EdgeInsets.all(8),
+                                                decoration: BoxDecoration(
+                                                  color: myColors.white,
+                                                  border: Border.all(
+                                                      width: 0.5,
+                                                      color:
+                                                          myColors.darkgreen),
+                                                  borderRadius:
+                                                      BorderRadius.circular(4),
                                                 ),
-                                              )),
+                                                child: ListTile(
+                                                  leading: Container(
+                                                    width: 64,
+                                                    height: 64,
+                                                    decoration:
+                                                        const BoxDecoration(
+                                                            shape:
+                                                                BoxShape.circle,
+                                                            color:
+                                                                Colors.yellow),
+                                                  ),
+                                                  title: Text(testimony[
+                                                          i % testimony.length]
+                                                      .name),
+                                                  subtitle: SizedBox(
+                                                    width: width * 0.3 - 180,
+                                                    height: 132,
+                                                    child: Text(
+                                                      testimony[i %
+                                                              testimony.length]
+                                                          .data,
+                                                      maxLines: 4,
+                                                    ),
+                                                  ),
+                                                )),
+                                          ),
                                           Container(
                                             width: 64,
                                             height: 1,
@@ -608,36 +642,63 @@ class MainPage extends StatelessWidget {
                                             height: 1,
                                             color: myColors.darkgreen,
                                           ),
-                                          Container(
-                                              width: width * 0.3 - 64,
-                                              height: 132,
-                                              padding: const EdgeInsets.all(8),
-                                              decoration: BoxDecoration(
-                                                color: myColors.white,
-                                                border: Border.all(
-                                                    width: 0.5,
-                                                    color: myColors.darkgreen),
-                                                borderRadius:
-                                                    BorderRadius.circular(4),
-                                              ),
-                                              child: ListTile(
-                                                leading: Container(
-                                                  width: 64,
-                                                  height: 64,
-                                                  decoration:
-                                                      const BoxDecoration(
-                                                          shape:
-                                                              BoxShape.circle,
-                                                          color: Colors.yellow),
+                                          GestureDetector(
+                                            onTap: () {
+                                              Get.dialog(Dialog(
+                                                child: SizedBox(
+                                                  width: 400,
+                                                  height: 400,
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: Text(testimony[i %
+                                                            testimony.length]
+                                                        .data),
+                                                  ),
                                                 ),
-                                                title: const Text("Name "),
-                                                subtitle: SizedBox(
-                                                  width: width * 0.3 - 180,
-                                                  height: 132,
-                                                  child: const Text(
-                                                      "It is the visa system sanctioned by the employer bearing all the processing cost of the employees."),
+                                              ));
+                                            },
+                                            child: Container(
+                                                width: width * 0.3 - 64,
+                                                height: 132,
+                                                padding:
+                                                    const EdgeInsets.all(8),
+                                                decoration: BoxDecoration(
+                                                  color: myColors.white,
+                                                  border: Border.all(
+                                                      width: 0.5,
+                                                      color:
+                                                          myColors.darkgreen),
+                                                  borderRadius:
+                                                      BorderRadius.circular(4),
                                                 ),
-                                              ))
+                                                child: ListTile(
+                                                  leading: Container(
+                                                    width: 64,
+                                                    height: 64,
+                                                    decoration:
+                                                        const BoxDecoration(
+                                                            shape:
+                                                                BoxShape.circle,
+                                                            color:
+                                                                Colors.yellow),
+                                                  ),
+                                                  title: Text(testimony[
+                                                          i % testimony.length]
+                                                      .name),
+                                                  subtitle: SizedBox(
+                                                    width: width * 0.3 - 180,
+                                                    height: 132,
+                                                    child: Text(
+                                                      testimony[i %
+                                                              testimony.length]
+                                                          .data,
+                                                      maxLines: 4,
+                                                    ),
+                                                  ),
+                                                )),
+                                          )
                                         ]),
                                       );
                                     } else {
@@ -775,60 +836,60 @@ class MainPage extends StatelessWidget {
                                             children: [
                                               Chip(
                                                   backgroundColor:
-                                                      Color(0xff4267B2),
+                                                      const Color(0xff4267B2),
                                                   shape: RoundedRectangleBorder(
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               4)),
-                                                  label: Text(
+                                                  label: const Text(
                                                     "Facebook",
                                                     style: TextStyle(
                                                         color: Colors.white),
                                                   )),
                                               Chip(
                                                   backgroundColor:
-                                                      Color(0xff00acee),
+                                                      const Color(0xff00acee),
                                                   shape: RoundedRectangleBorder(
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               4)),
-                                                  label: Text(
+                                                  label: const Text(
                                                     "Twitter",
                                                     style: TextStyle(
                                                         color: Colors.white),
                                                   )),
                                               Chip(
                                                   backgroundColor:
-                                                      Color(0xffd62976),
+                                                      const Color(0xffd62976),
                                                   shape: RoundedRectangleBorder(
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               4)),
-                                                  label: Text(
+                                                  label: const Text(
                                                     "Instagram",
                                                     style: TextStyle(
                                                         color: Colors.white),
                                                   )),
                                               Chip(
                                                   backgroundColor:
-                                                      Color(0xffFF0000),
+                                                      const Color(0xffFF0000),
                                                   shape: RoundedRectangleBorder(
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               4)),
-                                                  label: Text(
+                                                  label: const Text(
                                                     "YouTube",
                                                     style: TextStyle(
                                                         color: Colors.white),
                                                   )),
                                               Chip(
                                                   backgroundColor:
-                                                      Color(0xffff0050),
+                                                      const Color(0xffff0050),
                                                   shape: RoundedRectangleBorder(
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               4)),
-                                                  label: Text(
+                                                  label: const Text(
                                                     "TikTok",
                                                     style: TextStyle(
                                                         color: Colors.white),
@@ -979,7 +1040,7 @@ class MainPage extends StatelessWidget {
                               children: [
                                 Text(
                                     "Copyright © ${DateTime.now().year} Santi OverSeas Pvt.Ltd. All rights reserved"),
-                                Text("Privacy Policy")
+                                const Text("Privacy Policy")
                               ],
                             ),
                           ),

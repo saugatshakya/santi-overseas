@@ -121,6 +121,7 @@ class Auth {
         "login_", jsonEncode({"email": email, "password": password}));
     if (response.statusCode == 200) {
       repo.saveUserInfo(email);
+      appStateController.saveUser(User(email: email, id: "0", name: "user"));
       Get.back();
     } else {
       Get.showSnackbar(const GetSnackBar(
@@ -146,6 +147,7 @@ class Auth {
     if (response.statusCode == 200) {
       log("here");
       repo.saveUserInfo(email);
+      appStateController.saveUser(User(email: email, id: "0", name: name));
       Get.back();
     } else {
       Get.showSnackbar(const GetSnackBar(

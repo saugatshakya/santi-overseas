@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:testapp/data/functions/auth.dart';
-import 'package:testapp/data/repo/user_info.dart';
 import 'package:testapp/static/colors.dart';
 
 showAuthDialog() {
@@ -24,42 +23,42 @@ showAuthDialog() {
                 width: Get.width * 0.32,
                 height: Get.width * 0.32,
                 child: Padding(
-                  padding: EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(16),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
+                      const Text(
                         "Login",
                         style: TextStyle(
                             fontSize: 32,
                             fontWeight: FontWeight.w600,
                             color: Color(0xff101010)),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 16,
                       ),
-                      Text("Email"),
+                      const Text("Email"),
                       TextField(
                         onChanged: (val) {
                           email = val;
                         },
                         decoration:
-                            InputDecoration(border: OutlineInputBorder()),
+                            const InputDecoration(border: OutlineInputBorder()),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
-                      Text("Password"),
+                      const Text("Password"),
                       TextField(
                         onChanged: (val) {
                           password = val;
                         },
                         obscureText: true,
                         decoration:
-                            InputDecoration(border: OutlineInputBorder()),
+                            const InputDecoration(border: OutlineInputBorder()),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 12,
                       ),
                       GestureDetector(
@@ -85,21 +84,21 @@ showAuthDialog() {
                               borderRadius: BorderRadius.circular(20)),
                           child: Center(
                             child: loginLoading
-                                ? SizedBox(
+                                ? const SizedBox(
                                     width: 20,
                                     height: 20,
                                     child: CircularProgressIndicator(
                                       color: Colors.white,
                                     ),
                                   )
-                                : Text(
+                                : const Text(
                                     "Proceed",
                                     style: TextStyle(color: Colors.white),
                                   ),
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 132,
                       ),
                     ],
@@ -112,74 +111,74 @@ showAuthDialog() {
                 width: Get.width * 0.32,
                 height: Get.width * 0.32,
                 child: Padding(
-                  padding: EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(16),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
+                      const Text(
                         "SignUp",
                         style: TextStyle(
                             fontSize: 32,
                             fontWeight: FontWeight.w600,
                             color: Color(0xff101010)),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 16,
                       ),
-                      Text("Name"),
+                      const Text("Name"),
                       TextField(
                         onChanged: (val) {
                           name = val;
                         },
                         decoration:
-                            InputDecoration(border: OutlineInputBorder()),
+                            const InputDecoration(border: OutlineInputBorder()),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
-                      Text("Email"),
+                      const Text("Email"),
                       TextField(
                         onChanged: (val) {
                           email = val;
                         },
                         decoration:
-                            InputDecoration(border: OutlineInputBorder()),
+                            const InputDecoration(border: OutlineInputBorder()),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
-                      Text("Phone"),
+                      const Text("Phone"),
                       TextField(
                         onChanged: (val) {
                           phone = val;
                         },
                         decoration:
-                            InputDecoration(border: OutlineInputBorder()),
+                            const InputDecoration(border: OutlineInputBorder()),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
-                      Text("Address"),
+                      const Text("Address"),
                       TextField(
                         onChanged: (value) {
                           address = value;
                         },
                         decoration:
-                            InputDecoration(border: OutlineInputBorder()),
+                            const InputDecoration(border: OutlineInputBorder()),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
-                      Text("Password"),
+                      const Text("Password"),
                       TextField(
                         onChanged: (val) {
                           password = val;
                         },
                         decoration:
-                            InputDecoration(border: OutlineInputBorder()),
+                            const InputDecoration(border: OutlineInputBorder()),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 12,
                       ),
                       GestureDetector(
@@ -209,14 +208,14 @@ showAuthDialog() {
                               borderRadius: BorderRadius.circular(20)),
                           child: Center(
                             child: signUpLoading
-                                ? SizedBox(
+                                ? const SizedBox(
                                     width: 20,
                                     height: 20,
                                     child: CircularProgressIndicator(
                                       color: Colors.white,
                                     ),
                                   )
-                                : Text(
+                                : const Text(
                                     "Proceed",
                                     style: TextStyle(color: Colors.white),
                                   ),

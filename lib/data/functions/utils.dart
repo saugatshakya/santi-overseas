@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:universal_html/html.dart' as html;
 

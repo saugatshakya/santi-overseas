@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:testapp/static/colors.dart';
 
 class RaisedButton extends StatefulWidget {
   const RaisedButton(

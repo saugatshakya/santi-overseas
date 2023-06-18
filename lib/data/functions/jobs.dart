@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:testapp/controller/app_state_controller.dart';
 import 'package:testapp/data/functions/api.dart';
-import 'package:testapp/data/models/company.dart';
 import 'package:testapp/data/models/country.dart';
 import 'package:testapp/data/models/image.dart';
 import 'package:testapp/data/models/job.dart';
@@ -17,7 +17,7 @@ class JobsApi {
       log("jobs: $response");
       for (var data in response) {
         JobModel job = JobModel.fromJson(data);
-        log("required numbers: " + job.applyBefore.toString());
+        log("required numbers: ${job.applyBefore}");
         jobs.add(job);
       }
     } catch (e) {
@@ -119,8 +119,28 @@ class JobsApi {
   apply(jobId, contactInfo) async {
     log("$jobId , $contactInfo");
     var response =
-        await api.post("apply", "job_id=$jobId&contact_info=$contactInfo");
-    log(response.body.toString());
+        await api.post("apply?job_id=$jobId&contact_info=$contactInfo", "");
+    if (response.statusCode == 200) {
+      Get.dialog(const Dialog(
+        child: SizedBox(
+          width: 164,
+          height: 42,
+          child: Center(
+            child: Text("Applied Succeddfully"),
+          ),
+        ),
+      ));
+    } else {
+      Get.dialog(const Dialog(
+        child: SizedBox(
+          width: 164,
+          height: 42,
+          child: Center(
+            child: Text("Sorry Can't apply to the Job"),
+          ),
+        ),
+      ));
+    }
   }
 
   getNews() async {

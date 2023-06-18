@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
 import 'package:testapp/data/functions/jobs.dart';
 import 'package:testapp/data/models/job.dart';
@@ -63,7 +61,7 @@ class JobDetail extends StatelessWidget {
                     }),
               ),
             ),
-            SizedBox(height: 32),
+            const SizedBox(height: 32),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -166,7 +164,7 @@ class JobDetail extends StatelessWidget {
                           height: 4,
                         ),
                         Text(
-                            "${timeago.format(DateTime.parse(job.postedOn ?? DateTime.now().toString()))}",
+                            timeago.format(DateTime.parse(job.postedOn ?? DateTime.now().toString())),
                             style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.w500,
@@ -185,7 +183,7 @@ class JobDetail extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 32),
+            const SizedBox(height: 32),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -280,7 +278,7 @@ class JobDetail extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 32),
+            const SizedBox(height: 32),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

@@ -38,42 +38,42 @@ class _EmployeeState extends State<Employee> {
                           width: width * 0.32,
                           height: width * 0.32,
                           child: Padding(
-                            padding: EdgeInsets.all(16),
+                            padding: const EdgeInsets.all(16),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(
+                                const Text(
                                   "Login",
                                   style: TextStyle(
                                       fontSize: 32,
                                       fontWeight: FontWeight.w600,
                                       color: Color(0xff101010)),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 16,
                                 ),
-                                Text("Email"),
+                                const Text("Email"),
                                 TextField(
                                   onChanged: (val) {
                                     email = val;
                                   },
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                       border: OutlineInputBorder()),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 8,
                                 ),
-                                Text("Password"),
+                                const Text("Password"),
                                 TextField(
                                   onChanged: (val) {
                                     password = val;
                                   },
                                   obscureText: true,
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                       border: OutlineInputBorder()),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 12,
                                 ),
                                 GestureDetector(
@@ -100,14 +100,14 @@ class _EmployeeState extends State<Employee> {
                                             BorderRadius.circular(20)),
                                     child: Center(
                                       child: loginLoading
-                                          ? SizedBox(
+                                          ? const SizedBox(
                                               width: 20,
                                               height: 20,
                                               child: CircularProgressIndicator(
                                                 color: Colors.white,
                                               ),
                                             )
-                                          : Text(
+                                          : const Text(
                                               "Proceed",
                                               style: TextStyle(
                                                   color: Colors.white),
@@ -115,7 +115,7 @@ class _EmployeeState extends State<Employee> {
                                     ),
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 132,
                                 ),
                               ],
@@ -128,54 +128,54 @@ class _EmployeeState extends State<Employee> {
                           width: width * 0.32,
                           height: width * 0.32,
                           child: Padding(
-                            padding: EdgeInsets.all(16),
+                            padding: const EdgeInsets.all(16),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(
+                                const Text(
                                   "SignUp",
                                   style: TextStyle(
                                       fontSize: 32,
                                       fontWeight: FontWeight.w600,
                                       color: Color(0xff101010)),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 16,
                                 ),
-                                Text("Email"),
+                                const Text("Email"),
                                 TextField(
                                   onChanged: (val) {
                                     email = val;
                                   },
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                       border: OutlineInputBorder()),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 8,
                                 ),
-                                Text("Password"),
+                                const Text("Password"),
                                 TextField(
                                   onChanged: (val) {
                                     password = val;
                                   },
                                   obscureText: true,
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                       border: OutlineInputBorder()),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 8,
                                 ),
-                                Text("Confirm Password"),
+                                const Text("Confirm Password"),
                                 TextField(
                                   onChanged: (val) {
                                     confirmPassword = val;
                                   },
                                   obscureText: true,
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                       border: OutlineInputBorder()),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 12,
                                 ),
                                 GestureDetector(
@@ -195,9 +195,9 @@ class _EmployeeState extends State<Employee> {
                                           signUpLoading = false;
                                         });
                                       } else {
-                                        Get.showSnackbar(GetSnackBar(
+                                        Get.showSnackbar(const GetSnackBar(
                                           message: "Passwords does not match",
-                                          duration: const Duration(
+                                          duration: Duration(
                                               milliseconds: 2000),
                                         ));
                                       }
@@ -212,14 +212,14 @@ class _EmployeeState extends State<Employee> {
                                             BorderRadius.circular(20)),
                                     child: Center(
                                       child: signUpLoading
-                                          ? SizedBox(
+                                          ? const SizedBox(
                                               width: 20,
                                               height: 20,
                                               child: CircularProgressIndicator(
                                                 color: Colors.white,
                                               ),
                                             )
-                                          : Text(
+                                          : const Text(
                                               "Proceed",
                                               style: TextStyle(
                                                   color: Colors.white),
@@ -243,42 +243,42 @@ class _EmployeeState extends State<Employee> {
                           width: width * 0.8,
                           height: 332,
                           child: Padding(
-                            padding: EdgeInsets.all(16),
+                            padding: const EdgeInsets.all(16),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(
+                                const Text(
                                   "Login",
                                   style: TextStyle(
                                       fontSize: 32,
                                       fontWeight: FontWeight.w600,
                                       color: Color(0xff101010)),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 16,
                                 ),
-                                Text("Email"),
+                                const Text("Email"),
                                 TextField(
                                   onChanged: (val) {
                                     email = val;
                                   },
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                       border: OutlineInputBorder()),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 8,
                                 ),
-                                Text("Password"),
+                                const Text("Password"),
                                 TextField(
                                   onChanged: (val) {
                                     password = val;
                                   },
                                   obscureText: true,
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                       border: OutlineInputBorder()),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 12,
                                 ),
                                 GestureDetector(
@@ -305,14 +305,14 @@ class _EmployeeState extends State<Employee> {
                                             BorderRadius.circular(20)),
                                     child: Center(
                                       child: loginLoading
-                                          ? SizedBox(
+                                          ? const SizedBox(
                                               width: 20,
                                               height: 20,
                                               child: CircularProgressIndicator(
                                                 color: Colors.white,
                                               ),
                                             )
-                                          : Text(
+                                          : const Text(
                                               "Proceed",
                                               style: TextStyle(
                                                   color: Colors.white),
@@ -330,54 +330,54 @@ class _EmployeeState extends State<Employee> {
                           width: width * 0.8,
                           height: 400,
                           child: Padding(
-                            padding: EdgeInsets.all(16),
+                            padding: const EdgeInsets.all(16),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(
+                                const Text(
                                   "SignUp",
                                   style: TextStyle(
                                       fontSize: 32,
                                       fontWeight: FontWeight.w600,
                                       color: Color(0xff101010)),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 16,
                                 ),
-                                Text("Email"),
+                                const Text("Email"),
                                 TextField(
                                   onChanged: (val) {
                                     email = val;
                                   },
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                       border: OutlineInputBorder()),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 8,
                                 ),
-                                Text("Password"),
+                                const Text("Password"),
                                 TextField(
                                   onChanged: (val) {
                                     password = val;
                                   },
                                   obscureText: true,
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                       border: OutlineInputBorder()),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 8,
                                 ),
-                                Text("Confirm Password"),
+                                const Text("Confirm Password"),
                                 TextField(
                                   onChanged: (val) {
                                     confirmPassword = val;
                                   },
                                   obscureText: true,
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                       border: OutlineInputBorder()),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 12,
                                 ),
                                 GestureDetector(
@@ -397,9 +397,9 @@ class _EmployeeState extends State<Employee> {
                                           signUpLoading = false;
                                         });
                                       } else {
-                                        Get.showSnackbar(GetSnackBar(
+                                        Get.showSnackbar(const GetSnackBar(
                                           message: "Passwords does not match",
-                                          duration: const Duration(
+                                          duration: Duration(
                                               milliseconds: 2000),
                                         ));
                                       }
@@ -414,14 +414,14 @@ class _EmployeeState extends State<Employee> {
                                             BorderRadius.circular(20)),
                                     child: Center(
                                       child: signUpLoading
-                                          ? SizedBox(
+                                          ? const SizedBox(
                                               width: 20,
                                               height: 20,
                                               child: CircularProgressIndicator(
                                                 color: Colors.white,
                                               ),
                                             )
-                                          : Text(
+                                          : const Text(
                                               "Proceed",
                                               style: TextStyle(
                                                   color: Colors.white),
