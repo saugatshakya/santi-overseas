@@ -51,7 +51,6 @@ class _MainPageState extends State<MainPage> {
 
   final TextEditingController _contact = TextEditingController();
 
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<AppStateController>(
@@ -109,38 +108,70 @@ class _MainPageState extends State<MainPage> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   SearchableTextField(
-                                    suggestions: const [
-                                     
-                                    ],
+                                    suggestions: const [],
                                     label: "Jobs, Title, Keywords or Company",
                                     icon: Icons.search,
                                     width: 400,
                                     focusNode: state.seachCountryFocus,
-                                    onChanged: (val){
+                                    onChanged: (val) {
                                       appStateController.changeSearchJob(val);
                                     },
                                   ),
                                   SearchableTextField(
-                                    suggestions: const [
-                                     
-                                    ],   onChanged: (val){
-                                      appStateController.changeSearchCountry(val);
+                                    suggestions: const [],
+                                    onChanged: (val) {
+                                      appStateController
+                                          .changeSearchCountry(val);
                                     },
                                     label: "Area, City, Town, Country",
                                     icon: Icons.location_on,
                                     width: 250,
                                     focusNode: state.seachJobFocus,
                                   ),
-                                  SearchButton(onTap: (){log("here");List<JobModel> jobs = [];
-                                    if(appStateController.searchJob!=""){    List<JobModel> newJobs  = appStateController.jobs.where((element) =>(element.title!=null&& element.title!.toLowerCase().contains(appStateController.searchJob))||(element.category!=null&& element.category!.toLowerCase().contains(appStateController.searchJob))).toList();             
-                                    jobs =jobs +newJobs;                
-}
-if(appStateController.searchCountry!=""){    List<JobModel> newJobs  = appStateController.jobs.where((element) => element.country!=null&&element.country!.name!=null&& element.country!.name!.toLowerCase().contains(appStateController.searchCountry)).toList();             
-                                    jobs =jobs +newJobs;                
-}
+                                  SearchButton(
+                                    onTap: () {
+                                      log("here");
+                                      List<JobModel> jobs = [];
+                                      if (appStateController.searchJob != "") {
+                                        List<JobModel> newJobs = appStateController
+                                            .jobs
+                                            .where((element) =>
+                                                (element.title != null &&
+                                                    element.title!
+                                                        .toLowerCase()
+                                                        .contains(
+                                                            appStateController
+                                                                .searchJob)) ||
+                                                (element.category != null &&
+                                                    element.category!
+                                                        .toLowerCase()
+                                                        .contains(
+                                                            appStateController
+                                                                .searchJob)))
+                                            .toList();
+                                        jobs = jobs + newJobs;
+                                      }
+                                      if (appStateController.searchCountry !=
+                                          "") {
+                                        List<JobModel> newJobs =
+                                            appStateController.jobs
+                                                .where((element) =>
+                                                    element.country != null &&
+                                                    element.country!.name !=
+                                                        null &&
+                                                    element.country!.name!
+                                                        .toLowerCase()
+                                                        .contains(
+                                                            appStateController
+                                                                .searchCountry))
+                                                .toList();
+                                        jobs = jobs + newJobs;
+                                      }
 
-                                    appStateController.updateJobs(jobs);
-                                  appStateController.changePage(1);},)
+                                      appStateController.updateJobs(jobs);
+                                      appStateController.changePage(1);
+                                    },
+                                  )
                                 ],
                               ),
                               const SizedBox(
@@ -163,11 +194,12 @@ if(appStateController.searchCountry!=""){    List<JobModel> newJobs  = appStateC
                                     widget: (context, i) => GestureDetector(
                                           onTap: () {},
                                           child: CountrySelector(
-                                            country: widget.countryCheckBox[
-                                                    i % widget.countryCheckBox.length]
-                                                ["country"],
+                                            country: widget.countryCheckBox[i %
+                                                widget.countryCheckBox
+                                                    .length]["country"],
                                             code: widget.countryCheckBox[i %
-                                                widget.countryCheckBox.length]["code"],
+                                                widget.countryCheckBox
+                                                    .length]["code"],
                                           ),
                                         )),
                               if (widget.countryCheckBox.isNotEmpty)
@@ -210,8 +242,8 @@ if(appStateController.searchCountry!=""){    List<JobModel> newJobs  = appStateC
                               widget: (context, i) => GestureDetector(
                                     onTap: () {},
                                     child: CompanyLogo(
-                                        imageLink:
-                                            widget.companies[i % widget.companies.length]),
+                                        imageLink: widget.companies[
+                                            i % widget.companies.length]),
                                   )),
                         if (widget.companies.isNotEmpty)
                           const SizedBox(
@@ -431,7 +463,8 @@ if(appStateController.searchCountry!=""){    List<JobModel> newJobs  = appStateC
                           ScrollWidget(
                               reverse: false,
                               widget: (context, i) => Searches(
-                                  search: widget.searches[i % widget.searches.length]),
+                                  search: widget
+                                      .searches[i % widget.searches.length]),
                               direction: Axis.horizontal,
                               height: 64),
                         if (widget.searches.isNotEmpty)
@@ -530,8 +563,9 @@ if(appStateController.searchCountry!=""){    List<JobModel> newJobs  = appStateC
                                       height: 32,
                                     ),
                                     NewsScroll(
-                                      widget: (context, i) =>
-                                          News(news: widget.news[i % widget.news.length]),
+                                      widget: (context, i) => News(
+                                          news: widget
+                                              .news[i % widget.news.length]),
                                       direction: Axis.horizontal,
                                       height: 300,
                                     ),
@@ -582,14 +616,37 @@ if(appStateController.searchCountry!=""){    List<JobModel> newJobs  = appStateC
                                                     padding:
                                                         const EdgeInsets.all(
                                                             8.0),
-                                                    child: SingleChildScrollView(
+                                                    child:
+                                                        SingleChildScrollView(
                                                       child: Column(
-                                                        children: [Text(state.testimony[i %
-                                                                  state.testimony.length]
-                                                              .name),SizedBox(height: 8,),
-                                                          Text(state.testimony[i %
-                                                                  state.testimony.length]
-                                                              .data),
+                                                        children: [
+                                                          Text(state.language ==
+                                                                  const Locale(
+                                                                      'en',
+                                                                      'EN')
+                                                              ? engTestimony[i %
+                                                                      engTestimony
+                                                                          .length]
+                                                                  .name
+                                                              : nepTestimony[i %
+                                                                      nepTestimony
+                                                                          .length]
+                                                                  .name),
+                                                          SizedBox(
+                                                            height: 8,
+                                                          ),
+                                                          Text(state.language ==
+                                                                  const Locale(
+                                                                      'en',
+                                                                      'EN')
+                                                              ? engTestimony[i %
+                                                                      engTestimony
+                                                                          .length]
+                                                                  .data
+                                                              : nepTestimony[i %
+                                                                      nepTestimony
+                                                                          .length]
+                                                                  .data),
                                                         ],
                                                       ),
                                                     ),
@@ -622,16 +679,33 @@ if(appStateController.searchCountry!=""){    List<JobModel> newJobs  = appStateC
                                                             color:
                                                                 Colors.yellow),
                                                   ),
-                                                  title: Text(state.testimony[
-                                                          i % state.testimony.length]
-                                                      .name),
+                                                  title: Text(state.language ==
+                                                          const Locale(
+                                                              'en', 'EN')
+                                                      ? engTestimony[i %
+                                                              engTestimony
+                                                                  .length]
+                                                          .name
+                                                      : nepTestimony[i %
+                                                              nepTestimony
+                                                                  .length]
+                                                          .name),
                                                   subtitle: SizedBox(
-                                                    width: widget.width * 0.3 - 180,
+                                                    width: widget.width * 0.3 -
+                                                        180,
                                                     height: 132,
                                                     child: Text(
-                                                      state.testimony[i %
-                                                              state.testimony.length]
-                                                          .data,
+                                                      state.language ==
+                                                              const Locale(
+                                                                  'en', 'EN')
+                                                          ? engTestimony[i %
+                                                                  engTestimony
+                                                                      .length]
+                                                              .data
+                                                          : nepTestimony[i %
+                                                                  nepTestimony
+                                                                      .length]
+                                                              .data,
                                                       maxLines: 4,
                                                     ),
                                                   ),
@@ -681,15 +755,37 @@ if(appStateController.searchCountry!=""){    List<JobModel> newJobs  = appStateC
                                                     padding:
                                                         const EdgeInsets.all(
                                                             8.0),
-                                                    child: SingleChildScrollView(
+                                                    child:
+                                                        SingleChildScrollView(
                                                       child: Column(
                                                         children: [
-                                                                                                       Text(state.testimony[i %
-                                                                    state.testimony.length]
-                                                                .name),SizedBox(height: 8,),
-                                                            Text(state.testimony[i %
-                                                                    state.testimony.length]
-                                                                .data),
+                                                          Text(state.language ==
+                                                                  const Locale(
+                                                                      'en',
+                                                                      'EN')
+                                                              ? engTestimony[i %
+                                                                      engTestimony
+                                                                          .length]
+                                                                  .name
+                                                              : nepTestimony[i %
+                                                                      nepTestimony
+                                                                          .length]
+                                                                  .name),
+                                                          SizedBox(
+                                                            height: 8,
+                                                          ),
+                                                          Text(state.language ==
+                                                                  const Locale(
+                                                                      'en',
+                                                                      'EN')
+                                                              ? engTestimony[i %
+                                                                      engTestimony
+                                                                          .length]
+                                                                  .data
+                                                              : nepTestimony[i %
+                                                                      nepTestimony
+                                                                          .length]
+                                                                  .data),
                                                         ],
                                                       ),
                                                     ),
@@ -722,16 +818,33 @@ if(appStateController.searchCountry!=""){    List<JobModel> newJobs  = appStateC
                                                             color:
                                                                 Colors.yellow),
                                                   ),
-                                                  title: Text(state.testimony[
-                                                          i % state.testimony.length]
-                                                      .name),
+                                                  title: Text(state.language ==
+                                                          const Locale(
+                                                              'en', 'EN')
+                                                      ? engTestimony[i %
+                                                              engTestimony
+                                                                  .length]
+                                                          .name
+                                                      : nepTestimony[i %
+                                                              nepTestimony
+                                                                  .length]
+                                                          .name),
                                                   subtitle: SizedBox(
-                                                    width: widget.width * 0.3 - 180,
+                                                    width: widget.width * 0.3 -
+                                                        180,
                                                     height: 132,
                                                     child: Text(
-                                                      state.testimony[i %
-                                                              state.testimony.length]
-                                                          .data,
+                                                      state.language ==
+                                                              const Locale(
+                                                                  'en', 'EN')
+                                                          ? engTestimony[i %
+                                                                  engTestimony
+                                                                      .length]
+                                                              .data
+                                                          : nepTestimony[i %
+                                                                  nepTestimony
+                                                                      .length]
+                                                              .data,
                                                       maxLines: 4,
                                                     ),
                                                   ),
@@ -873,14 +986,19 @@ if(appStateController.searchCountry!=""){    List<JobModel> newJobs  = appStateC
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
                                               GestureDetector(
-                                                onTap: (){launchUrl(Uri.parse("https://www.facebook.com/profile.php?id=100090616503497"));},
+                                                onTap: () {
+                                                  launchUrl(Uri.parse(
+                                                      "https://www.facebook.com/profile.php?id=100090616503497"));
+                                                },
                                                 child: Chip(
                                                     backgroundColor:
                                                         const Color(0xff4267B2),
-                                                    shape: RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                                4)),
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4)),
                                                     label: const Text(
                                                       "Facebook",
                                                       style: TextStyle(
@@ -888,14 +1006,19 @@ if(appStateController.searchCountry!=""){    List<JobModel> newJobs  = appStateC
                                                     )),
                                               ),
                                               GestureDetector(
-                                                onTap: (){launchUrl(Uri.parse("https://twitter.com/OverseasSanti"));},
+                                                onTap: () {
+                                                  launchUrl(Uri.parse(
+                                                      "https://twitter.com/OverseasSanti"));
+                                                },
                                                 child: Chip(
                                                     backgroundColor:
                                                         const Color(0xff00acee),
-                                                    shape: RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                                4)),
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4)),
                                                     label: const Text(
                                                       "Twitter",
                                                       style: TextStyle(
@@ -903,16 +1026,19 @@ if(appStateController.searchCountry!=""){    List<JobModel> newJobs  = appStateC
                                                     )),
                                               ),
                                               GestureDetector(
-                                                onTap: (){
-                                                  launchUrl(Uri.parse("https://www.instagram.com/santi_overseas/"));
+                                                onTap: () {
+                                                  launchUrl(Uri.parse(
+                                                      "https://www.instagram.com/santi_overseas/"));
                                                 },
                                                 child: Chip(
                                                     backgroundColor:
                                                         const Color(0xffd62976),
-                                                    shape: RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                                4)),
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4)),
                                                     label: const Text(
                                                       "Instagram",
                                                       style: TextStyle(
@@ -920,16 +1046,19 @@ if(appStateController.searchCountry!=""){    List<JobModel> newJobs  = appStateC
                                                     )),
                                               ),
                                               GestureDetector(
-                                                onTap: (){
-                                                  launchUrl(Uri.parse("https://www.youtube.com/channel/UCal825XqmaEUsDjdRKuFoHQ"));
+                                                onTap: () {
+                                                  launchUrl(Uri.parse(
+                                                      "https://www.youtube.com/channel/UCal825XqmaEUsDjdRKuFoHQ"));
                                                 },
                                                 child: Chip(
                                                     backgroundColor:
                                                         const Color(0xffFF0000),
-                                                    shape: RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                                4)),
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4)),
                                                     label: const Text(
                                                       "YouTube",
                                                       style: TextStyle(
@@ -937,16 +1066,19 @@ if(appStateController.searchCountry!=""){    List<JobModel> newJobs  = appStateC
                                                     )),
                                               ),
                                               GestureDetector(
-                                                onTap: (){
-                                                  launchUrl(Uri.parse("https://www.tiktok.com/@santi_overseas?_t=8dVtAYtgQNe&_r=1"));
+                                                onTap: () {
+                                                  launchUrl(Uri.parse(
+                                                      "https://www.tiktok.com/@santi_overseas?_t=8dVtAYtgQNe&_r=1"));
                                                 },
                                                 child: Chip(
                                                     backgroundColor:
                                                         const Color(0xffff0050),
-                                                    shape: RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                                4)),
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4)),
                                                     label: const Text(
                                                       "TikTok",
                                                       style: TextStyle(

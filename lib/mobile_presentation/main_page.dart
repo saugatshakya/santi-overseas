@@ -159,12 +159,10 @@ class _DefaultState extends State<Default> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 SearchableTextField(
-                                  suggestions: const [
-                               
-                                  ],
-                                   onChanged: (val){
-                                      appStateController.changeSearchJob(val);
-                                    },
+                                  suggestions: const [],
+                                  onChanged: (val) {
+                                    appStateController.changeSearchJob(val);
+                                  },
                                   label: "Jobs, Title, Keywords or Company",
                                   icon: Icons.search,
                                   width: MediaQuery.of(context).size.width,
@@ -174,11 +172,10 @@ class _DefaultState extends State<Default> {
                                   height: 16,
                                 ),
                                 SearchableTextField(
-                                  suggestions: const [
-                                   
-                                  ],  onChanged: (val){
-                                      appStateController.changeSearchCountry(val);
-                                    },
+                                  suggestions: const [],
+                                  onChanged: (val) {
+                                    appStateController.changeSearchCountry(val);
+                                  },
                                   label: "Area, City, Town, Country",
                                   icon: Icons.location_on,
                                   width:
@@ -532,15 +529,25 @@ class _DefaultState extends State<Default> {
                                                   color: Colors.yellow),
                                             ),
                                             minLeadingWidth: 0,
-                                            title: Text(
-                                                state.testimony[i % state.testimony.length]
+                                            title: Text(state.language ==
+                                                    const Locale('en', 'EN')
+                                                ? engTestimony[
+                                                        i % engTestimony.length]
+                                                    .name
+                                                : nepTestimony[
+                                                        i % nepTestimony.length]
                                                     .name),
                                             subtitle: SizedBox(
                                               width: Get.width * 0.5 - 0.5 - 16,
                                               height: 92,
-                                              child: Text(state.testimony[
-                                                      i % state.testimony.length]
-                                                  .data),
+                                              child: Text(state.language ==
+                                                      const Locale('en', 'EN')
+                                                  ? engTestimony[i %
+                                                          engTestimony.length]
+                                                      .data
+                                                  : nepTestimony[i %
+                                                          nepTestimony.length]
+                                                      .data),
                                             ),
                                           )),
                                       Container(
@@ -597,16 +604,26 @@ class _DefaultState extends State<Default> {
                                                   shape: BoxShape.circle,
                                                   color: Colors.yellow),
                                             ),
-                                            title: Text(
-                                                state.testimony[i % state.testimony.length]
+                                            title: Text(state.language ==
+                                                    const Locale('en', 'EN')
+                                                ? engTestimony[
+                                                        i % engTestimony.length]
+                                                    .name
+                                                : nepTestimony[
+                                                        i % nepTestimony.length]
                                                     .name),
                                             minLeadingWidth: 0,
                                             subtitle: SizedBox(
                                               width: Get.width * 0.5 - 0.5 - 16,
                                               height: 92,
-                                              child: Text(state.testimony[
-                                                      i % state.testimony.length]
-                                                  .data),
+                                              child: Text(state.language ==
+                                                      const Locale('en', 'EN')
+                                                  ? engTestimony[i %
+                                                          engTestimony.length]
+                                                      .data
+                                                  : nepTestimony[i %
+                                                          nepTestimony.length]
+                                                      .data),
                                             ),
                                           ))
                                     ]),
@@ -709,13 +726,16 @@ class _DefaultState extends State<Default> {
                                         style: TextStyle(color: Colors.white),
                                       )),
                                   GestureDetector(
-                                    onTap: (){launchUrl(Uri.parse("https://www.youtube.com/channel/UCal825XqmaEUsDjdRKuFoHQ"));},
+                                    onTap: () {
+                                      launchUrl(Uri.parse(
+                                          "https://www.youtube.com/channel/UCal825XqmaEUsDjdRKuFoHQ"));
+                                    },
                                     child: Chip(
-                                        backgroundColor: const Color(0xffFF0000),
+                                        backgroundColor:
+                                            const Color(0xffFF0000),
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(4)),
-                                                
                                         label: const Text(
                                           "YouTube",
                                           style: TextStyle(color: Colors.white),
