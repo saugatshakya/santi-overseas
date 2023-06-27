@@ -81,7 +81,7 @@ class MainTable extends StatelessWidget {
                           )),
                           child: Image.network(
                             "https://freeticketfreevisa.com/${state.adImage!.imagePath}",
-                            fit: BoxFit.cover,
+                            fit: BoxFit.contain,
                             colorBlendMode: BlendMode.softLight,
                             color: myColors.darkgreen.withOpacity(0.8),
                           ),

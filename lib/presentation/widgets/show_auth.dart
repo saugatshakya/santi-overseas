@@ -15,7 +15,7 @@ showAuthDialog() {
     builder: (context, setState) => Dialog(
         clipBehavior: Clip.hardEdge,
         child: SizedBox(
-          width: Get.width * 0.65,
+          width: Get.width * 0.8,
           child:
               Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
             Card(
@@ -109,7 +109,7 @@ showAuthDialog() {
             Card(
               child: SizedBox(
                 width: Get.width * 0.32,
-                height: Get.width * 0.32,
+                height: Get.width * 0.4,
                 child: Padding(
                   padding: const EdgeInsets.all(16),
                   child: Column(

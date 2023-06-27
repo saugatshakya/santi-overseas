@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:testapp/data/models/news.dart';
 import 'package:testapp/static/colors.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class News extends StatelessWidget {
   final NewsModel news;
@@ -10,41 +11,46 @@ class News extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(8),
-      padding: const EdgeInsets.all(8.0),
-      decoration: BoxDecoration(
-          color: myColors.white,
-          border: Border.all(width: 0.2),
-          borderRadius: BorderRadius.circular(4)),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            width: 132,
-            height: 150,
-            child: Image.network(news.imageLink!),
-          ),
-          const SizedBox(
-            height: 8,
-          ),
-          Text(
-            news.title ?? "null",
-            maxLines: 1,
-            style: TextStyle(
-                fontWeight: FontWeight.w600, color: myColors.darkgreen),
-          ),
-          Container(
-            width: 132,
-            height: 90,
-            padding: const EdgeInsets.all(8),
-            child: Text(
-              news.summary ?? "null",
-              overflow: TextOverflow.fade,
-              style: TextStyle(fontSize: 10, color: myColors.darkgreen),
+    return GestureDetector(
+      onTap: (){
+        launchUrl(Uri.parse(news.newsLink!));
+      },
+      child: Container(
+        margin: const EdgeInsets.all(8),
+        padding: const EdgeInsets.all(8.0),
+        decoration: BoxDecoration(
+            color: myColors.white,
+            border: Border.all(width: 0.2),
+            borderRadius: BorderRadius.circular(4)),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(
+              width: 132,
+              height: 150,
+              child: Image.network(news.imageLink!,errorBuilder:(_,__,___)=> Image.network("https://media.istockphoto.com/id/1182477852/photo/breaking-news-world-news-with-map-backgorund.jpg?s=612x612&w=0&k=20&c=SQfmzF39HZJ_AqFGosVGKT9iGOdtS7ddhfj0EUl0Tkc="),fit: BoxFit.cover,),
+              
+              // child: Image.network("https://assets-api.kathmandupost.com/thumb.php?src=https://assets-cdn.kathmandupost.com/uploads/source/news/2023/third-party/skb-1687773608.jpg&w=300&height=200"),
             ),
-          )
-        ],
+          
+            Text(
+              news.title ?? "null",
+              maxLines: 1,
+              style: TextStyle(
+                  fontWeight: FontWeight.w600, color: myColors.darkgreen),
+            ),
+            Container(
+              width: 132,
+              height:98,
+              padding: const EdgeInsets.all(8),
+              child: Text(
+                news.summary ?? "null",
+                overflow: TextOverflow.fade,
+                style: TextStyle(fontSize: 10, color: myColors.darkgreen),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

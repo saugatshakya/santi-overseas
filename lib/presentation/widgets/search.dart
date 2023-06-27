@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:testapp/static/colors.dart';
 
 class SearchButton extends StatefulWidget {
-  const SearchButton({super.key});
+  const SearchButton({super.key, required this.onTap});
+  final Function onTap;
 
   @override
   State<SearchButton> createState() => _SearchButtonState();
@@ -39,7 +40,10 @@ class _SearchButtonState extends State<SearchButton>
   Widget build(BuildContext context) {
     return GestureDetector(
       onTapDown: _onTapDown,
-      onTapUp: _onTapUp,
+      onTapUp: (TapUpDetails details){
+        _onTapUp(details);
+        widget.onTap();
+      },
       child: MouseRegion(                    cursor: SystemMouseCursors.click,
 
         child: Material(

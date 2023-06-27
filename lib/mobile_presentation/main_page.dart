@@ -160,11 +160,11 @@ class _DefaultState extends State<Default> {
                               children: [
                                 SearchableTextField(
                                   suggestions: const [
-                                    "aag",
-                                    "bage",
-                                    "chaeh",
-                                    "dawt"
+                               
                                   ],
+                                   onChanged: (val){
+                                      appStateController.changeSearchJob(val);
+                                    },
                                   label: "Jobs, Title, Keywords or Company",
                                   icon: Icons.search,
                                   width: MediaQuery.of(context).size.width,
@@ -175,11 +175,10 @@ class _DefaultState extends State<Default> {
                                 ),
                                 SearchableTextField(
                                   suggestions: const [
-                                    "Dharan",
-                                    "Kathmandu",
-                                    "Pokhara",
-                                    "Ithari"
-                                  ],
+                                   
+                                  ],  onChanged: (val){
+                                      appStateController.changeSearchCountry(val);
+                                    },
                                   label: "Area, City, Town, Country",
                                   icon: Icons.location_on,
                                   width:
@@ -534,13 +533,13 @@ class _DefaultState extends State<Default> {
                                             ),
                                             minLeadingWidth: 0,
                                             title: Text(
-                                                testimony[i % testimony.length]
+                                                state.testimony[i % state.testimony.length]
                                                     .name),
                                             subtitle: SizedBox(
                                               width: Get.width * 0.5 - 0.5 - 16,
                                               height: 92,
-                                              child: Text(testimony[
-                                                      i % testimony.length]
+                                              child: Text(state.testimony[
+                                                      i % state.testimony.length]
                                                   .data),
                                             ),
                                           )),
@@ -599,14 +598,14 @@ class _DefaultState extends State<Default> {
                                                   color: Colors.yellow),
                                             ),
                                             title: Text(
-                                                testimony[i % testimony.length]
+                                                state.testimony[i % state.testimony.length]
                                                     .name),
                                             minLeadingWidth: 0,
                                             subtitle: SizedBox(
                                               width: Get.width * 0.5 - 0.5 - 16,
                                               height: 92,
-                                              child: Text(testimony[
-                                                      i % testimony.length]
+                                              child: Text(state.testimony[
+                                                      i % state.testimony.length]
                                                   .data),
                                             ),
                                           ))
@@ -709,15 +708,19 @@ class _DefaultState extends State<Default> {
                                         "Instagram",
                                         style: TextStyle(color: Colors.white),
                                       )),
-                                  Chip(
-                                      backgroundColor: const Color(0xffFF0000),
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(4)),
-                                      label: const Text(
-                                        "YouTube",
-                                        style: TextStyle(color: Colors.white),
-                                      )),
+                                  GestureDetector(
+                                    onTap: (){launchUrl(Uri.parse("https://www.youtube.com/channel/UCal825XqmaEUsDjdRKuFoHQ"));},
+                                    child: Chip(
+                                        backgroundColor: const Color(0xffFF0000),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(4)),
+                                                
+                                        label: const Text(
+                                          "YouTube",
+                                          style: TextStyle(color: Colors.white),
+                                        )),
+                                  ),
                                   Chip(
                                       backgroundColor: const Color(0xffff0050),
                                       shape: RoundedRectangleBorder(

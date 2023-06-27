@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:testapp/controller/app_state_controller.dart';
+import 'package:testapp/data/functions/jobs.dart';
 import 'package:testapp/data/functions/utils.dart';
 import 'package:testapp/presentation/Employee.dart';
 import 'package:testapp/presentation/widgets/show_auth.dart';
@@ -19,7 +20,8 @@ class MyAppBar extends AppBar {
           toolbarHeight: 100,
           actions: [
             GestureDetector(
-              onTap: () {
+              onTap: () {    JobsApi().allJobs();
+
                 appStateController.changePage(0);
               },
               child: Row(

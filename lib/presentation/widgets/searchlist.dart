@@ -12,6 +12,7 @@ class SearchableTextField extends StatefulWidget {
   final IconData? icon;
   final double width;
   final FocusNode focusNode;
+  final Function(String) onChanged;
 
   const SearchableTextField(
       {super.key,
@@ -19,7 +20,7 @@ class SearchableTextField extends StatefulWidget {
       required this.label,
       this.icon,
       required this.width,
-      required this.focusNode});
+      required this.focusNode,required this.onChanged});
 
   @override
   _SearchableTextFieldState createState() => _SearchableTextFieldState();
@@ -60,6 +61,7 @@ class _SearchableTextFieldState extends State<SearchableTextField> {
                       setState(() {
                         showSuggesation = true;
                       });
+                      widget.onChanged(val);
                     },
                     decoration: InputDecoration(
                         filled: true,

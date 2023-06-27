@@ -3,22 +3,35 @@ import 'package:get/get.dart';
 import 'package:testapp/data/models/image.dart';
 import 'package:testapp/data/models/job.dart';
 import 'package:testapp/data/models/user.dart';
+import 'package:testapp/static/data.dart';
 
 class AppStateController extends GetxController {
-  Locale language = const Locale('ne', 'NE');
+  Locale language = const Locale('en', 'EN');
   PageController currentPage = PageController(initialPage: 0);
+  List<Testimony> testimony = [
+  Testimony(
+    data:
+        "testimonial1".tr,
+    name: "speaker1".tr,
+  ),
+  Testimony(
+    data:
+        "testimonial2".tr,
+    name: "speaker2".tr,
+  ),
+  Testimony(data: "testimonial3".tr, name: "speaker3".tr)
+,Testimony(data: "testimonial4".tr, name: "speaker4".tr)
+];
   String searchCountry = "";
   String searchJob = "";
   final FocusNode seachCountryFocus = FocusNode();
   final FocusNode seachJobFocus = FocusNode();
   //job
   int pagination = 1;
-  int itemCount = 83;
-  int perPageItem = 9;
+  int perPageItem = 4;
   //company
   int paginationC = 1;
-  int itemCountC = 57;
-  int perPageItemC = 9;
+  int perPageItemC = 4;
   //
   User? user;
 

@@ -1,8 +1,10 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:testapp/controller/app_state_controller.dart';
 import 'package:testapp/data/functions/jobs.dart';
+import 'package:testapp/data/models/job.dart';
 import 'package:testapp/presentation/widgets/company_logo.dart';
 import 'package:testapp/presentation/widgets/country_selector.dart';
 import 'package:testapp/presentation/widgets/main_table.dart';
@@ -16,7 +18,7 @@ import 'package:testapp/static/colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:testapp/static/data.dart';
 
-class MainPage extends StatelessWidget {
+class MainPage extends StatefulWidget {
   MainPage(
       {super.key,
       required this.height,
@@ -27,10 +29,6 @@ class MainPage extends StatelessWidget {
       required this.answers,
       required this.searches,
       required this.news});
-  final TextEditingController _name = TextEditingController();
-  final TextEditingController _email = TextEditingController();
-  final TextEditingController _address = TextEditingController();
-  final TextEditingController _contact = TextEditingController();
   final double height;
   final double width;
   final List countryCheckBox;
@@ -39,6 +37,21 @@ class MainPage extends StatelessWidget {
   final List answers;
   final List searches;
   final List news;
+
+  @override
+  State<MainPage> createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
+  final TextEditingController _name = TextEditingController();
+
+  final TextEditingController _email = TextEditingController();
+
+  final TextEditingController _address = TextEditingController();
+
+  final TextEditingController _contact = TextEditingController();
+
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<AppStateController>(
@@ -46,8 +59,8 @@ class MainPage extends StatelessWidget {
         builder: (state) {
           return SafeArea(
               child: Container(
-                  height: height - 48,
-                  width: width,
+                  height: widget.height - 48,
+                  width: widget.width,
                   decoration: BoxDecoration(
                       color: myColors.white.withOpacity(0.9),
                       image: const DecorationImage(
@@ -97,29 +110,37 @@ class MainPage extends StatelessWidget {
                                 children: [
                                   SearchableTextField(
                                     suggestions: const [
-                                      "aag",
-                                      "bage",
-                                      "chaeh",
-                                      "dawt"
+                                     
                                     ],
                                     label: "Jobs, Title, Keywords or Company",
                                     icon: Icons.search,
                                     width: 400,
                                     focusNode: state.seachCountryFocus,
+                                    onChanged: (val){
+                                      appStateController.changeSearchJob(val);
+                                    },
                                   ),
                                   SearchableTextField(
                                     suggestions: const [
-                                      "Dharan",
-                                      "Kathmandu",
-                                      "Pokhara",
-                                      "Ithari"
-                                    ],
+                                     
+                                    ],   onChanged: (val){
+                                      appStateController.changeSearchCountry(val);
+                                    },
                                     label: "Area, City, Town, Country",
                                     icon: Icons.location_on,
                                     width: 250,
                                     focusNode: state.seachJobFocus,
                                   ),
-                                  const SearchButton()
+                                  SearchButton(onTap: (){log("here");List<JobModel> jobs = [];
+                                    if(appStateController.searchJob!=""){    List<JobModel> newJobs  = appStateController.jobs.where((element) =>(element.title!=null&& element.title!.toLowerCase().contains(appStateController.searchJob))||(element.category!=null&& element.category!.toLowerCase().contains(appStateController.searchJob))).toList();             
+                                    jobs =jobs +newJobs;                
+}
+if(appStateController.searchCountry!=""){    List<JobModel> newJobs  = appStateController.jobs.where((element) => element.country!=null&&element.country!.name!=null&& element.country!.name!.toLowerCase().contains(appStateController.searchCountry)).toList();             
+                                    jobs =jobs +newJobs;                
+}
+
+                                    appStateController.updateJobs(jobs);
+                                  appStateController.changePage(1);},)
                                 ],
                               ),
                               const SizedBox(
@@ -133,7 +154,7 @@ class MainPage extends StatelessWidget {
                               const SizedBox(
                                 height: 16,
                               ),
-                              if (countryCheckBox.isNotEmpty)
+                              if (widget.countryCheckBox.isNotEmpty)
                                 ScrollWidget(
                                     reverse: false,
                                     height: 100,
@@ -142,14 +163,14 @@ class MainPage extends StatelessWidget {
                                     widget: (context, i) => GestureDetector(
                                           onTap: () {},
                                           child: CountrySelector(
-                                            country: countryCheckBox[
-                                                    i % countryCheckBox.length]
+                                            country: widget.countryCheckBox[
+                                                    i % widget.countryCheckBox.length]
                                                 ["country"],
-                                            code: countryCheckBox[i %
-                                                countryCheckBox.length]["code"],
+                                            code: widget.countryCheckBox[i %
+                                                widget.countryCheckBox.length]["code"],
                                           ),
                                         )),
-                              if (countryCheckBox.isNotEmpty)
+                              if (widget.countryCheckBox.isNotEmpty)
                                 const SizedBox(
                                   height: 16,
                                 ),
@@ -164,7 +185,7 @@ class MainPage extends StatelessWidget {
                         const SizedBox(
                           height: 16,
                         ),
-                        if (companies.isNotEmpty)
+                        if (widget.companies.isNotEmpty)
                           Container(
                             width: MediaQuery.of(context).size.width,
                             padding: const EdgeInsets.fromLTRB(32, 8, 8, 8),
@@ -176,11 +197,11 @@ class MainPage extends StatelessWidget {
                                       color: myColors.darkgreen)),
                             ),
                           ),
-                        if (companies.isNotEmpty)
+                        if (widget.companies.isNotEmpty)
                           const SizedBox(
                             height: 16,
                           ),
-                        if (companies.isNotEmpty)
+                        if (widget.companies.isNotEmpty)
                           ScrollWidget(
                               reverse: true,
                               height: 100,
@@ -190,13 +211,13 @@ class MainPage extends StatelessWidget {
                                     onTap: () {},
                                     child: CompanyLogo(
                                         imageLink:
-                                            companies[i % companies.length]),
+                                            widget.companies[i % widget.companies.length]),
                                   )),
-                        if (companies.isNotEmpty)
+                        if (widget.companies.isNotEmpty)
                           const SizedBox(
                             height: 32,
                           ),
-                        if (companies.isNotEmpty)
+                        if (widget.companies.isNotEmpty)
                           Divider(
                             height: 0,
                             thickness: 2,
@@ -205,7 +226,7 @@ class MainPage extends StatelessWidget {
                         Row(
                           children: [
                             SizedBox(
-                              width: width * 0.5 - 16,
+                              width: widget.width * 0.5 - 16,
                               height: 280,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -235,7 +256,7 @@ class MainPage extends StatelessWidget {
                             Container(
                               padding: const EdgeInsets.all(16),
                               color: myColors.darkgreen,
-                              width: width * 0.5,
+                              width: widget.width * 0.5,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -386,11 +407,11 @@ class MainPage extends StatelessWidget {
                           thickness: 2,
                           color: myColors.darkgreen,
                         ),
-                        if (searches.isNotEmpty)
+                        if (widget.searches.isNotEmpty)
                           const SizedBox(
                             height: 16,
                           ),
-                        if (searches.isNotEmpty)
+                        if (widget.searches.isNotEmpty)
                           Container(
                             width: MediaQuery.of(context).size.width,
                             padding: const EdgeInsets.fromLTRB(32, 8, 8, 8),
@@ -402,18 +423,18 @@ class MainPage extends StatelessWidget {
                                       color: myColors.darkgreen)),
                             ),
                           ),
-                        if (searches.isNotEmpty)
+                        if (widget.searches.isNotEmpty)
                           const SizedBox(
                             height: 16,
                           ),
-                        if (searches.isNotEmpty)
+                        if (widget.searches.isNotEmpty)
                           ScrollWidget(
                               reverse: false,
                               widget: (context, i) => Searches(
-                                  search: searches[i % searches.length]),
+                                  search: widget.searches[i % widget.searches.length]),
                               direction: Axis.horizontal,
                               height: 64),
-                        if (searches.isNotEmpty)
+                        if (widget.searches.isNotEmpty)
                           const SizedBox(
                             height: 32,
                           ),
@@ -434,7 +455,7 @@ class MainPage extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               SizedBox(
-                                width: width * 0.42,
+                                width: widget.width * 0.42,
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
@@ -461,7 +482,7 @@ class MainPage extends StatelessWidget {
                                                     SizedBox(
                                                       height: 32,
                                                       child: Text(
-                                                        "${i % questions.length + 1}  ${questions[i % questions.length]}",
+                                                        "${i % widget.questions.length + 1}  ${widget.questions[i % widget.questions.length]}",
                                                         style: TextStyle(
                                                           fontSize: 18,
                                                           color: myColors
@@ -472,7 +493,7 @@ class MainPage extends StatelessWidget {
                                                     SizedBox(
                                                       height: 68,
                                                       child: Text(
-                                                        "→ ${answers[i % answers.length]}",
+                                                        "→ ${widget.answers[i % widget.answers.length]}",
                                                         overflow: TextOverflow
                                                             .ellipsis,
                                                         maxLines: 2,
@@ -493,7 +514,7 @@ class MainPage extends StatelessWidget {
                                 ),
                               ),
                               SizedBox(
-                                width: width * 0.42,
+                                width: widget.width * 0.42,
                                 height: 464,
                                 child: Column(
                                   children: [
@@ -510,7 +531,7 @@ class MainPage extends StatelessWidget {
                                     ),
                                     NewsScroll(
                                       widget: (context, i) =>
-                                          News(news: news[i % news.length]),
+                                          News(news: widget.news[i % widget.news.length]),
                                       direction: Axis.horizontal,
                                       height: 300,
                                     ),
@@ -529,7 +550,7 @@ class MainPage extends StatelessWidget {
                                   color: myColors.darkgreen)),
                         ),
                         SizedBox(
-                          width: width * 0.62,
+                          width: widget.width * 0.62,
                           child: Divider(
                             height: 0,
                             thickness: 2,
@@ -538,17 +559,17 @@ class MainPage extends StatelessWidget {
                         ),
                         SizedBox(
                           height: 500,
-                          width: width,
+                          width: widget.width,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SizedBox(
-                                width: width * 0.3,
+                                width: widget.width * 0.3,
                                 child: ScrolllVerticle(
                                   widget: (context, i) {
                                     if (i % 2 == 0) {
                                       return SizedBox(
-                                        width: width * 0.3,
+                                        width: widget.width * 0.3,
                                         height: 132,
                                         child: Row(children: [
                                           GestureDetector(
@@ -556,20 +577,28 @@ class MainPage extends StatelessWidget {
                                               Get.dialog(Dialog(
                                                 child: SizedBox(
                                                   width: 400,
-                                                  height: 400,
+                                                  height: 600,
                                                   child: Padding(
                                                     padding:
                                                         const EdgeInsets.all(
                                                             8.0),
-                                                    child: Text(testimony[i %
-                                                            testimony.length]
-                                                        .data),
+                                                    child: SingleChildScrollView(
+                                                      child: Column(
+                                                        children: [Text(state.testimony[i %
+                                                                  state.testimony.length]
+                                                              .name),SizedBox(height: 8,),
+                                                          Text(state.testimony[i %
+                                                                  state.testimony.length]
+                                                              .data),
+                                                        ],
+                                                      ),
+                                                    ),
                                                   ),
                                                 ),
                                               ));
                                             },
                                             child: Container(
-                                                width: width * 0.3 - 64,
+                                                width: widget.width * 0.3 - 64,
                                                 height: 132,
                                                 padding:
                                                     const EdgeInsets.all(8),
@@ -593,15 +622,15 @@ class MainPage extends StatelessWidget {
                                                             color:
                                                                 Colors.yellow),
                                                   ),
-                                                  title: Text(testimony[
-                                                          i % testimony.length]
+                                                  title: Text(state.testimony[
+                                                          i % state.testimony.length]
                                                       .name),
                                                   subtitle: SizedBox(
-                                                    width: width * 0.3 - 180,
+                                                    width: widget.width * 0.3 - 180,
                                                     height: 132,
                                                     child: Text(
-                                                      testimony[i %
-                                                              testimony.length]
+                                                      state.testimony[i %
+                                                              state.testimony.length]
                                                           .data,
                                                       maxLines: 4,
                                                     ),
@@ -629,12 +658,12 @@ class MainPage extends StatelessWidget {
                                 color: myColors.darkgreen,
                               ),
                               SizedBox(
-                                width: width * 0.3,
+                                width: widget.width * 0.3,
                                 child: ScrolllVerticle(
                                   widget: (context, i) {
                                     if (i % 2 != 0) {
                                       return SizedBox(
-                                        width: width * 0.3,
+                                        width: widget.width * 0.3,
                                         height: 132,
                                         child: Row(children: [
                                           Container(
@@ -647,20 +676,29 @@ class MainPage extends StatelessWidget {
                                               Get.dialog(Dialog(
                                                 child: SizedBox(
                                                   width: 400,
-                                                  height: 400,
+                                                  height: 600,
                                                   child: Padding(
                                                     padding:
                                                         const EdgeInsets.all(
                                                             8.0),
-                                                    child: Text(testimony[i %
-                                                            testimony.length]
-                                                        .data),
+                                                    child: SingleChildScrollView(
+                                                      child: Column(
+                                                        children: [
+                                                                                                       Text(state.testimony[i %
+                                                                    state.testimony.length]
+                                                                .name),SizedBox(height: 8,),
+                                                            Text(state.testimony[i %
+                                                                    state.testimony.length]
+                                                                .data),
+                                                        ],
+                                                      ),
+                                                    ),
                                                   ),
                                                 ),
                                               ));
                                             },
                                             child: Container(
-                                                width: width * 0.3 - 64,
+                                                width: widget.width * 0.3 - 64,
                                                 height: 132,
                                                 padding:
                                                     const EdgeInsets.all(8),
@@ -684,15 +722,15 @@ class MainPage extends StatelessWidget {
                                                             color:
                                                                 Colors.yellow),
                                                   ),
-                                                  title: Text(testimony[
-                                                          i % testimony.length]
+                                                  title: Text(state.testimony[
+                                                          i % state.testimony.length]
                                                       .name),
                                                   subtitle: SizedBox(
-                                                    width: width * 0.3 - 180,
+                                                    width: widget.width * 0.3 - 180,
                                                     height: 132,
                                                     child: Text(
-                                                      testimony[i %
-                                                              testimony.length]
+                                                      state.testimony[i %
+                                                              state.testimony.length]
                                                           .data,
                                                       maxLines: 4,
                                                     ),
@@ -713,7 +751,7 @@ class MainPage extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
-                          width: width * 0.62,
+                          width: widget.width * 0.62,
                           child: Divider(
                             height: 0,
                             thickness: 2,
@@ -758,7 +796,7 @@ class MainPage extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               SizedBox(
-                                width: width * 0.5 - 16,
+                                width: widget.width * 0.5 - 16,
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -794,7 +832,7 @@ class MainPage extends StatelessWidget {
                                 ),
                               ),
                               SizedBox(
-                                width: width * 0.5,
+                                width: widget.width * 0.5,
                                 child: Image.asset(
                                   "assets/ss.png",
                                   fit: BoxFit.cover,
@@ -804,7 +842,7 @@ class MainPage extends StatelessWidget {
                           ),
                         ),
                         Container(
-                          width: width,
+                          width: widget.width,
                           height: 300,
                           color: myColors.darkgreen,
                           child: Padding(
@@ -813,7 +851,7 @@ class MainPage extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 SizedBox(
-                                  width: width * 0.42,
+                                  width: widget.width * 0.42,
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -829,71 +867,92 @@ class MainPage extends StatelessWidget {
                                       Padding(
                                         padding: const EdgeInsets.all(12.0),
                                         child: SizedBox(
-                                          width: width * 0.3,
+                                          width: widget.width * 0.3,
                                           child: Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
-                                              Chip(
-                                                  backgroundColor:
-                                                      const Color(0xff4267B2),
-                                                  shape: RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              4)),
-                                                  label: const Text(
-                                                    "Facebook",
-                                                    style: TextStyle(
-                                                        color: Colors.white),
-                                                  )),
-                                              Chip(
-                                                  backgroundColor:
-                                                      const Color(0xff00acee),
-                                                  shape: RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              4)),
-                                                  label: const Text(
-                                                    "Twitter",
-                                                    style: TextStyle(
-                                                        color: Colors.white),
-                                                  )),
-                                              Chip(
-                                                  backgroundColor:
-                                                      const Color(0xffd62976),
-                                                  shape: RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              4)),
-                                                  label: const Text(
-                                                    "Instagram",
-                                                    style: TextStyle(
-                                                        color: Colors.white),
-                                                  )),
-                                              Chip(
-                                                  backgroundColor:
-                                                      const Color(0xffFF0000),
-                                                  shape: RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              4)),
-                                                  label: const Text(
-                                                    "YouTube",
-                                                    style: TextStyle(
-                                                        color: Colors.white),
-                                                  )),
-                                              Chip(
-                                                  backgroundColor:
-                                                      const Color(0xffff0050),
-                                                  shape: RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              4)),
-                                                  label: const Text(
-                                                    "TikTok",
-                                                    style: TextStyle(
-                                                        color: Colors.white),
-                                                  ))
+                                              GestureDetector(
+                                                onTap: (){launchUrl(Uri.parse("https://www.facebook.com/profile.php?id=100090616503497"));},
+                                                child: Chip(
+                                                    backgroundColor:
+                                                        const Color(0xff4267B2),
+                                                    shape: RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                                4)),
+                                                    label: const Text(
+                                                      "Facebook",
+                                                      style: TextStyle(
+                                                          color: Colors.white),
+                                                    )),
+                                              ),
+                                              GestureDetector(
+                                                onTap: (){launchUrl(Uri.parse("https://twitter.com/OverseasSanti"));},
+                                                child: Chip(
+                                                    backgroundColor:
+                                                        const Color(0xff00acee),
+                                                    shape: RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                                4)),
+                                                    label: const Text(
+                                                      "Twitter",
+                                                      style: TextStyle(
+                                                          color: Colors.white),
+                                                    )),
+                                              ),
+                                              GestureDetector(
+                                                onTap: (){
+                                                  launchUrl(Uri.parse("https://www.instagram.com/santi_overseas/"));
+                                                },
+                                                child: Chip(
+                                                    backgroundColor:
+                                                        const Color(0xffd62976),
+                                                    shape: RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                                4)),
+                                                    label: const Text(
+                                                      "Instagram",
+                                                      style: TextStyle(
+                                                          color: Colors.white),
+                                                    )),
+                                              ),
+                                              GestureDetector(
+                                                onTap: (){
+                                                  launchUrl(Uri.parse("https://www.youtube.com/channel/UCal825XqmaEUsDjdRKuFoHQ"));
+                                                },
+                                                child: Chip(
+                                                    backgroundColor:
+                                                        const Color(0xffFF0000),
+                                                    shape: RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                                4)),
+                                                    label: const Text(
+                                                      "YouTube",
+                                                      style: TextStyle(
+                                                          color: Colors.white),
+                                                    )),
+                                              ),
+                                              GestureDetector(
+                                                onTap: (){
+                                                  launchUrl(Uri.parse("https://www.tiktok.com/@santi_overseas?_t=8dVtAYtgQNe&_r=1"));
+                                                },
+                                                child: Chip(
+                                                    backgroundColor:
+                                                        const Color(0xffff0050),
+                                                    shape: RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                                4)),
+                                                    label: const Text(
+                                                      "TikTok",
+                                                      style: TextStyle(
+                                                          color: Colors.white),
+                                                    )),
+                                              )
                                             ],
                                           ),
                                         ),
@@ -912,7 +971,7 @@ class MainPage extends StatelessWidget {
                                         child: Row(
                                           children: [
                                             SizedBox(
-                                              width: width * 0.3,
+                                              width: widget.width * 0.3,
                                               height: 54,
                                               child: TextField(
                                                 style: TextStyle(
@@ -972,7 +1031,7 @@ class MainPage extends StatelessWidget {
                                   color: Colors.white,
                                 ),
                                 SizedBox(
-                                  width: width * 0.24,
+                                  width: widget.width * 0.24,
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -1032,7 +1091,7 @@ class MainPage extends StatelessWidget {
                             launchUrl(url);
                           },
                           child: Container(
-                            width: width,
+                            width: widget.width,
                             height: 32,
                             color: myColors.blue,
                             child: Row(
@@ -1072,8 +1131,8 @@ class _GalleryImageState extends State<GalleryImage> {
           child: Dialog(
             child: Container(
               margin: const EdgeInsets.all(8),
-              height: 300,
-              width: 300,
+              height: 500,
+              width: 800,
               child: Image.network(
                 "https://freeticketfreevisa.com/${widget.path}",
                 fit: BoxFit.cover,

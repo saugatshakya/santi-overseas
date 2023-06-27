@@ -86,7 +86,7 @@ class _JobsState extends State<Jobs> {
                           ),
                         ),
                         const SizedBox(
-                          height: 8,
+                          height: 16,
                         ),
                         NumberPagination(
                           onPageChanged: (int pageNumber) {
@@ -125,7 +125,7 @@ class _JobsState extends State<Jobs> {
                           ),
                         ),
                         const SizedBox(
-                          height: 16,
+                          height: 8,
                         )
                       ],
                     ),

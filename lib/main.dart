@@ -10,6 +10,7 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:testapp/presentation/widgets/show_auth.dart';
 import 'package:testapp/static/colors.dart';
 import 'package:testapp/static/strings.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'mobile_presentation/main_page.dart';
 
 void main() async {
@@ -293,14 +294,20 @@ class MainWidget extends StatelessWidget {
                 const SizedBox(
                   width: 32,
                 ),
-                const Icon(
-                  Icons.location_on_outlined,
-                  color: Colors.white,
+                GestureDetector(
+                  onTap: (){
+                    launchUrl(Uri.parse("https://www.google.com/maps/place/Santi+Overseas+Pvt.+Ltd./@27.7351503,85.3353543,17z/data=!3m1!4b1!4m6!3m5!1s0x39eb192cdd2191ab:0xf59810fce01ff89e!8m2!3d27.7351503!4d85.3379292!16s%2Fg%2F11rq985k99?entry=ttu"));
+                  },
+                  child: Row(children: const[ Icon(
+                    Icons.location_on_outlined,
+                    color: Colors.white,
+                  ),
+                   Text(
+                    "Santi Overseas, Chundevi Marg, काठमाडौँ 44600",
+                    style: TextStyle(color: Colors.white),
+                  ),],),
                 ),
-                const Text(
-                  "Basundara Chawki, Kathmandu",
-                  style: TextStyle(color: Colors.white),
-                ),
+                
                 const SizedBox(
                   width: 32,
                 ),

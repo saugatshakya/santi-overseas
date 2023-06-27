@@ -90,7 +90,14 @@ class Job extends StatelessWidget {
                       children: [
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
+                          children: [ Text("Country:",
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500,
+                                    color: myColors.darkgreen)),
+                            const SizedBox(
+                              height: 4,
+                            ),
                             Text("Required Numbers:",
                                 style: TextStyle(
                                     fontSize: 18,
@@ -143,7 +150,14 @@ class Job extends StatelessWidget {
                         ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
+                          children: [   Text("${job.country!.name}",
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500,
+                                    color: myColors.darkgreen)),
+                            const SizedBox(
+                              height: 4,
+                            ),
                             Text("${job.requiredNumbers}",
                                 style: TextStyle(
                                     fontSize: 18,
