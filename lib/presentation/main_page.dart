@@ -141,13 +141,15 @@ class _MainPageState extends State<MainPage> {
                                                         .toLowerCase()
                                                         .contains(
                                                             appStateController
-                                                                .searchJob)) ||
+                                                                .searchJob
+                                                                .toLowerCase())) ||
                                                 (element.category != null &&
                                                     element.category!
                                                         .toLowerCase()
                                                         .contains(
                                                             appStateController
-                                                                .searchJob)))
+                                                                .searchJob
+                                                                .toLowerCase())))
                                             .toList();
                                         jobs = jobs + newJobs;
                                       }
@@ -163,7 +165,8 @@ class _MainPageState extends State<MainPage> {
                                                         .toLowerCase()
                                                         .contains(
                                                             appStateController
-                                                                .searchCountry))
+                                                                .searchCountry
+                                                                .toLowerCase()))
                                                 .toList();
                                         jobs = jobs + newJobs;
                                       }
