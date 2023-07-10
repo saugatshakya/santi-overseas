@@ -467,13 +467,14 @@ class _DefaultState extends State<Default> {
                           const SizedBox(
                             height: 32,
                           ),
-                          NewsScroll(
-                            widget: (context, i) => News(
-                              news: news[i % news.length],
+                          if (news.isNotEmpty)
+                            NewsScroll(
+                              widget: (context, i) => News(
+                                news: news[i % news.length],
+                              ),
+                              direction: Axis.horizontal,
+                              height: 300,
                             ),
-                            direction: Axis.horizontal,
-                            height: 300,
-                          ),
                         ],
                       ),
                     ),
@@ -835,7 +836,7 @@ class _DefaultState extends State<Default> {
                               Padding(
                                 padding:
                                     const EdgeInsets.fromLTRB(12.0, 4, 12, 4),
-                                child: Text("Telephone: 9810479710",
+                                child: Text("Telephone: 9805375020",
                                     style: TextStyle(
                                         fontSize: 14,
                                         fontWeight: FontWeight.w500,
@@ -853,7 +854,8 @@ class _DefaultState extends State<Default> {
                               Padding(
                                 padding:
                                     const EdgeInsets.fromLTRB(12.0, 4, 12, 4),
-                                child: Text("Location: xyz",
+                                child: Text(
+                                    "Location: basundhara chawki, kathmandu",
                                     style: TextStyle(
                                         fontSize: 14,
                                         fontWeight: FontWeight.w500,

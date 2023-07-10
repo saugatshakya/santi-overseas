@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:testapp/data/models/image.dart';
 import 'package:testapp/data/models/job.dart';
 import 'package:testapp/data/models/user.dart';
+import 'package:testapp/data/repo/user_info.dart';
 
 class AppStateController extends GetxController {
   Locale language = const Locale('en', 'EN');
@@ -107,6 +108,7 @@ class AppStateController extends GetxController {
 
   logout() {
     user = null;
+    repo.clearUserInfo();
     update();
   }
 }

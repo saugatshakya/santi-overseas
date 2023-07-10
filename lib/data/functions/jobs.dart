@@ -118,8 +118,9 @@ class JobsApi {
 
   apply(jobId, contactInfo) async {
     log("$jobId , $contactInfo");
-    var response =
-        await api.post("apply?job_id=$jobId&contact_info=$contactInfo", "");
+    var response = await api.post(
+        "apply?job_id=$jobId&contact_info=${appStateController.user!.email}",
+        "");
     if (response.statusCode == 200) {
       Get.dialog(const Dialog(
         child: SizedBox(

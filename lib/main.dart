@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:testapp/controller/app_state_controller.dart';
+import 'package:testapp/data/functions/auth.dart';
 import 'package:testapp/presentation/Employee.dart';
 import 'package:testapp/presentation/free_ticket_free_visa.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
@@ -176,42 +177,65 @@ class MiniWidget extends StatelessWidget {
                     thickness: 1,
                   ),
                 ),
-                const ListTile(
-                  onTap: showAuthDialog,
-                  dense: true,
-                  title: Text(
-                    "Login/SignUp",
-                    style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.white),
-                  ),
-                  subtitle: Divider(
-                    color: Colors.white,
-                    endIndent: 32,
-                    thickness: 1,
-                  ),
-                ),
-                ListTile(
-                  dense: true,
-                  onTap: () {
-                    Get.to(() => const Employee());
-                    // Uri url = Uri.parse("https://freeticketfreevisa.com/admin");
-                    // launchUrl(url);
-                  },
-                  title: const Text(
-                    "For Employees",
-                    style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.white),
-                  ),
-                  subtitle: const Divider(
-                    color: Colors.white,
-                    endIndent: 16,
-                    thickness: 1,
-                  ),
-                ),
+                GetBuilder<AppStateController>(
+                    init: appStateController,
+                    builder: (state) {
+                      return state.user == null
+                          ? ListTile(
+                              onTap: showAuthDialog,
+                              dense: true,
+                              title: Text(
+                                "Login/SignUp",
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.white),
+                              ),
+                              subtitle: Divider(
+                                color: Colors.white,
+                                endIndent: 32,
+                                thickness: 1,
+                              ),
+                            )
+                          : ListTile(
+                              onTap: () {
+                                state.logout();
+                              },
+                              dense: true,
+                              title: Text(
+                                "Logout",
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.white),
+                              ),
+                              subtitle: Divider(
+                                color: Colors.white,
+                                endIndent: 32,
+                                thickness: 1,
+                              ),
+                            );
+                    }),
+                // ListTile(
+                //   dense: true,
+                //   onTap: () {
+                //     Get.to(() => const Employee());
+                //     // Uri url = Uri.parse("https://freeticketfreevisa.com/admin");
+                //     // launchUrl(url);
+                //   },
+                //   title: const Text(
+                //     "For Employees",
+                //     style: TextStyle(
+                //         fontSize: 18,
+                //         fontWeight: FontWeight.w500,
+                //         color: Colors.white),
+                //   ),
+                //   subtitle: const Divider(
+                //     color: Colors.white,
+                //     endIndent: 16,
+                //     thickness: 1,
+                //   ),
+                // ),
                 const Spacer(),
                 const Text(
                   "Phone Number: 9810479710",
@@ -295,19 +319,23 @@ class MainWidget extends StatelessWidget {
                   width: 32,
                 ),
                 GestureDetector(
-                  onTap: (){
-                    launchUrl(Uri.parse("https://www.google.com/maps/place/Santi+Overseas+Pvt.+Ltd./@27.7351503,85.3353543,17z/data=!3m1!4b1!4m6!3m5!1s0x39eb192cdd2191ab:0xf59810fce01ff89e!8m2!3d27.7351503!4d85.3379292!16s%2Fg%2F11rq985k99?entry=ttu"));
+                  onTap: () {
+                    launchUrl(Uri.parse(
+                        "https://www.google.com/maps/place/Santi+Overseas+Pvt.+Ltd./@27.7351503,85.3353543,17z/data=!3m1!4b1!4m6!3m5!1s0x39eb192cdd2191ab:0xf59810fce01ff89e!8m2!3d27.7351503!4d85.3379292!16s%2Fg%2F11rq985k99?entry=ttu"));
                   },
-                  child: Row(children: const[ Icon(
-                    Icons.location_on_outlined,
-                    color: Colors.white,
+                  child: Row(
+                    children: const [
+                      Icon(
+                        Icons.location_on_outlined,
+                        color: Colors.white,
+                      ),
+                      Text(
+                        "Santi Overseas, Chundevi Marg, काठमाडौँ 44600",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ],
                   ),
-                   Text(
-                    "Santi Overseas, Chundevi Marg, काठमाडौँ 44600",
-                    style: TextStyle(color: Colors.white),
-                  ),],),
                 ),
-                
                 const SizedBox(
                   width: 32,
                 ),

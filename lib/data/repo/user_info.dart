@@ -16,6 +16,11 @@ class UserInfo {
     String? data = _prefs!.getString("userInfo");
     return data;
   }
+
+  clearUserInfo() async {
+    _prefs = await SharedPreferences.getInstance();
+    _prefs!.remove("userInfo");
+  }
 }
 
 final UserInfo repo = UserInfo();

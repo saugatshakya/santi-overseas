@@ -935,14 +935,20 @@ class _MainPageState extends State<MainPage> {
                                               fontWeight: FontWeight.w500,
                                               color: myColors.darkgreen)),
                                     ),
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.only(left: 32.0),
-                                      child: Text("COMING SOON",
-                                          style: TextStyle(
-                                              fontSize: 28,
-                                              fontWeight: FontWeight.w600,
-                                              color: myColors.darkgreen)),
+                                    GestureDetector(
+                                      onTap: () {
+                                        launchUrl(Uri.parse(
+                                            "https://drive.google.com/uc?export=download&id=1BnVPwYw3vsFzXi3-7O7aPmgtJ-gS6JWS"));
+                                      },
+                                      child: Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 32.0),
+                                        child: Text("Download",
+                                            style: TextStyle(
+                                                fontSize: 28,
+                                                fontWeight: FontWeight.w600,
+                                                color: myColors.darkgreen)),
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -1182,7 +1188,7 @@ class _MainPageState extends State<MainPage> {
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.all(12.0),
-                                        child: Text("Telephone: 9810479710",
+                                        child: Text("Telephone: 9805375020",
                                             style: TextStyle(
                                                 fontSize: 18,
                                                 fontWeight: FontWeight.w500,
@@ -1199,7 +1205,8 @@ class _MainPageState extends State<MainPage> {
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.all(12.0),
-                                        child: Text("Location: xyz",
+                                        child: Text(
+                                            "Location: basundhara chawki, kathmandu",
                                             style: TextStyle(
                                                 fontSize: 18,
                                                 fontWeight: FontWeight.w500,
