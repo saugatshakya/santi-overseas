@@ -14,13 +14,14 @@ class Companies extends StatefulWidget {
 
 class _CompaniesState extends State<Companies> {
   List companies = [
-    "assets/company.jpg",
-    "assets/company_1.jpg",
-    "assets/company_2.jpg",
-    "assets/company_3.jpg",
-    "assets/company_4.jpg",
-    "assets/company_5.jpg"
+   
   ];
+
+  @override
+  void initState() {
+    companies = appStateController.companies;
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;

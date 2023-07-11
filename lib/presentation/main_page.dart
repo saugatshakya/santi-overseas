@@ -861,6 +861,7 @@ class _MainPageState extends State<MainPage> {
                                   },
                                   direction: Axis.vertical,
                                   height: 500,
+
                                 ),
                               ),
                             ],
@@ -1177,18 +1178,24 @@ class _MainPageState extends State<MainPage> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Padding(
-                                        padding: const EdgeInsets.all(12.0),
-                                        child: Text(
-                                            "Contact Us: Santi OverSeas",
-                                            style: TextStyle(
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.w500,
-                                                color: myColors.white)),
+                                      GestureDetector(
+                                         onTap: () {
+                    launchUrl(Uri.parse(
+                        "https://www.google.com/maps/place/Santi+Overseas+Pvt.+Ltd./@27.7351503,85.3353543,17z/data=!3m1!4b1!4m6!3m5!1s0x39eb192cdd2191ab:0xf59810fce01ff89e!8m2!3d27.7351503!4d85.3379292!16s%2Fg%2F11rq985k99?entry=ttu"));
+                  },
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(12.0),
+                                          child: Text(
+                                              "Contact Us: Santi OverSeas",
+                                              style: TextStyle(
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: myColors.white)),
+                                        ),
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.all(12.0),
-                                        child: Text("Telephone: 9805375020",
+                                        child: Text("Telephone: 9800000000",
                                             style: TextStyle(
                                                 fontSize: 18,
                                                 fontWeight: FontWeight.w500,
@@ -1215,13 +1222,19 @@ class _MainPageState extends State<MainPage> {
                                     ],
                                   ),
                                 ),
-                                Card(
-                                    elevation: 4,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(4)),
-                                    child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(4),
-                                        child: Image.asset("assets/map.png")))
+                                GestureDetector(
+                                   onTap: () {
+                    launchUrl(Uri.parse(
+                        "https://www.google.com/maps/place/Santi+Overseas+Pvt.+Ltd./@27.7351503,85.3353543,17z/data=!3m1!4b1!4m6!3m5!1s0x39eb192cdd2191ab:0xf59810fce01ff89e!8m2!3d27.7351503!4d85.3379292!16s%2Fg%2F11rq985k99?entry=ttu"));
+                  },
+                                  child: Card(
+                                      elevation: 4,
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(4)),
+                                      child: ClipRRect(
+                                          borderRadius: BorderRadius.circular(4),
+                                          child: Image.asset("assets/map.png"))),
+                                )
                               ],
                             ),
                           ),

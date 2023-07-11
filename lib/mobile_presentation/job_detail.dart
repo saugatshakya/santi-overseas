@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:testapp/controller/app_state_controller.dart';
 import 'package:testapp/data/functions/jobs.dart';
 import 'package:testapp/data/models/job.dart';
 import 'package:testapp/data/repo/user_info.dart';
@@ -42,11 +43,10 @@ class JobDetail extends StatelessWidget {
                     fontSize: 12,
                     color: myColors.darkgreen,
                     onTap: () async {
-                      String? userInfo = await UserInfo().getUserInfo();
-                      if (userInfo == null) {
+                      if (appStateController.user == null) {
                         showAuthDialog();
                       } else {
-                        JobsApi().apply(job.id, userInfo);
+                        JobsApi().apply(job.id);
                         // Get.dialog(const Center(
                         //   child: Dialog(
                         //     child: SizedBox(

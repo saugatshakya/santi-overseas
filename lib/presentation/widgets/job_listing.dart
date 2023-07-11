@@ -55,7 +55,8 @@ class _JobListingState extends State<JobListing> {
                 width: 54,
                 height: 54,
                 decoration: BoxDecoration(
-                    color: Colors.red, borderRadius: BorderRadius.circular(4)),
+                    borderRadius: BorderRadius.circular(4)),
+                    child: Image.network(widget.job.company!.logo!),
               ),
               trailing: getSmartPhoneOrTablet() == phoneType || width < 1275
                   ? const SizedBox()
@@ -78,15 +79,12 @@ class _JobListingState extends State<JobListing> {
                             fontSize: 12,
                             color: hovering ? Colors.green : myColors.darkgreen,
                             onTap: () async {
-                              log("Tap");
-                              String? userInfo = await UserInfo().getUserInfo();
-                              log("userinfo: $userInfo");
-                              if (userInfo == null) {
+                              if (appStateController.user == null) {
                                 log("here");
                                 showAuthDialog();
                               } else {
                                 log("over here");
-                                JobsApi().apply(widget.job.id, userInfo);
+                                JobsApi().apply(widget.job.id);
                                 // Get.dialog(const Center(
                                 //   child: Dialog(
                                 //     child: SizedBox(
@@ -228,15 +226,13 @@ class _JobListingState extends State<JobListing> {
                                     ? Colors.green
                                     : myColors.darkgreen,
                                 onTap: () async {
-                                  String? userInfo =
-                                      await UserInfo().getUserInfo();
-                                  log("userinfo: $userInfo");
-                                  if (userInfo == null) {
+                             
+                                  if (appStateController.user == null) {
                                     log("here");
                                     showAuthDialog();
                                   } else {
                                     log("over here");
-                                    JobsApi().apply(widget.job.id, userInfo);
+                                    JobsApi().apply(widget.job.id);
                                     // Get.dialog(const Center(
                                     //   child: Dialog(
                                     //     child: SizedBox(

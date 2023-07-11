@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:testapp/controller/app_state_controller.dart';
 import 'package:testapp/data/functions/jobs.dart';
 import 'package:testapp/data/models/job.dart';
 import 'package:testapp/data/repo/user_info.dart';
@@ -34,8 +35,8 @@ class Job extends StatelessWidget {
                     child: SizedBox(
                         height: 64,
                         width: 64,
-                        child: Image.asset(
-                          "assets/company.jpg",
+                        child: Image.network(
+                        job.company!.logo!,
                           fit: BoxFit.cover,
                         )),
                   ),
@@ -48,11 +49,11 @@ class Job extends StatelessWidget {
                       fontSize: 12,
                       color: myColors.darkgreen,
                       onTap: () {
-                        String? userInfo = UserInfo().getUserInfo();
-                        if (userInfo == null) {
+                      
+                        if (appStateController.user == null) {
                           showAuthDialog();
                         } else {
-                          JobsApi().apply(job.id, userInfo);
+                          JobsApi().apply(job.id);
                           // Get.dialog(const Center(
                           //   child: Dialog(
                           //     child: SizedBox(

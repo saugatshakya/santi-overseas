@@ -116,8 +116,8 @@ class JobsApi {
     appStateController.updateGallery(images);
   }
 
-  apply(jobId, contactInfo) async {
-    log("$jobId , $contactInfo");
+  apply(jobId) async {
+    log("$jobId");
     var response = await api.post(
         "apply?job_id=$jobId&contact_info=${appStateController.user!.email}",
         "");

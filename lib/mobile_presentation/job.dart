@@ -78,15 +78,12 @@ class _JobListingMobileState extends State<JobListingMobile> {
                             fontSize: 12,
                             color: hovering ? Colors.green : myColors.darkgreen,
                             onTap: () async {
-                              log("Tap");
-                              String? userInfo = await UserInfo().getUserInfo();
-                              log("userinfo: $userInfo");
-                              if (userInfo == null) {
+                              if (appStateController.user == null) {
                                 log("here");
                                 showAuthDialog();
                               } else {
                                 log("over here");
-                                JobsApi().apply(widget.job.id, userInfo);
+                                JobsApi().apply(widget.job.id);
                                 // Get.dialog(const Center(
                                 //   child: Dialog(
                                 //     child: SizedBox(
@@ -219,15 +216,13 @@ class _JobListingMobileState extends State<JobListingMobile> {
                                     ? Colors.green
                                     : myColors.darkgreen,
                                 onTap: () async {
-                                  String? userInfo =
-                                      await UserInfo().getUserInfo();
-                                  log("userinfo: $userInfo");
-                                  if (userInfo == null) {
+                              
+                                  if (appStateController.user == null) {
                                     log("here");
                                     showAuthDialog();
                                   } else {
                                     log("over here");
-                                    JobsApi().apply(widget.job.id, userInfo);
+                                    JobsApi().apply(widget.job.id);
                                     // Get.dialog(const Center(
                                     //   child: Dialog(
                                     //     child: SizedBox(

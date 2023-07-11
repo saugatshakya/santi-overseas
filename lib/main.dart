@@ -368,11 +368,11 @@ class MainWidget extends StatelessWidget {
                                 child: Text("English"))
                           ],
                           child: Container(
-                            width: 92,
+                            width: 110,
                             padding: const EdgeInsets.all(8.0),
                             child: Row(children: [
                               Text(
-                                state.language.languageCode,
+                                "Language".tr,
                                 style: TextStyle(
                                     color: myColors.white,
                                     fontWeight: FontWeight.w600),
