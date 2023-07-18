@@ -5,9 +5,15 @@ import 'package:testapp/presentation/widgets/job_listing.dart';
 import 'package:testapp/presentation/widgets/scroll_widget.dart';
 import 'package:testapp/static/colors.dart';
 
-class MainTable extends StatelessWidget {
+class MainTable extends StatefulWidget {
   const MainTable({super.key});
 
+  @override
+  State<MainTable> createState() => _MainTableState();
+}
+
+class _MainTableState extends State<MainTable> {
+  int currentImage = 0;
   @override
   Widget build(BuildContext context) {
     return GetBuilder<AppStateController>(
@@ -66,28 +72,36 @@ class MainTable extends StatelessWidget {
                     )
                   ],
                 ),
-              ),
-              Container(
-                color: myColors.darkgreen.withOpacity(0.8),
-                width: Get.width * 0.54,
-                height: 400,
-                child: state.adImage != null
-                    ? MouseRegion(
-                        cursor: SystemMouseCursors.click,
-                        child: GestureDetector(
-                          onTap: () => Get.dialog(Center(
-                            child: Image.network(
-                                "https://freeticketfreevisa.com/${state.adImage!.imagePath}"),
-                          )),
-                          child: Image.network(
-                            "https://freeticketfreevisa.com/${state.adImage!.imagePath}",
-                            fit: BoxFit.contain,
-                            colorBlendMode: BlendMode.softLight,
-                            color: myColors.darkgreen.withOpacity(0.8),
-                          ),
-                        ),
-                      )
-                    : const SizedBox(),
+              ),if(state.adImage.isNotEmpty)
+              SizedBox(width: Get.width * 0.54,
+                  height: 400,
+                child: Row(
+                  children: [currentImage!=0?GestureDetector(onTap: (){setState(() {
+                    currentImage--;
+                  });},child: Container(height: 400,width: 64,color: myColors.darkgreen.withOpacity(0.5),child:const Center(child: Icon(Icons.skip_previous),),)):SizedBox(width: 64,),Container(
+                    color: myColors.darkgreen.withOpacity(0.8),
+                    width: Get.width * 0.54-128,
+                    height: 400,
+                    child: MouseRegion(
+                            cursor: SystemMouseCursors.click,
+                            child: GestureDetector(
+                              onTap: () => Get.dialog(Center(
+                                child: Image.network(
+                                    "https://freeticketfreevisa.com/${state.adImage[currentImage].imagePath}"),
+                              )),
+                              child: Image.network(
+                                "https://freeticketfreevisa.com/${state.adImage[currentImage].imagePath}",
+                                fit: BoxFit.contain,
+                                colorBlendMode: BlendMode.softLight,
+                                color: myColors.darkgreen.withOpacity(0.8),
+                              ),
+                            ),
+                          )
+                        
+                  ),currentImage!=state.adImage.length-1?GestureDetector(onTap: (){setState(() {
+                    currentImage++;
+                  });},child: Container(height: 400,width: 64,color: myColors.darkgreen.withOpacity(0.5),child:const Center(child: Icon(Icons.skip_next),),)):SizedBox(width: 64,)]
+                ),
               )
             ],
           );

@@ -676,11 +676,10 @@ class _MainPageState extends State<MainPage> {
                                                     width: 64,
                                                     height: 64,
                                                     decoration:
-                                                        const BoxDecoration(
+                                                         BoxDecoration(
                                                             shape:
                                                                 BoxShape.circle,
-                                                            color:
-                                                                Colors.yellow),
+                                                           image: DecorationImage(image: AssetImage(testimonialImage[i%testimonialImage.length]))),
                                                   ),
                                                   title: Text(state.language ==
                                                           const Locale(
@@ -815,11 +814,10 @@ class _MainPageState extends State<MainPage> {
                                                     width: 64,
                                                     height: 64,
                                                     decoration:
-                                                        const BoxDecoration(
+                                                         BoxDecoration(
                                                             shape:
                                                                 BoxShape.circle,
-                                                            color:
-                                                                Colors.yellow),
+                                                           image: DecorationImage(image: AssetImage(testimonialImage[i%testimonialImage.length]))),
                                                   ),
                                                   title: Text(state.language ==
                                                           const Locale(
@@ -1195,7 +1193,7 @@ class _MainPageState extends State<MainPage> {
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.all(12.0),
-                                        child: Text("Telephone: 9800000000",
+                                        child: Text("Telephone: 9802343957",
                                             style: TextStyle(
                                                 fontSize: 18,
                                                 fontWeight: FontWeight.w500,

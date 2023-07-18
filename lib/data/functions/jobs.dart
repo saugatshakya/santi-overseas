@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:math'hide log;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:testapp/controller/app_state_controller.dart';
@@ -27,13 +28,44 @@ class JobsApi {
   }
 
   getAd() async {
-    try {
+    try {List<ImageModel> images = [];
       var response = await api.get("getImages/advertisement");
-      ImageModel image = ImageModel.fromJson(response["images"][0]);
-      appStateController.updatADImage(image);
+      for(int i=0;i<response["images"].length;i++){
+      ImageModel image = ImageModel.fromJson(response["images"][i]);
+      images.add(image);}
+      if(images.isNotEmpty){
+        int random = Random().nextInt(images.length);
+        showWidget(images[random].imagePath!);
+      }
+      appStateController.updatADImage(images);
     } catch (e) {
       log(e.toString());
     }
+  }
+
+  
+  showWidget(String image) async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    Get.dialog(Dialog(
+      child: Stack(children: [
+        Image.network("https://freeticketfreevisa.com/$image"),
+        Positioned(
+            top: 0,
+            right: 16,
+            child: GestureDetector(
+              onTap: () {
+                Get.back();
+              },
+              child: Container(
+                decoration: const BoxDecoration(
+                    color: Colors.white, shape: BoxShape.circle),
+                width: 32,
+                height: 32,
+                child: const Center(child: Icon(Icons.close)),
+              ),
+            ))
+      ]),
+    ));
   }
 
   getPopularSearch() async {

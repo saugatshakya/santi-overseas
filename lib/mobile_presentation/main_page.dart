@@ -525,9 +525,9 @@ class _DefaultState extends State<Default> {
                                             leading: Container(
                                               width: 16,
                                               height: 16,
-                                              decoration: const BoxDecoration(
+                                              decoration:  BoxDecoration(
                                                   shape: BoxShape.circle,
-                                                  color: Colors.yellow),
+                                                 image: DecorationImage(image: AssetImage(testimonialImage[i%testimonialImage.length]))),
                                             ),
                                             minLeadingWidth: 0,
                                             title: Text(state.language ==
@@ -601,9 +601,9 @@ class _DefaultState extends State<Default> {
                                             leading: Container(
                                               width: 16,
                                               height: 16,
-                                              decoration: const BoxDecoration(
+                                              decoration:  BoxDecoration(
                                                   shape: BoxShape.circle,
-                                                  color: Colors.yellow),
+                                                  image: DecorationImage(image: AssetImage(testimonialImage[i%testimonialImage.length]))),
                                             ),
                                             title: Text(state.language ==
                                                     const Locale('en', 'EN')
@@ -836,7 +836,7 @@ class _DefaultState extends State<Default> {
                               Padding(
                                 padding:
                                     const EdgeInsets.fromLTRB(12.0, 4, 12, 4),
-                                child: Text("Telephone: 9800000000",
+                                child: Text("Telephone: 9802343957",
                                     style: TextStyle(
                                         fontSize: 14,
                                         fontWeight: FontWeight.w500,

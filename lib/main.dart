@@ -39,7 +39,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
-    showWidget();
+    // showWidget();
     super.initState();
   }
 
@@ -312,7 +312,7 @@ class MainWidget extends StatelessWidget {
                   color: Colors.white,
                 ),
                 const Text(
-                  "9800000000",
+                  "9802343957",
                   style: TextStyle(color: Colors.white),
                 ),
                 const SizedBox(

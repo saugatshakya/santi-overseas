@@ -26,7 +26,7 @@ class AppStateController extends GetxController {
   List<JobModel> jobs = [];
   JobModel? selectedJob;
   List<String> companies = [];
-  ImageModel? adImage;
+  List<ImageModel> adImage = [];
   List<ImageModel> gallery = [];
   changePage(int page) {
     currentPage.jumpToPage(
@@ -91,7 +91,7 @@ class AppStateController extends GetxController {
     update();
   }
 
-  updatADImage(ImageModel image) {
+  updatADImage(List<ImageModel> image) {
     adImage = image;
     update();
   }
