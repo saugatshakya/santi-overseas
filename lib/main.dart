@@ -245,7 +245,7 @@ class MiniWidget extends StatelessWidget {
                       color: Colors.white),
                 ),
                 const Text(
-                  "Location: basundhara chawki, kathmandu",
+                  "Location: Chundevi Marg, Maharajgunj, Kathmandu 44600",
                   style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
@@ -312,7 +312,7 @@ class MainWidget extends StatelessWidget {
                   color: Colors.white,
                 ),
                 const Text(
-                  "9802343957",
+                  "01-5910769",
                   style: TextStyle(color: Colors.white),
                 ),
                 const SizedBox(
@@ -330,7 +330,7 @@ class MainWidget extends StatelessWidget {
                         color: Colors.white,
                       ),
                       Text(
-                        "Santi Overseas, Chundevi Marg, काठमाडौँ 44600",
+                        "Chundevi Marg, Maharajgunj, Kathmandu 44600",
                         style: TextStyle(color: Colors.white),
                       ),
                     ],

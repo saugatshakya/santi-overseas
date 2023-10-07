@@ -18,7 +18,7 @@ List<Testimony> engTestimony = [
   Testimony(
       data:
           "Mr. Manu Kumar Lama is an accomplished and self-driven professional with an entrepreneurial unmatched spirit. Having a rich experience in the human resource management industry both in Nepal and Malaysia, Mr. Lama carries the overall responsibilities for the recruitment policies. For his excellent managerial skills and  knowledge, he strives for highly potential candidates nurturing them ethically to instill enthusiasm. The feedback from the thousands of candidates deployed to Malaysia, UAE, Saudi Arabia, Qatar and Oman along with the employers have proved his leadership and professionalism  in this business. The quality of dealing with the difficulties tactfully and critically has led him to the apex to build up a huge network in this field. His outstanding knowledge on Malay language both written and spoken has added a great asset in him establishing the relation of brotherhood among many big companies and people as well.\nMr. Manu Kumar Lama, being the member of different social organizations, has been involved in many social welfare and volunteer activities. His charitable attribute is reflected in the companies he is involved advocating different facilities to the staffs and those who go for foreign employment. He has played an instrumental role in SANTI to guild the business with ZERO COST policy to address the G2G agreement held between the Malaysian government and the government of Nepal, and in accordance with the RBA Code of Conduct. The Board of Directors are  proud of  the veteran Mr. MK Lama, the founder member and the Managing Director, wishing him all the best for his further success in this realm.",
-      name: "MANAGING DIRECTOR'S")
+      name: "MANAGING DIRECTOR")
 ];
 
 List<Testimony> nepTestimony = [
@@ -41,7 +41,7 @@ List<Testimony> nepTestimony = [
           " यस शान्ति ओभरसिज प्रा.लि. का प्रबन्ध निर्देशक श्री मनु कुमार लामा बैदेशिक रोजगारीको क्षेत्रमा एक सु-परिचित नाम हो l विशेषत: नेपाल र मलेशियाका सरकारहरुको बिचमा भएको श्रम सम्झौता सम्बन्धि जानकार र मलाया भाषाका विज्ञ हुनुले पनि मलेशियाका दर्जनौ ठूला बहुराष्ट्रिय कम्पनीहरु संगको बर्षौ देखिको उहाँको सहकार्य आफैमा एक गौरवशाली सफलता बनेको छ l यस्तो परिप्रेक्षमा उहाँले नेतृत्व प्रदान गर्नुभएको यस शान्ति ओभरसिज प्रा.लि. आज बैदेशिक रोजगारीको क्षेत्रमा एक अग्रणी संस्थाको रुपमा स्थापित भएको कुरा सबैमा विदितै छ l ",
       name: "MANAGING DIRECTOR'S")
 ];
-List<String> testimonialImage = ["assets/Chairman.jpg","assets/Director.jpg","assets/Surendra.jpg","assets/RishiRam.jpg"];
+List<String> testimonialImage = ["assets/Surendra.jpg","assets/RishiRam.jpg","assets/Chairman.jpg","assets/Director.jpg"];
 
 class Testimony {
   String name;

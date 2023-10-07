@@ -836,7 +836,7 @@ class _DefaultState extends State<Default> {
                               Padding(
                                 padding:
                                     const EdgeInsets.fromLTRB(12.0, 4, 12, 4),
-                                child: Text("Telephone: 9802343957",
+                                child: Text("Telephone: 01-5910769",
                                     style: TextStyle(
                                         fontSize: 14,
                                         fontWeight: FontWeight.w500,
@@ -860,7 +860,7 @@ class _DefaultState extends State<Default> {
                                   padding:
                                       const EdgeInsets.fromLTRB(12.0, 4, 12, 4),
                                   child: Text(
-                                      "Location: basundhara chawki, kathmandu",
+                                      "Location: Chundevi Marg, Maharajgunj, Kathmandu 44600",
                                       style: TextStyle(
                                           fontSize: 14,
                                           fontWeight: FontWeight.w500,

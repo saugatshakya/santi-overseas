@@ -29,6 +29,7 @@ class _CountrySelectorState extends State<CountrySelector> {
         });
       },
       child: Container(
+        clipBehavior: Clip.hardEdge,
         margin: const EdgeInsets.fromLTRB(16, 8, 16, 8),
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
@@ -45,9 +46,13 @@ class _CountrySelectorState extends State<CountrySelector> {
             const SizedBox(
               width: 32,
             ),
-            Text(
-              widget.country,
-              style: TextStyle(fontSize: 18, color: myColors.white),
+            Expanded(
+              child: Text(
+                widget.country,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+                style: TextStyle(fontSize: 18, color: myColors.white),
+              ),
             )
           ],
         ),

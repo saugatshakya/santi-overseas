@@ -1193,7 +1193,7 @@ class _MainPageState extends State<MainPage> {
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.all(12.0),
-                                        child: Text("Telephone: 9802343957",
+                                        child: Text("Telephone: 01-5910769",
                                             style: TextStyle(
                                                 fontSize: 18,
                                                 fontWeight: FontWeight.w500,
@@ -1211,7 +1211,7 @@ class _MainPageState extends State<MainPage> {
                                       Padding(
                                         padding: const EdgeInsets.all(12.0),
                                         child: Text(
-                                            "Location: basundhara chawki, kathmandu",
+                                            "Location: Chundevi Marg, Maharajgunj, Kathmandu 44600",
                                             style: TextStyle(
                                                 fontSize: 18,
                                                 fontWeight: FontWeight.w500,
