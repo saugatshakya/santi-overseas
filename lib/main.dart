@@ -3,11 +3,8 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:testapp/controller/app_state_controller.dart';
-import 'package:testapp/data/functions/auth.dart';
-import 'package:testapp/presentation/Employee.dart';
 import 'package:testapp/presentation/free_ticket_free_visa.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:testapp/presentation/widgets/show_auth.dart';
 import 'package:testapp/static/colors.dart';
 import 'package:testapp/static/strings.dart';
@@ -17,15 +14,15 @@ import 'mobile_presentation/main_page.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  if (kIsWeb) {
-    // initialiaze the facebook javascript SDK
-    await FacebookAuth.i.webAndDesktopInitialize(
-      appId: "604017458447537",
-      cookie: true,
-      xfbml: true,
-      version: "v16.0",
-    );
-  }
+  // if (kIsWeb) {
+  //   // initialiaze the facebook javascript SDK
+  //   await FacebookAuth.i.webAndDesktopInitialize(
+  //     appId: "604017458447537",
+  //     cookie: true,
+  //     xfbml: true,
+  //     version: "v16.0",
+  //   );
+  // }
   runApp(const MyApp());
 }
 

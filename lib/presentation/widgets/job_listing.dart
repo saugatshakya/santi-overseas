@@ -51,13 +51,16 @@ class _JobListingState extends State<JobListing> {
             width: width * 0.32,
             child: ListTile(
               contentPadding: const EdgeInsets.all(0),
-              leading: Container(
-                width: 54,
-                height: 54,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(4)),
-                    child: Image.network(widget.job.company!.logo!),
-              ),
+              leading: widget.job.company == null ||
+                      widget.job.company!.logo == null
+                  ? const SizedBox()
+                  : Container(
+                      width: 54,
+                      height: 54,
+                      decoration:
+                          BoxDecoration(borderRadius: BorderRadius.circular(4)),
+                      child: Image.network(widget.job.company!.logo!),
+                    ),
               trailing: getSmartPhoneOrTablet() == phoneType || width < 1275
                   ? const SizedBox()
                   : Column(
@@ -226,7 +229,6 @@ class _JobListingState extends State<JobListing> {
                                     ? Colors.green
                                     : myColors.darkgreen,
                                 onTap: () async {
-                             
                                   if (appStateController.user == null) {
                                     log("here");
                                     showAuthDialog();

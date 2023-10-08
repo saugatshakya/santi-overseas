@@ -30,18 +30,22 @@ class Job extends StatelessWidget {
               child: SizedBox(
                 width: 300,
                 child: ListTile(
-                  leading: ClipRRect(
-                    borderRadius: BorderRadius.circular(4),
-                    child: SizedBox(
-                        height: 64,
-                        width: 64,
-                        child: Image.network(
-                        job.company!.logo!,
-                          fit: BoxFit.cover,
-                        )),
-                  ),
+                  leading: job.company == null || job.company!.logo == null
+                      ? const SizedBox()
+                      : ClipRRect(
+                          borderRadius: BorderRadius.circular(4),
+                          child: SizedBox(
+                              height: 64,
+                              width: 64,
+                              child: Image.network(
+                                job.company!.logo!,
+                                fit: BoxFit.cover,
+                              )),
+                        ),
                   title: Text(job.title ?? "-"),
-                  subtitle: Text(job.company!.name ?? "-"),
+                  subtitle: job.company == null
+                      ? const SizedBox()
+                      : Text(job.company!.name ?? "-"),
                   trailing: RaisedButton(
                       label: "APPLY",
                       height: 24,
@@ -49,7 +53,6 @@ class Job extends StatelessWidget {
                       fontSize: 12,
                       color: myColors.darkgreen,
                       onTap: () {
-                      
                         if (appStateController.user == null) {
                           showAuthDialog();
                         } else {
@@ -91,7 +94,8 @@ class Job extends StatelessWidget {
                       children: [
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [ Text("Country:",
+                          children: [
+                            Text("Country:",
                                 style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w500,
@@ -151,7 +155,18 @@ class Job extends StatelessWidget {
                         ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [   Text("${job.country!.name}",
+                          children: [
+                            job.country == null
+                                ? const SizedBox()
+                                : Text("${job.country!.name}",
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w500,
+                                        color: myColors.darkgreen)),
+                            const SizedBox(
+                              height: 4,
+                            ),
+                            Text("${job.requiredNumbers ?? "-"}",
                                 style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w500,
@@ -159,7 +174,7 @@ class Job extends StatelessWidget {
                             const SizedBox(
                               height: 4,
                             ),
-                            Text("${job.requiredNumbers}",
+                            Text(job.category ?? "-",
                                 style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w500,
@@ -167,7 +182,7 @@ class Job extends StatelessWidget {
                             const SizedBox(
                               height: 4,
                             ),
-                            Text("${job.category}",
+                            Text("${job.workingHoursPerDay ?? "-"}",
                                 style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w500,
@@ -175,7 +190,7 @@ class Job extends StatelessWidget {
                             const SizedBox(
                               height: 4,
                             ),
-                            Text("${job.workingHoursPerDay}",
+                            Text("${job.workingDaysPerWeek ?? "-"}",
                                 style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w500,
@@ -183,7 +198,7 @@ class Job extends StatelessWidget {
                             const SizedBox(
                               height: 4,
                             ),
-                            Text("${job.workingDaysPerWeek}",
+                            Text(job.postedOn ?? "-",
                                 style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w500,
@@ -191,15 +206,7 @@ class Job extends StatelessWidget {
                             const SizedBox(
                               height: 4,
                             ),
-                            Text("${job.postedOn}",
-                                style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500,
-                                    color: myColors.darkgreen)),
-                            const SizedBox(
-                              height: 4,
-                            ),
-                            Text("${job.applyBefore}",
+                            Text(job.applyBefore ?? "-",
                                 style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w500,
@@ -263,7 +270,7 @@ class Job extends StatelessWidget {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("${job.minQualification}",
+                            Text(job.minQualification ?? "-",
                                 style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w500,
@@ -271,7 +278,7 @@ class Job extends StatelessWidget {
                             const SizedBox(
                               height: 4,
                             ),
-                            Text("${job.minExperience}",
+                            Text("${job.minExperience ?? "-"}",
                                 style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w500,
@@ -279,7 +286,7 @@ class Job extends StatelessWidget {
                             const SizedBox(
                               height: 4,
                             ),
-                            Text("${job.ageRequirement}",
+                            Text(job.ageRequirement ?? "-",
                                 style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w500,
@@ -287,7 +294,7 @@ class Job extends StatelessWidget {
                             const SizedBox(
                               height: 4,
                             ),
-                            Text("${job.skills}",
+                            Text(job.skills ?? "-",
                                 style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w500,
@@ -354,14 +361,6 @@ class Job extends StatelessWidget {
                             const SizedBox(
                               height: 4,
                             ),
-                            Text("Food:",
-                                style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500,
-                                    color: myColors.darkgreen)),
-                            const SizedBox(
-                              height: 4,
-                            ),
                             Text("OverTime:",
                                 style: TextStyle(
                                     fontSize: 18,
@@ -375,7 +374,7 @@ class Job extends StatelessWidget {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("${job.salary}",
+                            Text("${job.salary ?? "-"}",
                                 style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w500,
@@ -383,7 +382,7 @@ class Job extends StatelessWidget {
                             const SizedBox(
                               height: 4,
                             ),
-                            Text("${job.earning}",
+                            Text("${job.earning ?? "-"}",
                                 style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w500,
@@ -391,7 +390,7 @@ class Job extends StatelessWidget {
                             const SizedBox(
                               height: 4,
                             ),
-                            Text("${job.accommodation}",
+                            Text(job.accommodation ?? "-",
                                 style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w500,
@@ -399,7 +398,7 @@ class Job extends StatelessWidget {
                             const SizedBox(
                               height: 4,
                             ),
-                            Text("${job.food}",
+                            Text(job.food ?? "-",
                                 style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w500,
@@ -407,7 +406,7 @@ class Job extends StatelessWidget {
                             const SizedBox(
                               height: 4,
                             ),
-                            Text("${job.annualVacation}",
+                            Text(job.annualVacation ?? "-",
                                 style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w500,
@@ -415,7 +414,7 @@ class Job extends StatelessWidget {
                             const SizedBox(
                               height: 4,
                             ),
-                            Text("${job.overTime}",
+                            Text("${job.overTime ?? "-"}",
                                 style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w500,

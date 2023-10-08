@@ -12,7 +12,7 @@ class News extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         launchUrl(Uri.parse(news.newsLink!));
       },
       child: Container(
@@ -28,11 +28,18 @@ class News extends StatelessWidget {
             SizedBox(
               width: 132,
               height: 150,
-              child: Image.network(news.imageLink!,errorBuilder:(_,__,___)=> Image.network("https://media.istockphoto.com/id/1182477852/photo/breaking-news-world-news-with-map-backgorund.jpg?s=612x612&w=0&k=20&c=SQfmzF39HZJ_AqFGosVGKT9iGOdtS7ddhfj0EUl0Tkc="),fit: BoxFit.cover,),
-              
+              child: news.imageLink == null
+                  ? Image.network(
+                      "https://media.istockphoto.com/id/1182477852/photo/breaking-news-world-news-with-map-backgorund.jpg?s=612x612&w=0&k=20&c=SQfmzF39HZJ_AqFGosVGKT9iGOdtS7ddhfj0EUl0Tkc=")
+                  : Image.network(
+                      news.imageLink!,
+                      errorBuilder: (_, __, ___) => Image.network(
+                          "https://media.istockphoto.com/id/1182477852/photo/breaking-news-world-news-with-map-backgorund.jpg?s=612x612&w=0&k=20&c=SQfmzF39HZJ_AqFGosVGKT9iGOdtS7ddhfj0EUl0Tkc="),
+                      fit: BoxFit.cover,
+                    ),
+
               // child: Image.network("https://assets-api.kathmandupost.com/thumb.php?src=https://assets-cdn.kathmandupost.com/uploads/source/news/2023/third-party/skb-1687773608.jpg&w=300&height=200"),
             ),
-          
             Text(
               news.title ?? "null",
               maxLines: 1,
@@ -41,7 +48,7 @@ class News extends StatelessWidget {
             ),
             Container(
               width: 132,
-              height:98,
+              height: 98,
               padding: const EdgeInsets.all(8),
               child: Text(
                 news.summary ?? "null",

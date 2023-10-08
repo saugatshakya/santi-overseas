@@ -8,6 +8,7 @@ import 'package:testapp/data/functions/utils.dart';
 import 'package:testapp/presentation/Employee.dart';
 import 'package:testapp/presentation/widgets/show_auth.dart';
 import 'package:testapp/static/colors.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MyAppBar extends AppBar {
   final double width;
@@ -20,7 +21,8 @@ class MyAppBar extends AppBar {
           toolbarHeight: 100,
           actions: [
             GestureDetector(
-              onTap: () {    JobsApi().allJobs();
+              onTap: () {
+                JobsApi().allJobs();
 
                 appStateController.changePage(0);
               },
@@ -96,9 +98,10 @@ class MyAppBar extends AppBar {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          Get.to(() => const Employee());
-                          // Uri url = Uri.parse("https://freeticketfreevisa.com/admin");
-                          // launchUrl(url);
+                          // Get.to(() => const Employee());
+                          Uri url =
+                              Uri.parse("https://freeticketfreevisa.com/admin");
+                          launchUrl(url);
                         },
                         child: Container(
                           height: 48,
@@ -118,9 +121,10 @@ class MyAppBar extends AppBar {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          Get.to(() => const Employee());
-                          // Uri url = Uri.parse("https://freeticketfreevisa.com/admin");
-                          // launchUrl(url);
+                          // Get.to(() => const Employee());
+                          Uri url =
+                              Uri.parse("https://freeticketfreevisa.com/admin");
+                          launchUrl(url);
                         },
                         child: Container(
                           height: 48,
