@@ -104,9 +104,10 @@ class _NumberPaginationState extends State<NumberPagination> {
   }
 
   void _changePage(int page) {
-    if (page <= 0) page = 1;
-
-    if (page > widget.pageTotal) page = widget.pageTotal;
+    if (page <= 0 || page > widget.pageTotal) {
+      // Page is out of bounds, don't do anything.
+      return;
+    }
 
     setState(() {
       currentPage = page;
